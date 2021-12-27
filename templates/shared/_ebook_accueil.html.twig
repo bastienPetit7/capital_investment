@@ -1,0 +1,96 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+
+  {% include "shared/_aside_navbar_user.html.twig" %}
+  
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    {% include "shared/_navbar_user.html.twig" %}
+
+    <section class="py-6 bg-gray-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-lg-0 mb-4">
+        <div class="card">
+          <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+            <a href="javascript:;" class="d-block">
+              <img src="{{asset('theme/assets/mes_images/e_book/crypto_ebook.jpg')}}" class="img-fluid border-radius-lg">
+            </a>
+          </div>
+
+          <div class="card-body pt-3">
+            <span class="text-gradient text-warning text-uppercase text-xs font-weight-bold my-2">Crypto</span>
+            <a href="javascript:;" class="card-title h5 d-block text-darker">
+              Etude de cas 
+            </a>
+            <p class="card-description mb-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, exercitationem maxime.
+            </p>
+            
+          
+          </div>
+            <div class="card-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-info w-50">Dowmnload</button>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-lg-0 mb-4">
+        <div class="card">
+          <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+            <a href="javascript:;" class="d-block">
+              <img src="{{asset('theme/assets/mes_images/e_book/bio_tech_ebook.jpg')}}" class="img-fluid border-radius-lg">
+            </a>
+          </div>
+
+          <div class="card-body pt-3">
+            <span class="text-gradient text-info text-uppercase text-xs font-weight-bold my-2">Bio Tech</span>
+            <a href="javascript:;" class="text-darker card-title h5 d-block">
+              Etude de cas
+            </a>
+            <p class="card-description mb-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, quia mollitia.
+            </p>
+            
+          </div>
+           <div class="card-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-info w-50">Dowmnload</button>
+            </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-lg-0 mb-4">
+        <div class="card">
+          <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+            <a href="javascript:;" class="d-block">
+              <img src="{{asset('theme/assets/mes_images/e_book/fine_tech_ebook.jpg')}}" class="img-fluid border-radius-lg">
+            </a>
+          </div>
+
+          <div class="card-body pt-3">
+            <span class="text-gradient text-warning text-uppercase text-xs font-weight-bold my-2">Fine Tech</span>
+            <a href="javascript:;" class="text-darker card-title h5 d-block">
+              Etude de cas
+            </a>
+            <p class="card-description mb-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, commodi quasi!
+            </p>
+            
+          </div>
+           <div class="card-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-info w-50">Dowmnload</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+
+
+
+{% endblock %}

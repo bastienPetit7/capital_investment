@@ -1,0 +1,20 @@
+
+
+#tradingview_cecab{
+    height: 400px;
+}
+
+/* #tradingview_cecab2{
+    height: 400px;
+} */
+.tradingview-widget-container-2{
+    height: 350px;
+}
+
+@media screen and (max-width: 375px){
+    #tradingview_cecab{
+        height: 200px;
+       
+    }
+
+}

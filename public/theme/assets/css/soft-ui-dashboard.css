@@ -7255,16 +7255,16 @@ textarea.form-control-lg {
   background-color: #8392AB !important; }
 
 .bg-success {
-  background-color: #82d616 !important; }
+  background-color: rgb(38, 166, 154)!important; }
 
 .bg-info {
-  background-color: #17c1e8 !important; }
-
+  background-color: rgba(37, 106, 154, 1) !important; }
+/* Couleur Cleo Capital à modifier avec fichier theme original si besion*/
 .bg-warning {
   background-color: #fbcf33 !important; }
 
 .bg-danger {
-  background-color: #ea0606 !important; }
+  background-color: rgb(239, 83, 80) !important; }
 
 .bg-light {
   background-color: #e9ecef !important; }
@@ -13052,8 +13052,8 @@ label,
   background-image: linear-gradient(310deg, #17ad37 0%, #98ec2d 100%); }
 
 .bg-gradient-info {
-  background-image: linear-gradient(310deg, #2152ff 0%, #21d4fd 100%); }
-
+  background-image: linear-gradient(310deg, 	rgba(62, 182, 160, 0.4) 0%,  rgba(37, 106, 154, 1)100%); }
+/* Couleur Cléo Capital pour test design ===> Récupérer couleur de base si souhaiter via fichier du theme*/
 .bg-gradient-warning {
   background-image: linear-gradient(310deg, #f53939 0%, #fbcf33 100%); }
 
@@ -14057,7 +14057,7 @@ hr.horizontal {
   transition: all 0.2s ease-in-out; }
 
 .sidenav {
-  z-index: 999; }
+  z-index: 9999; }
   .sidenav .navbar-brand,
   .sidenav .navbar-heading {
     display: block; }
@@ -14142,14 +14142,14 @@ hr.horizontal {
   font-weight: 700;
   content: "\f107";
   margin-left: auto;
-  color: rgba(58, 65, 111, 0.5);
+  color: #ffffff;
   transition: all 0.2s ease-in-out; }
   @media (prefers-reduced-motion: reduce) {
     .navbar-vertical .navbar-nav .nav-link[data-bs-toggle="collapse"]:after {
       transition: none; } }
 
 .navbar-vertical .navbar-nav .nav-link[data-bs-toggle="collapse"][aria-expanded="true"]:after {
-  color: #3A416F;
+  color: #ffffff;
   transform: rotate(180deg); }
 
 .navbar-vertical .navbar-nav .nav-item .collapse .nav,
@@ -14164,7 +14164,7 @@ hr.horizontal {
     position: relative;
     background-color: transparent;
     box-shadow: none;
-    color: rgba(58, 65, 111, 0.5);
+    color: #ffffff;
     margin-left: 1.35rem; }
     .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-link:before,
     .navbar-vertical .navbar-nav .nav-item .collapsing .nav .nav-item .nav-link:before {
@@ -14176,7 +14176,7 @@ hr.horizontal {
       height: 5px;
       width: 5px;
       border-radius: 1.5rem;
-      background: rgba(58, 65, 111, 0.5); }
+      background: #ffffff; }
     .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-link.active,
     .navbar-vertical .navbar-nav .nav-item .collapsing .nav .nav-item .nav-link.active {
       color: #3A416F; }
@@ -14192,7 +14192,7 @@ hr.horizontal {
     .navbar-vertical .navbar-nav .nav-item .collapsing .nav .nav-item.active .nav-link:before {
       height: 8px;
       width: 8px;
-      background: #3A416F; }
+      background: #ffffff; }
   .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-item .nav-link:before,
   .navbar-vertical .navbar-nav .nav-item .collapsing .nav .nav-item .nav-item .nav-link:before {
     content: none; }
