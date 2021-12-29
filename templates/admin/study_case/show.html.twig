@@ -1,0 +1,43 @@
+{% extends "admin/base_admin.html.twig" %}
+
+{% block body %}
+    <div class="container-fluid py-4">
+        <div class="row">
+            {% include "shared/_messages_flash.html.twig" %}
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <a class="btn btn-secondary" href="{{ path('admin_study_case_list') }}"><i class="fas fa-arrow-circle-left"></i> Back to list</a>
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-6 text-center">
+                                <img class="w-100 border-radius-lg shadow-lg mx-auto" src="{{ studyCase.imagePath }}" alt="{{ studyCase.name }}">
+                            </div>
+                            <div class="col-lg-5 mx-auto">
+                                <h3 class="mt-lg-0 mt-4">{{ studyCase.name }}</h3>
+
+                                <h6 class="mb-0 mt-3">{{ studyCase.theme.name }}</h6>
+                                <h5>{{ studyCase.price / 100 }} €</h5>
+
+                                <label class="mt-4">Description</label>
+                                {{ studyCase.description | raw }}
+                                <div class="row mt-4">
+                                    <div class="col-lg-5">
+                                        <a href="{{ path('admin_study_case_download_pdf',{'id': studyCase.id}) }}" class="btn bg-gradient-info mb-0 mt-lg-auto w-100" type="button" name="button"><i class="fas fa-cloud-download-alt"></i> Download PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

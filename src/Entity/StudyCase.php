@@ -52,6 +52,12 @@ class StudyCase
     private $price;
 
     /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Description is required")
+     */
+    private $description;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $fileName;
@@ -158,6 +164,18 @@ class StudyCase
     public function setExtensionName(string $extensionName): self
     {
         $this->extensionName = $extensionName;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

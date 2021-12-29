@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VideoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=VideoRepository::class)
@@ -25,22 +26,26 @@ class Video
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Name is required")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Description is required")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Code youtube of video is required")
      */
     private $pathToFile;
 
     /**
      * @ORM\ManyToOne(targetEntity=ThemeVideo::class, inversedBy="videos")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Theme is required")
      */
     private $theme;
 

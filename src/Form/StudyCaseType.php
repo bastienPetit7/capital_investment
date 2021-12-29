@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\StudyCase;
 use App\Entity\ThemeStudyCase;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -38,6 +39,9 @@ class StudyCaseType extends AbstractType
             ->add('theme',EntityType::class,[
                 'placeholder' => '-- Choose a theme --',
                 'class' => ThemeStudyCase::class
+            ])
+            ->add('description',CKEditorType::class,[
+                'required' => false,
             ])
             ->add('file',DropzoneType::class,[
                 'required' => false,
