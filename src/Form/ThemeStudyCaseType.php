@@ -2,14 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Subscription;
+use App\Entity\ThemeStudyCase;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
-class SubscriptionType extends AbstractType
+class ThemeStudyCaseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -17,18 +18,23 @@ class SubscriptionType extends AbstractType
             ->add('name',TextType::class,[
                 'required' => false,
             ])
-            ->add('price',MoneyType::class,[
-                'divisor' => 100,
+            ->add('image',DropzoneType::class,[
                 'required' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2m',
+                        'maxSizeMessage' => 'File max size allowed is 2 Mo.',
+                    ])
+                ]
             ])
-            ->add('periodInDays')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Subscription::class,
+            'data_class' => ThemeStudyCase::class,
         ]);
     }
 }

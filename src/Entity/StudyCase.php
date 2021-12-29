@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StudyCaseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StudyCaseRepository::class)
@@ -25,6 +26,7 @@ class StudyCase
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Name is required")
      */
     private $name;
 
@@ -36,17 +38,28 @@ class StudyCase
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $fileToPath;
+    private $pathToFile;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $numberOfDownload;
+    private $numberOfDownload = 0;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Price is required")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fileName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $extensionName;
 
     public function getId(): ?int
     {
@@ -89,14 +102,14 @@ class StudyCase
         return $this;
     }
 
-    public function getFileToPath(): ?string
+    public function getPathToFile(): ?string
     {
-        return $this->fileToPath;
+        return $this->pathToFile;
     }
 
-    public function setFileToPath(string $fileToPath): self
+    public function setPathToFile(string $pathToFile): self
     {
-        $this->fileToPath = $fileToPath;
+        $this->pathToFile = $pathToFile;
 
         return $this;
     }
@@ -121,6 +134,30 @@ class StudyCase
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(string $fileName): self
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    public function getExtensionName(): ?string
+    {
+        return $this->extensionName;
+    }
+
+    public function setExtensionName(string $extensionName): self
+    {
+        $this->extensionName = $extensionName;
 
         return $this;
     }

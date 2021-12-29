@@ -21,7 +21,13 @@
     <link id="pagestyle" href="{{ asset('theme/assets/css/soft-ui-dashboard.css?v=1.0.4') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('theme/assets/css/style_perso.css') }}">
 </head>
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
 <body class="g-sidenav-show  bg-gray-100">
 
     {% include "admin/shared/_sidebar_admin.html.twig" %}

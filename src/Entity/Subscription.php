@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SubscriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
@@ -19,16 +20,19 @@ class Subscription
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Name is required")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Price is required")
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Periodicity is required")
      */
     private $periodInDays;
 

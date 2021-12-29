@@ -28,7 +28,7 @@ class CreateSubscription extends AbstractController
             $em->persist($sub);
             $em->flush();
 
-            $this->addFlash("success","A subscription has been created.");
+            $this->addFlash("light","A subscription has been created.");
             return $this->redirectToRoute("admin_subscription_list");
         }
 
