@@ -37,6 +37,7 @@ class StudyCaseType extends AbstractType
                 'required' => false,
             ])
             ->add('theme',EntityType::class,[
+                'required' => false,
                 'placeholder' => '-- Choose a theme --',
                 'class' => ThemeStudyCase::class
             ])

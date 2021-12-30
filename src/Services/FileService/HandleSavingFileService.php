@@ -44,4 +44,19 @@ class HandleSavingFileService
         $object->setPathToFile('/uploads/files/' . $fileUniqName);
     }
 
+    public function edit($pdfOriginal, UploadedFile $uploadedFile, object $object) {
+
+        $this->save($uploadedFile,$object);
+
+        if($pdfOriginal !== null && $pdfOriginal !== "")
+        {
+            $pdfOriginalPath = $this->parameterBag->get('app_files_directory') . '/../..' . $pdfOriginal;
+
+            if(file_exists($pdfOriginalPath))
+            {
+                unlink( $pdfOriginalPath);
+            }
+        }
+    }
+
 }

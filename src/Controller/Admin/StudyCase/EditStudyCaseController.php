@@ -4,6 +4,7 @@ namespace App\Controller\Admin\StudyCase;
 
 use App\Entity\StudyCase;
 use App\Form\StudyCaseType;
+use App\Repository\StudyCaseRepository;
 use App\Services\FileService\HandleSavingFileService;
 use App\Services\FileService\HandleSavingNameAndExtensionOfFileService;
 use App\Services\ImageService;
@@ -13,16 +14,27 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateStudyCaseController extends AbstractController
+class EditStudyCaseController extends AbstractController
 {
     /**
-     * @Route("admin/studycase/create", name="admin_study_case_create")
+     * @Route("admin/studycase/edit/{id}", name="admin_study_case_edit")
      */
-    public function create(EntityManagerInterface $em,Request $request,HandleSavingFileService $handleSavingFileService,
+    public function edit(int $id,StudyCaseRepository $studyCaseRepository,EntityManagerInterface $em,Request $request,
+                           HandleSavingFileService $handleSavingFileService,
                            HandleSavingNameAndExtensionOfFileService $handleSavingNameAndExtensionOfFileService,
                            ImageService $imageService)
     {
-        $studyCase = new StudyCase();
+        $studyCase = $studyCaseRepository->find($id);
+
+        if(!$studyCase)
+        {
+            $this->addFlash("danger","This study case cannot be found");
+            return $this->redirectToRoute("admin_study_case_list");
+        }
+
+        $originalImage = $studyCase->getImagePath();
+
+        $originalPdf = $studyCase->getPathToFile();
 
         $form = $this->createForm(StudyCaseType::class,$studyCase);
 
@@ -30,16 +42,12 @@ class CreateStudyCaseController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+
             /** @var UploadedFile $file */
             $imageFile = $form->get('image')->getData();
 
             if ($imageFile) {
-                $imageService->saveImage($imageFile,$studyCase);
-            }
-            else
-            {
-                $this->addFlash("danger","You must upload Image.");
-                return $this->redirectToRoute("admin_study_case_create");
+                $imageService->editImage($originalImage,$imageFile,$studyCase);
             }
 
             /** @var UploadedFile $pdfFile */
@@ -52,23 +60,18 @@ class CreateStudyCaseController extends AbstractController
                 //set Extension Of FIle
                 $extensionOfFile = $handleSavingNameAndExtensionOfFileService->getExtension($pdfFile);
                 $studyCase->setExtensionName($extensionOfFile);
-                $handleSavingFileService->save($pdfFile,$studyCase);
+                $handleSavingFileService->edit($originalPdf,$pdfFile,$studyCase);
             }
-            else
-            {
-                $this->addFlash("danger","You must upload PDF.");
-                return $this->redirectToRoute("admin_study_case_create");
-            }
-
-            $em->persist($studyCase);
 
             $em->flush();
 
-            $this->addFlash("light","This study case has been created successfully");
-            return $this->redirectToRoute("admin_study_case_list");
+            $this->addFlash("light","This study case has been updated successfully");
+
+
+            return $this->redirectToRoute("admin_study_case_show",['id' => $id]);
         }
 
-        return $this->render("admin/study_case/create.html.twig",[
+        return $this->render("admin/study_case/edit.html.twig",[
             'form' => $form->createView()
         ]);
     }

@@ -12,9 +12,9 @@
                         <div class="z-index-1 position-relative">
                             <h5 class="text-white">{{ sub.name }}</h5>
                             <h1 class="text-white mt-2 mb-0">
-                                {{ sub.price }} <small>€</small>
+                                {{ sub.price | priceInEuros }}
                             </h1>
-                            <h6 class="text-white">par mois</h6>
+                            <h6 class="text-white">monthly</h6>
                         </div>
                     </div>
                     <div class="position-relative mt-n5" style="height: 50px;">
@@ -52,8 +52,8 @@
                                 <b>500</b> Messages
                             </li>
                         </ul>
-                        <a href="javascript:;" class="btn bg-gradient-dark w-100 mt-4 mb-0">
-                            Get started
+                        <a href="{{ path('admin_subscription_edit',{'id': sub.id}) }}" class="btn bg-gradient-dark w-100 mt-4 mb-0">
+                            Edit Subscription
                         </a>
                     </div>
                 </div>

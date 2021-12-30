@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin\ThemeStudyCase;
 
-use App\Entity\ThemeStudyCase;
 use App\Form\ThemeStudyCaseType;
+use App\Repository\ThemeStudyCaseRepository;
 use App\Services\ImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,14 +11,22 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateThemeStudyCaseController extends AbstractController
+class EditThemeStudyCaseController extends AbstractController
 {
     /**
-     * @Route("admin/themestudycase/create", name="admin_theme_study_case_create")
+     * @Route("admin/themestudycase/edit/{id}", name="admin_theme_study_case_edit")
      */
-    public function create(ImageService $imageService,EntityManagerInterface $em,Request $request)
+    public function create(int $id,ThemeStudyCaseRepository $themeStudyCaseRepository,ImageService $imageService,EntityManagerInterface $em,Request $request)
     {
-        $theme = new ThemeStudyCase();
+        $theme = $themeStudyCaseRepository->find($id);
+
+        if(!$theme)
+        {
+            $this->addFlash("danger","The theme cannot be found.");
+            return $this->redirectToRoute("admin_theme_study_case_list");
+        }
+
+        $originalImage = $theme->getImagePath();
 
         $form = $this->createForm(ThemeStudyCaseType::class,$theme);
 
@@ -30,24 +38,17 @@ class CreateThemeStudyCaseController extends AbstractController
             $file = $form->get('image')->getData();
 
             if ($file) {
-                $imageService->saveImage($file,$theme);
+                $imageService->editImage($originalImage,$file,$theme);
             }
-            else
-            {
-                $this->addFlash("danger","You must add an image.");
-                return $this->redirectToRoute("admin_theme_study_case_create");
-            }
-
-            $em->persist($theme);
 
             $em->flush();
 
-            $this->addFlash("light","The theme " . $theme->getName() . " has been created successfully.");
+            $this->addFlash("light","The theme " . $theme->getName() . " has been edited successfully.");
 
             return $this->redirectToRoute("admin_theme_study_case_list");
         }
 
-        return $this->render("admin/theme_study_case/create.html.twig",[
+        return $this->render("admin/theme_study_case/edit.html.twig",[
             'form' => $form->createView()
         ]);
     }
