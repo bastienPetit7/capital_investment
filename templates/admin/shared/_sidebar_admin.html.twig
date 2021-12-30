@@ -7,7 +7,7 @@
     </a>
   </div>
   <hr class="horizontal dark mt-0">
-  <div class="collapse navbar-collapse  w-auto h-auto max-height-vh-100 h-100" id="sidenav-collapse-main">
+  <div class="collapse navbar-collapse  w-auto h-auto max-height-vh-100 h-100 pb-3" id="sidenav-collapse-main">
     <ul class="navbar-nav">
 
       <li class="nav-item mt-3">
@@ -156,13 +156,13 @@
         <div class="collapse " id="utilisateurExamples">
           <ul class="nav ms-4 ps-3">
             <li class="nav-item ">
-              <a class="nav-link " href="#">
+              <a class="nav-link " href="{{ path('admin_customer_investor_profile_create') }}">
                 <span class="sidenav-mini-icon"> <i class="fas fa-plus-circle"></i> </span>
                 <span class="sidenav-normal"> Add </span>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link " href="#">
+              <a class="nav-link " href="{{ path('admin_customer_investor_profile_list') }}">
                 <span class="sidenav-mini-icon"> W </span>
                 <span class="sidenav-normal"> List </span>
               </a>
@@ -355,7 +355,7 @@
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link " href="{{ path('admin_list_administrator') }}">
+              <a class="nav-link " href="{{ path('admin_staff_administrator_list') }}">
                 <span class="sidenav-mini-icon"> W </span>
                 <span class="sidenav-normal"> List </span>
               </a>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin\Staff;
+namespace App\Controller\Admin\Staff\Administrator;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListAdminController extends AbstractController
 {
     /**
-     * @Route("/admin/staff/list/administrator", name="admin_list_administrator")
+     * @Route("/admin/staff/administrator/list", name="admin_staff_administrator_list")
      */
     public function list(UserRepository $userRepository): Response
     {

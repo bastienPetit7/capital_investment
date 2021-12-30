@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin\Staff;
+namespace App\Controller\Admin\Staff\Administrator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CreateAdminController extends AbstractController
 {
     /**
-     * @Route("/admin/staff/add/administrator", name="admin_add_administrator")
+     * @Route("/admin/staff/administrator/create", name="admin_staff_administrator_create")
      */
     public function create()
     {
