@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\DocumentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=DocumentRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Document
 {
@@ -39,6 +41,7 @@ class Document
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Type is required")
      */
     private $type;
 
@@ -47,6 +50,17 @@ class Document
      * @ORM\JoinColumn(nullable=false)
      */
     private $list;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        if(empty($this->createdAt))
+        {
+            $this->createdAt = new \DateTime();
+        }
+    }
 
     public function getId(): ?int
     {

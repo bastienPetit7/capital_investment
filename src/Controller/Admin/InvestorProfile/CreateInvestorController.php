@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin\Customer\InvestorProfile;
+namespace App\Controller\Admin\InvestorProfile;
 
 use App\Entity\Investor;
 use App\Entity\ListDocument;
@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CreateInvestorController extends AbstractController
 {
     /**
-     * @Route("/admin/customer/investorprofile/create", name="admin_customer_investor_profile_create")
+     * @Route("/admin/investorprofile/create", name="admin_investor_profile_create")
      */
     public function create(Request $request, UserPasswordHasherInterface $userPasswordHasher,
                             EntityManagerInterface $entityManager)
@@ -77,7 +77,7 @@ class CreateInvestorController extends AbstractController
 
         }
 
-        return $this->render('admin/customer/investor_profile/create.html.twig', [
+        return $this->render('admin/investor_profile/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }

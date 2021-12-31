@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin\Customer\InvestorProfile;
+namespace App\Controller\Admin\InvestorProfile;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ListInvestorController extends AbstractController
 {
     /**
-     *@Route("/admin/customer/investorprofile/list", name="admin_customer_investor_profile_list")
+     * @Route("/admin/investorprofile/list", name="admin_investor_profile_list")
      */
     public function list(UserRepository $userRepository): Response
     {
@@ -26,7 +26,7 @@ class ListInvestorController extends AbstractController
             }
         }
 
-        return $this->render("admin/customer/investor_profile/list.html.twig",[
+        return $this->render("admin/investor_profile/list.html.twig",[
             'investors' => $investors
         ]);
     }
