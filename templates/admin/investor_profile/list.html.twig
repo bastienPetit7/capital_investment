@@ -12,10 +12,9 @@
                             <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Review</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Created At</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                             </tr>
                             </thead>
@@ -25,27 +24,21 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="{{ asset('theme/assets/img/team-2.jpg') }}" class="avatar avatar-sm me-3" alt="avatar image">
+                                                <img src="{{asset('theme/assets/mes_images/logo_capital_investment.svg')}}" class="avatar avatar-sm me-3" alt="avatar image">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{ user.name }}</h6>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <p class="text-sm text-secondary mb-0">Manager</p>
-                                    </td>
-                                    <td>
-                                      <span class="badge badge-dot me-4">
-                                        <i class="bg-info"></i>
-                                        <span class="text-dark text-xs">positive</span>
-                                      </span>
+                                    <td class="align-middle text-center ">
+                                        <p class="text-sm text-secondary mb-0">{{ user.investor.createdAt | date('d-M-Y') }}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <p class="text-secondary mb-0 text-sm">{{ user.email}}</p>
+                                        <p class="text-sm text-secondary mb-0">{{ user.telephone }}</p>
                                     </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-sm">23/04/18</span>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm text-secondary mb-0">{{ user.email }}</p>
                                     </td>
                                     <td class="align-middle text-center">
                                         <a class="btn btn-dark " href="{{ path('admin_investor_profile_handle_wallet',{'id' : user.investor.id}) }}">

@@ -10,7 +10,7 @@
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="{{ asset('theme/assets/img/bruce-mars.jpg') }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        <img src="{{asset('theme/assets/mes_images/logo_capital_investment.svg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -19,7 +19,7 @@
                             {{ investor.user.name }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            CEO / Co-Founder
+                            Investor
                         </p>
                     </div>
                 </div>
@@ -145,6 +145,7 @@
                     </div>
                     <div class="card-body p-3">
                         <ul class="list-group">
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Created Date:</strong> &nbsp; {{ investor.createdAt | date('d-M-Y') }}</li>
                             <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; {{ investor.user.name }}</li>
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Phone:</strong> &nbsp; {{ investor.user.telephone }}</li>
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ investor.user.email }}</li>
