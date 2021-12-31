@@ -45,6 +45,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $telephone;
+
+    /**
      * @ORM\OneToOne(targetEntity=Freemium::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $freemium;
@@ -166,6 +171,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }

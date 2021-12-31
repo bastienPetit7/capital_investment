@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Dictionary\AvailableStatusMode;
 use App\Repository\InvestorRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,6 +33,11 @@ class Investor
      * @ORM\OneToOne(targetEntity=ListDocument::class, mappedBy="investor", cascade={"persist", "remove"})
      */
     private $listDocument;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status = AvailableStatusMode::ACTIVE;
 
     public function getId(): ?int
     {
@@ -80,6 +86,18 @@ class Investor
         }
 
         $this->listDocument = $listDocument;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

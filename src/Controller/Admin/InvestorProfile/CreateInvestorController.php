@@ -37,6 +37,10 @@ class CreateInvestorController extends AbstractController
 
             $user->setName($name);
 
+            $phone = $form->get('telephone')->getData();
+
+            $user->setTelephone($phone);
+
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(

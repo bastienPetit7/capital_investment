@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HandleFilesController extends AbstractController
 {
     /**
-     * @Route("/admin/customer/investorprofile/handlefiles/{id}", name="admin_customer_investor_profile_handle_files")
+     * @Route("/admin/investorprofile/handlefiles/{id}", name="admin_investor_profile_handle_files")
      */
     public function show(int $id,EntityManagerInterface $em,InvestorRepository $investorRepository, Request $request,HandleSavingFileService $handleSavingFileService,
                          HandleSavingNameAndExtensionOfFileService $handleSavingNameAndExtensionOfFileService)
@@ -54,7 +54,7 @@ class HandleFilesController extends AbstractController
             else
             {
                 $this->addFlash("danger","You must upload PDF.");
-                return $this->redirectToRoute("admin_customer_investor_profile_handle_files",['id' => $id]);
+                return $this->redirectToRoute("admin_investor_profile_handle_files",['id' => $id]);
             }
 
             $document->setList($investor->getListDocument());
@@ -63,7 +63,7 @@ class HandleFilesController extends AbstractController
             $em->flush();
 
             $this->addFlash("light","The file has been uploaded successfully.");
-            return $this->redirectToRoute("admin_customer_investor_profile_handle_files",['id' => $id]);
+            return $this->redirectToRoute("admin_investor_profile_handle_files",['id' => $id]);
         }
 
         $documents = $investor->getListDocument()->getDocuments();
@@ -76,7 +76,7 @@ class HandleFilesController extends AbstractController
     }
 
     /**
-     * @Route("/admin/customer/investorprofile/downloadfile/{id}/{documentId}", name="admin_customer_investor_profile_download_file")
+     * @Route("/admin/investorprofile/downloadfile/{id}/{documentId}", name="admin_investor_profile_download_file")
      */
     public function downloadFile(int $id,int $documentId,InvestorRepository $investorRepository,DocumentRepository $documentRepository)
     {
@@ -93,7 +93,7 @@ class HandleFilesController extends AbstractController
         if(!$document)
         {
             $this->addFlash("danger","This document cannot be found");
-            return $this->redirectToRoute("admin_customer_investor_profile_handle_files",['id' => $id]);
+            return $this->redirectToRoute("admin_investor_profile_handle_files",['id' => $id]);
         }
 
         $fileToDownload = $document->getPathToFile();
@@ -103,7 +103,7 @@ class HandleFilesController extends AbstractController
 
         if (!file_exists($filePathInServer)) {
             $this->addFlash("dark","File not found.");
-            return $this->redirectToRoute("admin_customer_investor_profile_handle_files",['id' => $id ]);
+            return $this->redirectToRoute("admin_investor_profile_handle_files",['id' => $id ]);
         }
 
         $response =  new BinaryFileResponse($filePathInServer);

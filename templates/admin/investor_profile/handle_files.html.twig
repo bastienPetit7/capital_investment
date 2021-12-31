@@ -26,7 +26,7 @@
                     <div class="nav-wrapper position-relative end-0">
                         <ul class="nav nav-pills nav-fill p-1 bg-transparent " role="tablist">
                             <li class="nav-item">
-                                <a class="btn btn-sm btn-outline-dark  py-1 " href="{{ path('admin_customer_investor_profile_handle_wallet', {'id': investor.id}) }}"  >
+                                <a class="btn btn-sm btn-outline-dark  py-1 " href="{{ path('admin_investor_profile_handle_wallet', {'id': investor.id}) }}"  >
                                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                             <g transform="translate(-2319.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -45,7 +45,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-sm btn-light  py-1 " href="{{ path('admin_customer_investor_profile_handle_files', {'id': investor.id}) }}"  >
+                                <a class="btn btn-sm btn-light  py-1 " href="{{ path('admin_investor_profile_handle_files', {'id': investor.id}) }}"  >
                                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <title>document</title>
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -64,7 +64,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-sm btn-outline-dark py-1 " href="{{ path('admin_customer_investor_profile_handle_settings', {'id': investor.id}) }}" >
+                                <a class="btn btn-sm btn-outline-dark py-1 " href="{{ path('admin_investor_profile_handle_settings', {'id': investor.id}) }}" >
                                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <title>settings</title>
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -81,7 +81,7 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <span class="ms-1">Settings</span>
+                                    <span class="ms-1">Informations</span>
                                 </a>
                             </li>
                         </ul>
@@ -128,7 +128,7 @@
                                                             <p class="text-sm text-secondary mb-0">{{ document.createdAt | date('d-m-Y') }}</p>
                                                         </td>
                                                         <td class="align-middle text-center ">
-                                                            <a href="{{ path('admin_customer_investor_profile_download_file',{'id': investor.id,'documentId': document.id}) }}" class="btn btn-dark mb-0"><i class="fas fa-cloud-download-alt"></i> Download</a>
+                                                            <a href="{{ path('admin_investor_profile_download_file',{'id': investor.id,'documentId': document.id}) }}" class="btn btn-dark mb-0"><i class="fas fa-cloud-download-alt"></i> Download</a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}

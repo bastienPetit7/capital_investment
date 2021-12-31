@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HandleWalletController extends AbstractController
 {
     /**
-     * @Route("/admin/customer/investorprofile/handlewallet/{id}", name="admin_customer_investor_profile_handle_wallet")
+     * @Route("/admin/investorprofile/handlewallet/{id}", name="admin_investor_profile_handle_wallet")
      */
     public function show(int $id,InvestorRepository $investorRepository,EntityManagerInterface $em, Request $request)
     {
@@ -21,7 +21,7 @@ class HandleWalletController extends AbstractController
         if(!$investor)
         {
             $this->addFlash("danger","This investor profile cannot be found");
-            return $this->redirectToRoute("admin_customer_investor_profile_list");
+            return $this->redirectToRoute("admin_investor_profile_list");
         }
 
         $form = $this->createForm(ActualAmountWalletType::class);
@@ -40,7 +40,7 @@ class HandleWalletController extends AbstractController
 
             $this->addFlash("light","The wallet actual amount has been updated successfully.");
 
-            return $this->redirectToRoute("admin_customer_investor_profile_handle_wallet",['id'=>$id]);
+            return $this->redirectToRoute("admin_investor_profile_handle_wallet",['id'=>$id]);
 
         }
 

@@ -24,6 +24,15 @@ class InvestorProfileFormType extends AbstractType
                     ])
                 ]
             ])
+            ->add('telephone', TextType::class, [
+                'label' => "Phone number",
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Phone is required.',
+                    ])
+                ]
+            ])
             ->add('email', EmailType::class, [
                 'label' => "Email",
                 'required' => false,
