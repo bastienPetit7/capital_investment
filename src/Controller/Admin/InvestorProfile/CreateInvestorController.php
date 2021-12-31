@@ -6,7 +6,7 @@ use App\Entity\Investor;
 use App\Entity\ListDocument;
 use App\Entity\User;
 use App\Entity\Wallet;
-use App\Form\CustomerInvestorProfileFormType;
+use App\Form\InvestorProfileFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ class CreateInvestorController extends AbstractController
                             EntityManagerInterface $entityManager)
     {
 
-        $form = $this->createForm(CustomerInvestorProfileFormType::class);
+        $form = $this->createForm(InvestorProfileFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

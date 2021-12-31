@@ -3,7 +3,6 @@
 {% block body %}
     <div class="container-fluid py-4">
 
-        {% include "shared/_messages_flash.html.twig" %}
         <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('{{ asset('theme/assets/img/curved-images/curved14.jpg') }}'); background-position-y: 50%;">
             <span class="mask bg-gradient-info opacity-6"></span>
         </div>
@@ -95,6 +94,7 @@
     </div>
     <div class="container-fluid py-4">
         <div class="row mt-3">
+            {% include "shared/_messages_flash.html.twig" %}
             <div class="col-12 col-md-6 col-xl-4">
                 <div class="card h-100">
                     <div class="card-header pb-0 p-3">
