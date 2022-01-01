@@ -13,8 +13,6 @@ class InvestorHomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('investor/investor_home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('investor/investor_home.html.twig');
     }
 }
