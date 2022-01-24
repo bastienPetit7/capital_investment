@@ -1,0 +1,119 @@
+
+{% extends "base_vitrine.html.twig" %}
+
+
+{% block body %}
+
+    <!-- -------- START HEADER 7 w/ card over right bg image ------- -->
+<header>
+    <div class="page-header min-vh-100">
+        <div class="position-absolute fixed-top ms-auto w-50 h-100 z-index-0 d-none d-sm-none d-md-block" style="background-image: url({{asset('theme/assets/mes_images/capinvest_header.jpg')}}); background-size:cover;"></div>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-7 d-flex justify-content-center flex-column">
+            <div class="card card-body blur d-flex justify-content-center shadow-lg p-5 mt-5">
+                <h1 class="text-gradient text-info">Vous tradez?</h1>
+                <h1 class="mb-4">Nous vous accompagnons</h1>
+                <p class="lead pe-5 me-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus sit ipsam vero. </p>
+                <div class="buttons">
+                <a href="#abonnements" type="button" class="btn bg-gradient-info mt-4">Voir</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</header>
+<!-- -------- END HEADER 8 w/ card over right bg image ------- -->    
+<section class="py-7" id="abonnements">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+            <h3>Choisissez l'offre qui vous convient</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+        </div>
+        <div class="row mt-5">
+
+            {% for sub in subs %}
+
+                {% if sub.isActive is same as true %}
+                
+                    {% if sub.isMain is same as true %}
+                    
+                    
+                    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+                        <div class="card shadow-none border bg-gradient-dark h-100 overflow-hidden">
+                            {# <img src="{{asset('theme/assets/img/shapes/pattern-lines.svg')}}" alt="pattern-lines" class="position-absolute"> #}
+                            <div class="card-header bg-transparent text-sm-start text-center pt-4 pb-3 px-4">
+                                <h5 class="mb-1 text-white"> {{sub.name}}</h5>
+                                <p class="mb-3 text-sm text-white"> {{sub.subTitle}} .</p>
+                                <h3 class="font-weight-bolder mt-3 text-white">
+                                {{sub.price | priceInEuros }} <small class="text-sm text-secondary font-weight-bold">/ mois</small>
+                                </h3>
+                                <a href=" {{path('subscription_show', {'id' : sub.id})}} " class="btn btn-sm btn-white w-100 border-radius-md mt-4 mb-2">See details</a>
+                            </div>
+                            <hr class="horizontal light my-0">
+                            <div class="card-body">
+
+                                {% for keyPoint in sub.keyPoints %}
+                                    
+                                <div class="d-flex pb-3">
+                                <div>
+                                    <i class="fas fa-check text-success text-sm"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <span class="text-sm text-white"> {{keyPoint}} </span>
+                                </div>
+                                </div>
+                                {% endfor %}
+
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    {% else %}
+                        
+
+                        
+                    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+                        <div class="card shadow-none border h-100">
+                            <div class="card-header text-sm-start text-center pt-4 pb-3 px-4">
+                                <h5 class="mb-1"> {{sub.name}} </h5>
+                                <p class="mb-3 text-sm"> {{sub.subTitle}} </p>
+                                <h3 class="font-weight-bolder mt-3">
+                                {{sub.price | priceInEuros }} <small class="text-sm text-secondary font-weight-bold">/ mois</small>
+                                </h3>
+                                <a href="{{path('subscription_show', {'id' : sub.id})}}" class="btn btn-sm bg-gradient-dark w-100 border-radius-md mt-4 mb-2">See details</a>
+                            </div>
+                            <hr class="horizontal dark my-0">
+                            <div class="card-body">
+
+                                {% for keyPoint in sub.keyPoints %}
+                                    
+                                <div class="d-flex pb-3">
+                                <div>
+                                    <i class="fas fa-check text-success text-sm"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <span class="text-sm "> {{keyPoint}} </span>
+                                </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                                
+                    {% endif %}
+              
+                {% endif %}
+          
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

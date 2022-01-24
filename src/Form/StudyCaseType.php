@@ -7,6 +7,7 @@ use App\Entity\ThemeStudyCase;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,6 +22,9 @@ class StudyCaseType extends AbstractType
         $builder
             ->add('name',TextType::class,[
                 'required' => false,
+            ])
+            ->add('subtitle', TextType::class, [
+                'required' => false, 
             ])
             ->add('image',DropzoneType::class,[
                 'required' => false,
@@ -53,6 +57,22 @@ class StudyCaseType extends AbstractType
                         'maxSizeMessage' => 'File max size allowed is 10 Mo.',
                     ])
                 ]
+            ])
+            ->add('isMain', CheckboxType::class, [
+                'required' => false, 
+                
+            ])
+            ->add('isActive', CheckboxType::class, [
+                'required' => false, 
+
+            ])
+            ->add('isNew', CheckboxType::class, [
+                'required' => false, 
+
+            ])
+            ->add('isFree', CheckboxType::class, [
+                'required' => false, 
+
             ])
         ;
     }

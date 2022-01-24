@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -27,6 +28,33 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'label' => "Email"
+            ])
+            ->add('company', TextType::class, [
+                
+            ])
+            ->add('address', TextType::class, [
+                
+                'attr' => [
+                    'placeholder' => '48 rue Rivoly...'
+                ]
+            ])
+            ->add('postal', TextType::class, [
+                
+                'attr' => [
+                    // 'placeholder' => 'Entrez votre code postal'
+                ]
+            ])
+            ->add('city', TextType::class, [
+                
+                'attr' => [
+                    // 'placeholder' => 'Entrez votre ville'
+                ]
+            ])
+            ->add('country', CountryType::class, [
+                
+                'attr' => [
+                    // 'placeholder' => 'Entrer votre pays'
+                ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

@@ -13,7 +13,7 @@ class PremiumHomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('premium/premium_home/index.html.twig', [
+        return $this->render('dashboard/premium/premium_home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

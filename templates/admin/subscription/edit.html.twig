@@ -9,11 +9,31 @@
                         <h3><i class="fas fa-plus-circle"></i> Edit a subscription</h3>
                     </div>
                     <div class="card-body">
+                        
                         {{ form_start(form) }}
 
-                        {{ form_widget(form) }}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.subtitle)}}
+                        {{ form_row(form.price) }}
+                        {{ form_row(form.periodInDays) }}
+                        {{ form_row(form.image)}}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.keyPoint_id) }}
+                            </div>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <a class="btn btn-dark" href=" {{path('subscription_key_point_index')}}" >Manage Key point</a>
+                            </div>
+
+                        </div>
+
+                        {{form_row(form.description)}}
+                        {{form_row(form.shortDescription)}}
                         <button type="submit" class="btn btn-info">Edit</button>
+
                         {{ form_end(form) }}
+                        {{ include("admin/subscription/_delete_form.html.twig" ) }}
                     </div>
                 </div>
             </div>

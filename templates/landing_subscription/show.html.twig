@@ -1,0 +1,141 @@
+
+{% extends "base_vitrine.html.twig" %}
+
+
+{% block body %}
+
+
+
+
+
+
+<div class="container-fluid py-4 w-80">
+    <div class="row">
+        <div class="col-12">
+       
+              
+            <div class="row">
+
+
+                <div class="col-xl-7 col-lg-8 text-center d-flex flex-column justify-content-center align-items-center">
+
+                    <div class="">
+
+                    <img class="w-100 border-radius-lg shadow-lg mb-5 " src=" {{asset( sub.imagePath )}} " alt="image of subscription {{sub.name}}">
+                    <a href=" {{path('order_subscription_recap', {'id' : sub.id })}} " class=" btn bg-gradient-info mb-0 mt-lg-auto w-100" type="button" >Subscribe</a>
+
+                    </div>
+                
+
+                </div>
+               
+                <div class="col-lg-4 mx-auto">
+
+                    <h3 class="mt-lg-0 mt-2"> {{sub.name}} </h3>
+
+                    <p> {{sub.subTitle}} </p>
+
+                    <h6 class="mb-0 mt-2">Price</h6>
+                    <h5> <strong>{{sub.price | priceInEuros }}</strong>  <small>/month</small> </h5> 
+                  
+                  
+                    <h6 class="mt-2">Your subscription gives you access to:</h6>
+                    <ul>
+                        {% for keyPoint in keyPoints %}
+
+                        <li class="my-2">
+                            <span class="badge bg-info">{{keyPoint}}</span>
+                            
+                        </li>
+                            
+                        {% endfor %}
+                  
+                  
+                    </ul>
+                  
+                    <div class="row mt-4">
+                        <div class="col-lg-5">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+ 
+        </div>
+        <div class="col-12 mt-5 ">
+
+            <h3>Description</h3>
+        
+            <p class="description mb-5">
+            
+                {{sub.description | raw}}
+
+            </p>
+
+        
+        </div>
+    </div>
+    
+</div>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row my-5">
+      <div class="col-md-6 mx-auto text-center">
+        <h2>Frequently Asked Questions</h2>
+        <p>A lot of people don&#39;t appreciate the moment until it’s passed. I&#39;m not trying my hardest, and I&#39;m not trying to do </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <div class="accordion mb-5" id="accordionRental">
+          <div class="accordion-item mb-3">
+            <h5 class="accordion-header" id="headingOne">
+              <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                How do I order?
+                <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"></i>
+                <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"></i>
+              </button>
+            </h5>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionRental">
+              <div class="accordion-body text-sm opacity-8">
+                We’re not always in the position that we want to be at. We’re constantly growing. We’re constantly making mistakes. We’re constantly trying to express ourselves and actualize our dreams. If you have the opportunity to play this game
+                of life you need to appreciate every moment. A lot of people don’t appreciate the moment until it’s passed.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item mb-3">
+            <h5 class="accordion-header" id="headingTwo">
+              <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                How can i make the payment?
+                <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3"></i>
+                <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"></i>
+              </button>
+            </h5>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionRental">
+              <div class="accordion-body text-sm opacity-8">
+                It really matters and then like it really doesn’t matter. What matters is the people who are sparked by it. And the people who are like offended by it, it doesn’t matter. Because it&#39;s about motivating the doers. Because I’m here to follow my dreams and inspire other people to follow their dreams, too.
+                <br>
+                We’re not always in the position that we want to be at. We’re constantly growing. We’re constantly making mistakes. We’re constantly trying to express ourselves and actualize our dreams. If you have the opportunity to play this game of life you need to appreciate every moment. A lot of people don’t appreciate the moment until it’s passed.
+              </div>
+            </div>
+          </div>
+          
+        </div>
+              <a href=" {{path('order_subscription_recap', {'id' : sub.id })}} " class="btn bg-gradient-info mb-0 mt-lg-auto w-25" type="button" >Subscribe</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

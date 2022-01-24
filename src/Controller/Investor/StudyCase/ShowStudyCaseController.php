@@ -22,7 +22,7 @@ class ShowStudyCaseController extends AbstractController
             return $this->redirectToRoute("investor_study_case_all_list");
         }
 
-        return $this->render("investor/study_case/show.html.twig",[
+        return $this->render("dashboard/investor/study_case/show.html.twig",[
             'studyCase' => $studyCase
         ]);
     }

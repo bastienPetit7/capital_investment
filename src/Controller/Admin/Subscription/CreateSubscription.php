@@ -4,6 +4,7 @@ namespace App\Controller\Admin\Subscription;
 
 use App\Entity\Subscription;
 use App\Form\SubscriptionType;
+use App\Services\ImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,7 @@ class CreateSubscription extends AbstractController
     /**
      * @Route("admin/subscription/create", name="admin_subscription_create")
      */
-    public function create(Request $request,EntityManagerInterface $em): Response
+    public function create(Request $request,ImageService $imageService, EntityManagerInterface $em): Response
     {
         $sub = new Subscription();
 
@@ -25,6 +26,19 @@ class CreateSubscription extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            /** @var UploadedFile $file */
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                $imageService->saveImage($imageFile, $sub);
+            }
+            else
+            {
+                $this->addFlash("danger","You must upload Image.");
+                return $this->redirectToRoute("admin_study_case_create");
+            }
+
+
             $em->persist($sub);
             $em->flush();
 

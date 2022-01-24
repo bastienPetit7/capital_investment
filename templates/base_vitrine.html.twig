@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}CLEO CAPITAL HOLDING{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    {% block stylesheets %}
+        {#{{ encore_entry_link_tags('app') }}#}
+    {% endblock %}
+
+    {% block javascripts %}
+        {#{{ encore_entry_script_tags('app') }}#}
+    {% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('theme/assets/img/apple-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images_cleo/cleo_holding.png') }}">
+    <title>
+        Capital Investment
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="{{ asset('theme/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('theme/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="{{ asset('theme/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{{ asset('theme/assets/css/soft-ui-dashboard.css?v=1.0.8') }}" rel="stylesheet" />
+    <link href="{{ asset('theme/assets/css/style_perso.css') }}" rel="stylesheet" />
+</head>
+<body class="career">
+
+
+{% include 'shared/_navbar_transparent_capital_investment.html.twig' %}
+
+{% block body %}{% endblock %}
+
+{% include 'shared/_footer_capital_investment.html.twig' %}
+
+
+<script src="{{ asset('theme/assets/js/core/popper.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('theme/assets/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('theme/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<!--  Plugin for TypedJS, full documentation here: https://github.com/mattboldt/typed.js/ -->
+<script src="{{ asset('theme/assets/js/plugins/typedjs.js') }}"></script>
+
+<script src="{{ asset('theme/assets/js/plugins/rellax.min.js') }}"></script>
+<script src="{{ asset('theme/assets/js/plugins/tilt.min.js') }}"></script>
+<!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
+<script src="{{ asset('theme/assets/js/plugins/choices.min.js') }}"></script>
+<!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
+<script src="{{ asset('theme/assets/js/plugins/parallax.min.js') }}"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="{{ asset('theme/assets/js/plugins/nouislider.min.js') }}" type="text/javascript"></script>
+<!--  Plugin for the GlideJS Carousel, full documentation here: http://kenwheeler.github.io/slick/ -->
+<script src="{{ asset('theme/assets/js/plugins/glidejs.min.js') }}" type="text/javascript"></script>
+<!--  Plugin for the blob animation -->
+<script src="{{ asset('theme/assets/js/plugins/anime.min.js') }}" type="text/javascript"></script>
+<!-- Chart JS -->
+<script src="{{ asset('theme/assets/js/plugins/chartjs.min.js') }}"></script>
+<!-- Control Center for Soft UI Kit: parallax effects, scripts for the example pages etc -->
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+<script src="{{ asset('theme/assets/js/soft-ui-dashboard.min.js?v=1.0.8') }}" type="text/javascript"></script>
+<script>
+    if (document.getElementsByClassName('rellax')) {
+        // Also can pass in optional settings block
+        var rellax = new Rellax('.rellax', {
+            speed: -2,
+            center: false,
+            wrapper: null,
+            round: true,
+            vertical: true,
+            horizontal: false
+        });
+    }
+</script>
+</body>
+</html>

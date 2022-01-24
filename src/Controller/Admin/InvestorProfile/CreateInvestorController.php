@@ -77,7 +77,7 @@ class CreateInvestorController extends AbstractController
 
             $this->addFlash("light","An investor has been created");
 
-            return $this->redirectToRoute("admin_customer_investor_profile_list");
+            return $this->redirectToRoute("admin_investor_profile_list");
 
         }
 

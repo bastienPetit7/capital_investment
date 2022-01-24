@@ -1,0 +1,30 @@
+{% extends "admin/base_admin.html.twig" %}
+
+{% block body %}
+
+    <div class="container-fluid py-4">
+    
+        <div class="card card-frame">
+        
+            <div class="card-header">
+                 <h1>Edit Subscription's KeyPoint</h1>
+            </div>
+
+            <div class="card-body">
+
+            {{ include('admin/subscription_key_point/_form.html.twig', {'button_label': 'Update'}) }}
+
+            <a class="btn btn-dark" href="{{ path('subscription_key_point_index') }}">back to list</a>
+
+            {# {{ include('admin/subscription_key_point/_delete_form.html.twig') }} #}
+            
+            </div>
+        
+        </div>
+    
+    </div>
+
+   
+
+    
+{% endblock %}

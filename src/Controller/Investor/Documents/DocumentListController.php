@@ -45,7 +45,7 @@ class DocumentListController extends AbstractController
 
         $documents = $handleDocument->getDocumentsByType($investor,$type);
 
-        return $this->render("investor/documents/list.html.twig",[
+        return $this->render("dashboard/investor/documents/list.html.twig",[
             'type' => $type,
             'documents' => $documents
         ]);
@@ -65,7 +65,7 @@ class DocumentListController extends AbstractController
 
         $documents = $handleDocument->getDocumentsByType($investor,$type);
 
-        return $this->render("investor/documents/list.html.twig",[
+        return $this->render("dashboard/investor/documents/list.html.twig",[
             'type' => $type,
             'documents' => $documents
         ]);

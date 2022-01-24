@@ -20,7 +20,7 @@ class StudyCaseListController extends AbstractController
 
         $type = "All";
 
-        return $this->render("investor/study_case/list.html.twig",[
+        return $this->render("dashboard/investor/study_case/list.html.twig",[
             'type' => $type,
             'studyCases' => $studyCases
         ]);

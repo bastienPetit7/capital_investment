@@ -1,0 +1,51 @@
+{% extends "base_vitrine.html.twig" %}
+
+{% block body %}
+
+
+    <section class="py-6 bg-gray-100">
+  <div class="container">
+    <div class="row">
+
+        {% for ebook in ebooks %}
+            
+            <div class="col-lg-3 mb-lg-0 mb-4">
+        <div class="card">
+          <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+            <a href="javascript:;" class="d-block">
+              <img src=" {{ebook.imagePath}} " class="img-fluid border-radius-lg">
+            </a>
+          </div>
+
+          <div class="card-body pt-3">
+            <span class="text-gradient text-warning text-uppercase text-xs font-weight-bold my-2"> {{ebook.name}} </span>
+            <a href="javascript:;" class="card-title h5 d-block text-darker">
+              {{ebook.subtitle}}
+            </a>
+            <p class="card-description mb-4">
+              Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons.
+            </p>
+            <div class="author align-items-center">
+    
+              <div class="name ps-3">
+                
+                <div class="stats">
+                  <small>Posted on : {{ebook.createdAt | date('Y-m-d')}} </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        {% endfor %}
+      
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+{% endblock %}

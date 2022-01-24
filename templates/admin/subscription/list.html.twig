@@ -35,26 +35,55 @@
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <ul class="list-unstyled max-width-200 mx-auto">
-                            <li>
-                                <b>10</b> Projects
+                        <ul class="list-unstyled max-width-300 mx-auto">
+
+                           {% for keyPoints in sub.keyPoints %}
+
+
+                             <li>
+                                <i class="fas fa-check text-success text-sm"></i>
+                                <b>{{keyPoints}}</b>
+                                
+                               
                                 <hr class="horizontal dark">
                             </li>
-                            <li>
-                                <b>1</b> Team Members
-                                <hr class="horizontal dark">
-                            </li>
-                            <li>
-                                <b>5</b> Personal Contacts
-                                <hr class="horizontal dark">
-                            </li>
-                            <li>
-                                <b>500</b> Messages
-                            </li>
+                   
+                               
+                           {% endfor %}
+                
+
+                           
+                           
                         </ul>
                         <a href="{{ path('admin_subscription_edit',{'id': sub.id}) }}" class="btn bg-gradient-dark w-100 mt-4 mb-0">
                             Edit Subscription
                         </a>
+
+                        <div class="options-subscription-btn d-flex justify-content-center mt-3">
+
+                                {% if sub.isActive is same as false  %}
+                                
+                                <a href=" {{path('admin_subscription_activate', {'id' : sub.id})}} " class="btn bg-gradient-success me-3" title="Active and display subscription or users">unActivated</a> 
+                                
+                                {% else %}
+                                    
+                                <a href=" {{path('admin_subscription_unactivate', {'id' : sub.id})}} " class="btn bg-gradient-danger me-3" title="Unactive and undisplay subscription or users">Activated</a> 
+
+                                {% endif %}
+
+                                {% if sub.isMain is same as false %}
+                                
+                                <a href=" {{path('admin_subscription_isMain', {'id' : sub.id})}} " class="btn bg-gradient-warning">isNormal</a>
+
+                                {% else %}
+
+                                <a href=" {{path('admin_subscription_isNormal', {'id' : sub.id})}} " class="btn bg-gradient-info">isMain</a>
+                                     
+                                
+                                {% endif %}
+
+
+                        </div>
                     </div>
                 </div>
             </div>

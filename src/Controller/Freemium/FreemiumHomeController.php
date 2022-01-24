@@ -13,7 +13,7 @@ class FreemiumHomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('freemium/freemium_home/index.html.twig', [
+        return $this->render('dashboard/freemium/freemium_home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
