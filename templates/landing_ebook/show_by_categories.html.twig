@@ -7,7 +7,7 @@
 
     <section class="py-6 bg-gray-100">
   <div class="container">
-    <div class="row py-4"></div>
+     <div class="row py-4"></div>
     <div class="row">
 
         {% for ebook in ebooks %}
@@ -37,8 +37,7 @@
                 </div>
               </div>
             </div>
-              <a href="{{path('landing_ebook_show', {'id' : ebook.id})}}" class="btn btn-dark btn-sm mt-3">Read study case</a>
-
+            <a href="{{path('landing_ebook_show', {'id' : ebook.id})}}" class="btn btn-dark btn-sm mt-3">Read study case</a>
           </div>
         </div>
       </div>

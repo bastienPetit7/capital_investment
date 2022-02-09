@@ -3,6 +3,8 @@ twig:
     form_themes:
             - 'bootstrap_5_layout.html.twig'
             - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+    globals:
+        categoriesEbook: "@App\\Repository\\ThemeStudyCaseRepository"
 
 when@test:
     twig:

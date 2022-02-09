@@ -48,6 +48,11 @@ class StudyCaseType extends AbstractType
             ->add('description',CKEditorType::class,[
                 'required' => false,
             ])
+            ->add('extract',CKEditorType::class,[
+                'required' => false,
+                'label' => 'Extract ( finish it with a cliffhanger followed by (...) '
+            ])
+
             ->add('file',DropzoneType::class,[
                 'required' => false,
                 'mapped' => false,

@@ -46,6 +46,11 @@ class Order
      */
     private $orderDetails;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $authentificationMonetico;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -130,6 +135,18 @@ class Order
                 $orderDetail->setMyOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthentificationMonetico(): ?string
+    {
+        return $this->authentificationMonetico;
+    }
+
+    public function setAuthentificationMonetico(?string $authentificationMonetico): self
+    {
+        $this->authentificationMonetico = $authentificationMonetico;
 
         return $this;
     }

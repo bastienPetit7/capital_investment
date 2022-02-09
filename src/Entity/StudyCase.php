@@ -102,6 +102,11 @@ class StudyCase
     private $createdAt;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $extract;
+
+    /**
      * @ORM\PrePersist
      */
     public function prePersist()
@@ -293,6 +298,18 @@ class StudyCase
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getExtract(): ?string
+    {
+        return $this->extract;
+    }
+
+    public function setExtract(?string $extract): self
+    {
+        $this->extract = $extract;
 
         return $this;
     }

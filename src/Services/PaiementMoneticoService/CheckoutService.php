@@ -3,7 +3,6 @@
 namespace App\Services\PaiementMoneticoService;
 
 use App\Entity\User;
-use App\Entity\Subscription;
 use App\Classe\Monetico\Collections\Currency;
 use App\Classe\Monetico\Collections\Language;
 use App\Classe\Monetico\Request\OrderContext;
@@ -24,7 +23,7 @@ class CheckoutService
      */
     private $paymentRequest;
 
-    public function __construct(User $user, Subscription $product, $ref)
+    public function __construct(User $user, $product, $ref)
     {
         $generatedReference = $ref;
 

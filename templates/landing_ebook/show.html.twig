@@ -1,0 +1,64 @@
+{% extends "base_vitrine.html.twig" %}
+
+
+{% block body %}
+
+
+
+<div class="container-fluid py-4 w-80">
+    <div class="row">
+        <div class="col-12">
+       
+              
+            <div class="row">
+
+
+                <div class="col-xl-7 col-lg-8 text-center d-flex flex-column justify-content-center align-items-center">
+
+                    <div class="">
+
+                      <img class="w-100 border-radius-lg shadow-lg mb-5 " src=" {{asset( book.imagePath )}} " alt="image of subscription {{book.name}}" style="max-height: 600px; ">
+                      {# <a href=" {{path('order_ebook_recap', {'id' : book.id })}} " class=" btn bg-gradient-info mb-0 mt-lg-auto w-100" type="button" >Buy me</a> #}
+
+                    </div>
+                
+
+                </div>
+               
+                <div class="col-lg-4 mx-auto">
+
+                    <h3 class="mt-lg-0 mt-2"> {{book.name}} </h3>
+
+                    <p> {{book.subTitle}} </p>
+
+                    <h6 class="mb-0 mt-2">Description : </h6>
+
+                    <p> {{book.description | raw}}</p>
+                    
+                </div>
+
+            </div>
+ 
+        </div>
+        <div class="col-12 mt-5 ">
+
+            <h3> {{book.name}}  </h3>
+        
+            <p class="description mb-5">
+            
+                {{book.extract | raw}}
+
+            </p>
+ 
+            <a href="{{path('landing_ebook_get', {'id' : book.id})}}" class="btn btn-sm btn-outline-dark">Read more... </a>
+        </div>
+
+    </div>
+    
+</div>
+
+
+
+
+
+{% endblock %}
