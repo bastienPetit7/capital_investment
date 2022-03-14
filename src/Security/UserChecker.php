@@ -25,11 +25,11 @@ class UserChecker implements UserCheckerInterface
         {
             $investorProfile = $user->getInvestor();
 
-            if($investorProfile->getStatus() === AvailableStatusMode::GHOST)
-            {
-                $exception = new MyDisabledException();
-                return $exception->getMessageKey();
-            }
+            // if($investorProfile->getStatus() === AvailableStatusMode::GHOST)
+            // {
+            //     $exception = new MyDisabledException();
+            //     return $exception->getMessageKey();
+            // }
         }
     }
 

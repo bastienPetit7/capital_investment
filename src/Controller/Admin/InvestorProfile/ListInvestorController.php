@@ -26,6 +26,8 @@ class ListInvestorController extends AbstractController
             }
         }
 
+     
+
         return $this->render("admin/investor_profile/list.html.twig",[
             'investors' => $investors
         ]);
