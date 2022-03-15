@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Dictionary\AvailableStatusMode;
 use App\Repository\InvestorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,6 +46,16 @@ class Investor
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reporting::class, mappedBy="investorId")
+     */
+    private $reportings;
+
+    public function __construct()
+    {
+        $this->reportings = new ArrayCollection();
+    }
 
     /**
      * @ORM\PrePersist()
@@ -127,6 +139,36 @@ class Investor
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reporting[]
+     */
+    public function getReportings(): Collection
+    {
+        return $this->reportings;
+    }
+
+    public function addReporting(Reporting $reporting): self
+    {
+        if (!$this->reportings->contains($reporting)) {
+            $this->reportings[] = $reporting;
+            $reporting->setInvestorId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReporting(Reporting $reporting): self
+    {
+        if ($this->reportings->removeElement($reporting)) {
+            // set the owning side to null (unless already changed)
+            if ($reporting->getInvestorId() === $this) {
+                $reporting->setInvestorId(null);
+            }
+        }
 
         return $this;
     }
