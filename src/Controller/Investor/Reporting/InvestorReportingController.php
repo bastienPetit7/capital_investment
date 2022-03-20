@@ -3,10 +3,8 @@
 namespace App\Controller\Investor\Reporting;
 
 use App\Entity\User;
-use App\Repository\InvestorRepository;
-use App\Repository\ReportingDetailsRepository;
-use App\Repository\ReportingRepository;
-use App\Repository\UserRepository;
+use App\Services\ReportingService\ChartGenerator;
+use App\Repository\ReportingMovementRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -14,32 +12,35 @@ class InvestorReportingController extends AbstractController
 {
 
     #[Route('investor/reporting', name: 'investor_reporting', methods: ['GET'] )]
-    public function index(
-        ReportingRepository $reportingRepository,
-        ReportingDetailsRepository $reportingDetailsRepository,
-        UserRepository $userRepository,
-        InvestorRepository $investorRepository)
+    public function index(ReportingMovementRepository $reportingMovementRepository,ChartGenerator $chartGenerator)
     {
+        /** @var User $user */
         $user = $this->getUser();
 
-        $user = $userRepository->findOneBy(['email' => $user->getUserIdentifier()]);
+        $investor = $user->getInvestor();
 
-        // dd($user); 
-        
-        $investor = $investorRepository->findOneBy(['user' => $user->getId()] ); 
-        
-        
+        $wallet = $investor->getWallet();
 
-        $reporting = $reportingRepository->findOneBy(['investorId' => $investor->getId()]);
+        $reporting = $wallet->getReporting();
 
-        
-        $reportings = $reportingDetailsRepository->findBy([ 'reporting' => $reporting->getId()], ['date' => 'desc']);
-        
+        //HANDLE MOVEMENTS
+        $movements = $reportingMovementRepository->findByReportingAndAsc($reporting);
+
+        $lastMovements = $reportingMovementRepository->findLastMovements($reporting);
+
+        $chart = $chartGenerator->getChart($movements,$wallet);
+
+        $initialAmount = $wallet->getInitialAmount();
+
+        $year = date('Y');
 
         return $this->render('dashboard/investor/reporting/index.html.twig', [
-            'reportings' => $reportings,
-            'investor' => $user
-
+            'investor' => $investor,
+            'lastMovements' =>  $lastMovements,
+            'chart' => $chart,
+            'initialAmount' => $initialAmount,
+            'year' => $year,
+            'reporting' => $reporting,
         ]);
     }
 

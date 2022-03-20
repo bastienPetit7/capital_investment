@@ -42,15 +42,6 @@ class InvestorProfileFormType extends AbstractType
                     ])
                 ]
             ])
-            ->add('walletInitialAmount', IntegerType::class, [
-                'label' => "Wallet Initial Amount",
-                'required' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Wallet Initial Amount is required.',
-                    ])
-                ]
-            ])
         ;
     }
 

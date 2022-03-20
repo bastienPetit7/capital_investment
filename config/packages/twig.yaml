@@ -5,6 +5,7 @@ twig:
             - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
     globals:
         categoriesEbook: "@App\\Repository\\ThemeStudyCaseRepository"
+        reportingMovementRepository: "@App\\Repository\\ReportingMovementRepository"
 
 when@test:
     twig:

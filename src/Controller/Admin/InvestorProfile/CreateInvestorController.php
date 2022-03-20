@@ -4,6 +4,7 @@ namespace App\Controller\Admin\InvestorProfile;
 
 use App\Entity\Investor;
 use App\Entity\ListDocument;
+use App\Entity\Reporting;
 use App\Entity\User;
 use App\Entity\Wallet;
 use App\Form\InvestorProfileFormType;
@@ -61,16 +62,15 @@ class CreateInvestorController extends AbstractController
 
             $wallet = new Wallet();
 
-            $initialAmount = $form->get('walletInitialAmount')->getData();
-
-            $wallet->setInitialAmount($initialAmount);
-
-            $wallet->setActualAmount($initialAmount);
-
             $investor->setWallet($wallet);
+
+            $reporting = new Reporting();
+
+            $reporting->setWallet($wallet);
 
             $entityManager->persist($investor);
             $entityManager->persist($wallet);
+            $entityManager->persist($reporting);
             $entityManager->persist($listDocument);
             $entityManager->persist($user);
             $entityManager->flush();

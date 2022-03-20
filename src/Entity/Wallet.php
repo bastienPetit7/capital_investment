@@ -24,14 +24,34 @@ class Wallet
     private $investor;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable="true")
      */
     private $initialAmount;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable="true")
      */
     private $actualAmount;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Reporting::class, mappedBy="wallet", cascade={"persist", "remove"})
+     */
+    private $reporting;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $interestRates;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $interestType;
 
     public function getId(): ?int
     {
@@ -55,7 +75,7 @@ class Wallet
         return $this->initialAmount;
     }
 
-    public function setInitialAmount(int $initialAmount): self
+    public function setInitialAmount( $initialAmount)
     {
         $this->initialAmount = $initialAmount;
 
@@ -67,9 +87,62 @@ class Wallet
         return $this->actualAmount;
     }
 
-    public function setActualAmount(int $actualAmount): self
+    public function setActualAmount( $actualAmount)
     {
         $this->actualAmount = $actualAmount;
+
+        return $this;
+    }
+
+    public function getReporting(): ?Reporting
+    {
+        return $this->reporting;
+    }
+
+    public function setReporting(Reporting $reporting): self
+    {
+        // set the owning side of the relation if necessary
+        if ($reporting->getWallet() !== $this) {
+            $reporting->setWallet($this);
+        }
+
+        $this->reporting = $reporting;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getInterestRates(): ?float
+    {
+        return $this->interestRates;
+    }
+
+    public function setInterestRates(?float $interestRates): self
+    {
+        $this->interestRates = $interestRates;
+
+        return $this;
+    }
+
+    public function getInterestType(): ?string
+    {
+        return $this->interestType;
+    }
+
+    public function setInterestType(?string $interestType): self
+    {
+        $this->interestType = $interestType;
 
         return $this;
     }

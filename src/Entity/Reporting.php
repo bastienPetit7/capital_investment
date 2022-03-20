@@ -11,7 +11,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ReportingRepository::class)
- * @ORM\HasLifecycleCallbacks
  */
 class Reporting
 {
@@ -23,94 +22,65 @@ class Reporting
     private $id;
 
     /**
-     * @ORM\Column(type="datetime", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity=Wallet::class, inversedBy="reporting", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $createdAt;
+    private $wallet;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Investor::class, inversedBy="reportings")
+     * @ORM\OneToMany(targetEntity=ReportingMovement::class, mappedBy="reporting", orphanRemoval=true)
      */
-    private $investorId;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $reportingName;
-
-    /**
-     * @ORM\OneToMany(targetEntity=ReportingDetails::class, mappedBy="reporting")
-     */
-    private $reportingDetail;
-    
+    private $reportingMovements;
 
     public function __construct()
     {
-        $this->reportingDetail = new ArrayCollection();
+        $this->reportingMovements = new ArrayCollection();
     }
-    /**
-     *@ORM\PrePersist
-     */
-    public function prePersist(){
+    
 
-        if(empty($this->createdAt)){
-
-            $this->createdAt = new DateTime();
-        }
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getInvestorId(): ?Investor
+
+    public function getWallet(): ?Wallet
     {
-        return $this->investorId;
+        return $this->wallet;
     }
 
-    public function setInvestorId(?Investor $investorId): self
+    public function setWallet(Wallet $wallet): self
     {
-        $this->investorId = $investorId;
-
-        return $this;
-    }
-
-    public function getReportingName(): ?string
-    {
-        return $this->reportingName;
-    }
-
-    public function setReportingName(?string $reportingName): self
-    {
-        $this->reportingName = $reportingName;
+        $this->wallet = $wallet;
 
         return $this;
     }
 
     /**
-     * @return Collection|ReportingDetails[]
+     * @return Collection|ReportingMovement[]
      */
-    public function getReportingDetail(): Collection
+    public function getReportingMovements(): Collection
     {
-        return $this->reportingDetail;
+        return $this->reportingMovements;
     }
 
-    public function addReportingDetail(ReportingDetails $reportingDetail): self
+    public function addReportingMovement(ReportingMovement $reportingMovement): self
     {
-        if (!$this->reportingDetail->contains($reportingDetail)) {
-            $this->reportingDetail[] = $reportingDetail;
-            $reportingDetail->setReporting($this);
+        if (!$this->reportingMovements->contains($reportingMovement)) {
+            $this->reportingMovements[] = $reportingMovement;
+            $reportingMovement->setReporting($this);
         }
 
         return $this;
     }
 
-    public function removeReportingDetail(ReportingDetails $reportingDetail): self
+    public function removeReportingMovement(ReportingMovement $reportingMovement): self
     {
-        if ($this->reportingDetail->removeElement($reportingDetail)) {
+        if ($this->reportingMovements->removeElement($reportingMovement)) {
             // set the owning side to null (unless already changed)
-            if ($reportingDetail->getReporting() === $this) {
-                $reportingDetail->setReporting(null);
+            if ($reportingMovement->getReporting() === $this) {
+                $reportingMovement->setReporting(null);
             }
         }
 
