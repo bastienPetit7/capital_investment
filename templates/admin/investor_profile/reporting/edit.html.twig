@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Reporting</title>
+
+{% block body %}
+    <h1>Edit Reporting</h1>
+
+    {{ include('reporting_template/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('reporting_template_index') }}">back to list</a>
+
+    {{ include('reporting_template/_delete_form.html.twig') }}
+{% endblock %}

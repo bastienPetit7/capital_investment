@@ -2,11 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ReportingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReportingRepository;
+use DateTime;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ReportingRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Reporting
 {
@@ -18,9 +23,9 @@ class Reporting
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime", length=255, nullable=true)
      */
-    private $date;
+    private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Investor::class, inversedBy="reportings")
@@ -33,35 +38,29 @@ class Reporting
     private $reportingName;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\OneToMany(targetEntity=ReportingDetails::class, mappedBy="reporting")
      */
-    private $wallet;
+    private $reportingDetail;
+    
 
+    public function __construct()
+    {
+        $this->reportingDetail = new ArrayCollection();
+    }
     /**
-     * @ORM\Column(type="float", nullable=true)
+     *@ORM\PrePersist
      */
-    private $interets;
+    public function prePersist(){
 
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $interetsComposé;
+        if(empty($this->createdAt)){
+
+            $this->createdAt = new DateTime();
+        }
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDate(): ?string
-    {
-        return $this->date;
-    }
-
-    public function setDate(string $date): self
-    {
-        $this->date = $date;
-
-        return $this;
     }
 
     public function getInvestorId(): ?Investor
@@ -88,38 +87,32 @@ class Reporting
         return $this;
     }
 
-    public function getWallet(): ?float
+    /**
+     * @return Collection|ReportingDetails[]
+     */
+    public function getReportingDetail(): Collection
     {
-        return $this->wallet;
+        return $this->reportingDetail;
     }
 
-    public function setWallet(float $wallet): self
+    public function addReportingDetail(ReportingDetails $reportingDetail): self
     {
-        $this->wallet = $wallet;
+        if (!$this->reportingDetail->contains($reportingDetail)) {
+            $this->reportingDetail[] = $reportingDetail;
+            $reportingDetail->setReporting($this);
+        }
 
         return $this;
     }
 
-    public function getInterets(): ?float
+    public function removeReportingDetail(ReportingDetails $reportingDetail): self
     {
-        return $this->interets;
-    }
-
-    public function setInterets(?float $interets): self
-    {
-        $this->interets = $interets;
-
-        return $this;
-    }
-
-    public function getInteretsComposé(): ?float
-    {
-        return $this->interetsComposé;
-    }
-
-    public function setInteretsComposé(?float $interetsComposé): self
-    {
-        $this->interetsComposé = $interetsComposé;
+        if ($this->reportingDetail->removeElement($reportingDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($reportingDetail->getReporting() === $this) {
+                $reportingDetail->setReporting(null);
+            }
+        }
 
         return $this;
     }

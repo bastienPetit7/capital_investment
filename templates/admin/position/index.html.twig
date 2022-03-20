@@ -1,0 +1,112 @@
+{% extends "admin/base_admin.html.twig" %}
+
+{% block body %}
+    <div class="container-fluid py-4">
+        <div class="row">
+            {% include "shared/_messages_flash.html.twig" %}
+
+            <a href="{{path('position_new')}}" class="btn btn-dark btn-sm w-25 ms-3">New position</a>
+            <div class="col-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-left  text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Position's Name</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Actif</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Created At</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">tp1</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">tp2</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">tp3</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">tp4</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">tp5</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">tp6</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">tp7</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">tp8</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12 ps-2">Closed at</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12 ps-2">Stop loss</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">edit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for position in positions %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex pr-2 py-1">
+                                        {% if position.isActive %}
+
+                                             <div>
+                                                <span class="badge badge-success me-2">Active</span>
+                                            </div>
+
+                                            {% else %}
+
+                                            <div>
+                                                <span class="badge badge-danger me-2">Unactive</span>
+                                            </div>
+
+                                        {% endif %}
+                                           
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ position.name }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center ">
+                                        <p class="text-sm  mb-0">{{ position.positionType.name}}</p>
+                                    </td>
+                                    <td class="align-middle text-center ">
+                                        <p class="text-sm  mb-0">{{ position.createdAt | date('d-M-Y') }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.tp1 }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.tp2 }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.tp3 }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.tp4 }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.tp5 }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.tp6 }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.tp7 }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.tp8 }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.sellAt }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ position.stopLoss }}</p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a class="btn btn-dark " href="{{ path('position_edit',{'id' : position.id}) }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

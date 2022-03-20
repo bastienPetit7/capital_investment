@@ -1,0 +1,67 @@
+{% extends "dashboard/investor/base_investor.html.twig" %}
+
+
+{% block body %}
+
+    <div class="container-fluid py-4">
+
+        
+            
+        <div class="row">
+            {% include "shared/_messages_flash.html.twig" %}
+
+            <div class="col-12">
+                <div class="card">
+                    <h3 class="card-title p-4"> {{investor.name}}'s reporting </h3>
+                    <div class="table-responsive p-4">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-left  text-uppercase text-dark  font-weight-bolder opacity-12">Date</th>
+                                <th class="text-center text-uppercase text-dark  font-weight-bolder opacity-12">Initial Wallet</th>
+                                <th class="text-center text-uppercase text-dark  font-weight-bolder opacity-12">Interest</th>
+                                <th class="text-center text-uppercase text-dark  font-weight-bolder opacity-12">Compound Interest</th>
+                                <th class="text-center text-uppercase text-dark  font-weight-bolder opacity-12">Actual Wallet</th>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reporting in reportings %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex pr-2 py-1">
+                                 
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ reporting.date | format_datetime('medium', 'none', locale='en') }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center ">
+                                        <p class="text-sm  mb-0">$ {{ reporting.initialWallet}}</p>
+                                    </td>
+                                    <td class="align-middle text-center ">
+                                        <p class="text-sm  mb-0">$ {{ reporting.interest}}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">$ {{ reporting.compoundInterest }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm font-weight-bolder mb-0">$ {{ reporting.actualWallet }}</p>
+                                    </td>
+                                    
+                                    
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>
+       
+    </div>
+
+
+{% endblock %}

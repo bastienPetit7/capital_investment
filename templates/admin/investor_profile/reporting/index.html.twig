@@ -1,0 +1,74 @@
+{% extends "admin/base_admin.html.twig" %}
+
+{% block body %}
+
+    {% include "admin/shared/_header_investor_profile.html.twig" %}
+    
+    <div class="container-fluid py-4">
+
+        {% if reporting is empty  %}
+        
+        <a href="{{path('admin_investor_profile_create_reporting', {'id' : investor.id})}}" class="btn btn-danger btn-sm w-25 ms-3">Initialize Reporting</a>
+
+        {% else %}
+            
+        <div class="row">
+            {% include "shared/_messages_flash.html.twig" %}
+
+            <a href="{{path('admin_investor_profile_handle_reporting_detail_new', {'id' : investor.id})}}" class="btn btn-dark btn-sm w-25 ms-3">New reporting's line</a>
+            <div class="col-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                            <tr>
+                                <th class="text-left  text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Date</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Initial Wallet</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Interest</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Compound Interest</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-12">Actual Wallet</th>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for reporting in reportings %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex pr-2 py-1">
+                                 
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ reporting.date | format_datetime('medium', 'none', locale='en') }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center ">
+                                        <p class="text-sm  mb-0">{{ reporting.initialWallet}}</p>
+                                    </td>
+                                    <td class="align-middle text-center ">
+                                        <p class="text-sm  mb-0">{{ reporting.interest}}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ reporting.compoundInterest }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <p class="text-sm  mb-0">{{ reporting.actualWallet }}</p>
+                                    </td>
+                                    
+                                    <td class="align-middle text-center">
+                                        <a class="btn btn-dark " href=" {{ path('admin_investor_profile_handle_reporting_detail_edit', {'id' : investor.id, 'repoDetailId' : reporting.id})}} ">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

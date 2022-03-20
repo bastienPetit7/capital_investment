@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('reporting_details_delete', {'repoDetailId': reporting_detail.id, 'id': investor.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reporting_detail.id) }}">
+    <button class="btn btn-danger">Delete</button>
+</form>

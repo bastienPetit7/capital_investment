@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\PositionRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PositionRepository;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass=PositionRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Position
 {
@@ -86,6 +89,22 @@ class Position
      * @ORM\ManyToOne(targetEntity=PositionType::class, inversedBy="positions")
      */
     private $positionType;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable="true")
+     */
+    private $weekOfCreation;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if(empty($this->createdAt))
+        {
+            $this->createdAt = new DateTime();
+        }
+    }
 
     public function getId(): ?int
     {
@@ -256,6 +275,18 @@ class Position
     public function setPositionType(?PositionType $positionType): self
     {
         $this->positionType = $positionType;
+
+        return $this;
+    }
+
+    public function getWeekOfCreation(): ?string
+    {
+        return $this->weekOfCreation;
+    }
+
+    public function setWeekOfCreation(string $weekOfCreation): self
+    {
+        $this->weekOfCreation = $weekOfCreation;
 
         return $this;
     }

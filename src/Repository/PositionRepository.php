@@ -19,6 +19,16 @@ class PositionRepository extends ServiceEntityRepository
         parent::__construct($registry, Position::class);
     }
 
+    public function findActives(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andHaving('p.isActive = 1')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Position[] Returns an array of Position objects
     //  */
