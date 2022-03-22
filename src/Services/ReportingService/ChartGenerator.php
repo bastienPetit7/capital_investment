@@ -7,6 +7,7 @@ namespace App\Services\ReportingService;
 use App\Dictionary\Movement;
 use App\Entity\ReportingMovement;
 use App\Entity\Wallet;
+use App\Repository\ReportingMovementRepository;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
@@ -17,10 +18,12 @@ class ChartGenerator
      * @var ChartBuilderInterface
      */
     protected $chartBuilder;
+    private ReportingMovementRepository $reportingMovementRepository;
 
-    public function __construct(ChartBuilderInterface $chartBuilder)
+    public function __construct(ChartBuilderInterface $chartBuilder,ReportingMovementRepository $reportingMovementRepository)
     {
         $this->chartBuilder = $chartBuilder;
+        $this->reportingMovementRepository = $reportingMovementRepository;
     }
 
     public function getDateForChart($movements,$dateDepositInitial)
@@ -65,7 +68,7 @@ class ChartGenerator
         return $data;
     }
 
-    public function getChart($movements,Wallet $wallet)
+    public function getChartLine($movements,Wallet $wallet)
     {
         $depositInitial = $wallet->getInitialAmount();
         $dateDepositInitial = $wallet->getInvestor()->getCreatedAt();
@@ -92,4 +95,56 @@ class ChartGenerator
 
         return $chart;
     }
+
+    private function getValueForChartBar($reporting,$labels,$year)
+    {
+        $data = [];
+
+        foreach ($labels as $month)
+        {
+            $resultMonthly = $this->reportingMovementRepository->findMovementPerMonthAndYearAndReporting($reporting,$month,$year);
+
+            if($resultMonthly)
+            {
+                $valueInEuro = $resultMonthly->getWalletAmountAfterMovement() / 100;
+                $data[] = $valueInEuro;
+            }
+            else
+            {
+                $data[] = 0;
+            }
+
+
+        }
+
+        return $data;
+    }
+
+    public function getChartBar(Wallet $wallet,$year)
+    {
+        $reporting = $wallet->getReporting();
+
+        $labels = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        $data = $this->getValueForChartBar($reporting,$labels,$year);
+
+
+        //Set up the graph
+        $chart = $this->chartBuilder->createChart(Chart::TYPE_BAR);
+        $chart->setData([
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => 'Capital Evolution',
+                    'backgroundColor' => 'rgb(62, 182, 160)',
+                    'borderColor' => 'rgb(37, 106, 154)',
+                    'data' => $data,
+                ],
+            ],
+        ]);
+
+        $chart->setOptions([]);
+
+        return $chart;
+    }
+
 }

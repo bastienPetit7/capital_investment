@@ -28,11 +28,14 @@ class InvestorReportingController extends AbstractController
 
         $lastMovements = $reportingMovementRepository->findLastMovements($reporting);
 
-        $chart = $chartGenerator->getChart($movements,$wallet);
+        $chart = $chartGenerator->getChartLine($movements,$wallet);
 
         $initialAmount = $wallet->getInitialAmount();
 
         $year = date('Y');
+
+        $chartBar = $chartGenerator->getChartBar($wallet, $year);
+
 
         return $this->render('dashboard/investor/reporting/index.html.twig', [
             'investor' => $investor,
@@ -41,6 +44,7 @@ class InvestorReportingController extends AbstractController
             'initialAmount' => $initialAmount,
             'year' => $year,
             'reporting' => $reporting,
+            'chartBar' => $chartBar
         ]);
     }
 

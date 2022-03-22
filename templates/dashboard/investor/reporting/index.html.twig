@@ -186,6 +186,15 @@
 
             <div class="col-12 mt-3">
                 <div class="card">
+                    <h3 class="card-title p-4"> Capital Evolution </h3>
+                    <div class="card-body">
+                        {{ render_chart(chartBar) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-3">
+                <div class="card">
                     <h3 class="card-title p-4"> {{ investor.user.name }}'s reporting last 10 movements </h3>
                     <div class="card-body">
                          <div class="table-responsive">
