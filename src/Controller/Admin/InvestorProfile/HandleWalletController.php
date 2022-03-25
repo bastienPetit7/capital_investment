@@ -11,6 +11,7 @@ use App\Form\WalletType;
 use App\Form\WithdrawalAmountType;
 use App\Repository\InvestorRepository;
 use App\Repository\ReportingMovementRepository;
+use App\Services\ReportingService\ChartGenerator;
 use App\Services\ReportingService\DepositMovementPersister;
 use App\Services\ReportingService\EarningMovementPersister;
 use App\Services\ReportingService\WithdrawalMovementPersister;
@@ -27,7 +28,7 @@ class HandleWalletController extends AbstractController
     public function show(int $id,InvestorRepository $investorRepository,EntityManagerInterface $em,
                          Request $request,ReportingMovementRepository $reportingMovementRepository,
                          DepositMovementPersister $depositMovementPersister,WithdrawalMovementPersister $withdrawalMovementPersister,
-                         EarningMovementPersister $earningMovementPersister)
+                         EarningMovementPersister $earningMovementPersister,ChartGenerator $chartGenerator)
     {
         $investor = $investorRepository->find($id);
 
@@ -169,6 +170,14 @@ class HandleWalletController extends AbstractController
         //HANDLE MOVEMENTS
         $movements = $reportingMovementRepository->findByReportingAndAsc($reporting);
 
+        $chartLine = $chartGenerator->getChartLine($movements,$wallet);
+
+        $year = date('Y');
+
+        $chartBar = $chartGenerator->getChartBar($wallet, $year);
+
+        $initialAmount = $wallet->getInitialAmount();
+
         return $this->render('admin/investor_profile/handle_wallet.html.twig',[
             'investor' => $investor,
             'form' => $form->createView(),
@@ -178,7 +187,12 @@ class HandleWalletController extends AbstractController
             'formWithdrawalAmount' => $formWithdrawalAmount->createView(),
             'formDepositAmount' => $formDepositAmount->createView(),
             'formSimulateEarning' => $formSimulateEarning->createView(),
-            'movements' => $movements
+            'movements' => $movements,
+            'chartLine' => $chartLine,
+            'chartBar' => $chartBar,
+            'reporting' => $reporting,
+            'year' => $year,
+            'initialAmount' => $initialAmount,
         ]);
     }
 }

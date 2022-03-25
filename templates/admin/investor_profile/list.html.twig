@@ -1,63 +1,76 @@
 {% extends "admin/base_admin.html.twig" %}
 
 {% block body %}
+
     <div class="container-fluid py-4">
         <div class="row">
             {% include "shared/_messages_flash.html.twig" %}
-
-            <div class="col-12">
+            <div class="col-12 mb-4">
                 <div class="card">
-                    <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Created At</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for user in investors %}
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="{{asset('theme/assets/mes_images/logo_capital_investment.svg')}}" class="avatar avatar-sm me-3" alt="avatar image">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ user.name }}</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center ">
-                                        <p class="text-sm text-secondary mb-0">{{ user.investor.createdAt | date('d-M-Y') }}</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <p class="text-sm text-secondary mb-0">{{ user.telephone }}</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <p class="text-sm text-secondary mb-0">{{ user.email }}</p>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a class="btn btn-dark " href="{{ path('admin_investor_profile_handle_wallet',{'id' : user.investor.id}) }}">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5>Investors</h5>
+                        <a class="btn btn-dark" href="{{ path('admin_investor_profile_create') }}"><i class="fas fa-plus"></i> Add</a>
+                    </div>
+                    <div class="card-body">
+                        {% if investors | length > 0 %}
+                            <div class="table-responsive">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Created At</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for user in investors %}
+                                        <tr>
+                                            <td>
+                                                <a  href="{{ path('admin_investor_profile_handle_wallet',{'id' : user.investor.id}) }}">
+                                                <div class="d-flex px-2 py-1">
+                                                    <div>
+                                                        <img src="{{asset('theme/assets/mes_images/logo_capital_investment.svg')}}" class="avatar avatar-sm me-3" alt="avatar image">
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{ user.name }}</h6>
+                                                    </div>
+                                                </div>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle text-center ">
+                                                <a  href="{{ path('admin_investor_profile_handle_wallet',{'id' : user.investor.id}) }}">
+                                                <p class="text-sm text-secondary mb-0">{{ user.investor.createdAt | date('d-M-Y') }}</p>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <a  href="{{ path('admin_investor_profile_handle_wallet',{'id' : user.investor.id}) }}">
+                                                <p class="text-sm text-secondary mb-0">{{ user.telephone }}</p>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle text-center text-sm">
+                                                <a href="{{ path('admin_investor_profile_handle_wallet',{'id' : user.investor.id}) }}">
+                                                <p class="text-sm text-secondary mb-0">{{ user.email }}</p>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <a href="{{ path('admin_investor_profile_handle_wallet',{'id' : user.investor.id}) }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p>No investor</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
-
-
-
 
 {% endblock %}

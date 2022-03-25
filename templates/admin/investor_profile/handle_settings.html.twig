@@ -137,7 +137,7 @@
                                 <h6 class="mb-0">Profile Information</h6>
                             </div>
                             <div class="col-md-4 text-end">
-                                <a href="javascript:;">
+                                <a data-bs-toggle="modal" data-bs-target="#modal-form-profile">
                                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
                                 </a>
                             </div>
@@ -155,4 +155,28 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-form-profile" tabindex="-1" role="dialog" aria-labelledby="modal-form-earning" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="card card-plain">
+                        <div class="card-header pb-0 text-left">
+                            <h3 class="font-weight-bolder text-info text-gradient">Profile information</h3>
+                            <p class="mb-0">Edit profile</p>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(form) }}
+
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-info">Edit</button>
+                            {{ form_end(form) }}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

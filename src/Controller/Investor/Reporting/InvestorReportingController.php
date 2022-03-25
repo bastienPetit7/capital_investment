@@ -12,7 +12,8 @@ class InvestorReportingController extends AbstractController
 {
 
     #[Route('investor/reporting', name: 'investor_reporting', methods: ['GET'] )]
-    public function index(ReportingMovementRepository $reportingMovementRepository,ChartGenerator $chartGenerator)
+    public function index(ReportingMovementRepository $reportingMovementRepository,
+                          ChartGenerator $chartGenerator)
     {
         /** @var User $user */
         $user = $this->getUser();
