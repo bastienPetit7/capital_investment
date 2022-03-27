@@ -21,14 +21,20 @@ class DepositMovementPersister
         $this->em = $em;
     }
 
-    public function processCreation($depositAmount,Reporting $reporting,Wallet $wallet)
+    public function processCreation($month,$year,$depositAmount,Reporting $reporting,Wallet $wallet)
     {
         $actualWalletAmount = $wallet->getActualAmount();
         $newWalletAmount = $actualWalletAmount + $depositAmount;
 
+        $date = new \DateTime('01-' . $month .'-' . $year);
+
         //handle Reporting Movement
         $reportingMovement = new ReportingMovement();
+        $reportingMovement->setCreatedAt($date);
         $reportingMovement->setName(Movement::DEPOSIT);
+        $reportingMovement->setInterestRates($wallet->getInterestRates());
+        $reportingMovement->setMonth($month);
+        $reportingMovement->setYear($year);
         $reportingMovement->setReporting($reporting);
         $reportingMovement->setWalletAmountBeforeMovement($actualWalletAmount);
         $reportingMovement->setWalletAmountAfterMovement($newWalletAmount);

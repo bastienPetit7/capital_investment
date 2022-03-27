@@ -21,7 +21,7 @@ class SimulateEarningType extends AbstractType
                 'choices' => [
                     'January' => 'January',
                     'February' => 'February',
-                    'Mars' => 'Mars',
+                    'March' => 'March',
                     'April' => 'April',
                     'May' => 'May',
                     'June' => 'June',

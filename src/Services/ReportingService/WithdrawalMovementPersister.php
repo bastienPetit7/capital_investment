@@ -21,15 +21,19 @@ class WithdrawalMovementPersister
         $this->em = $em;
     }
 
-    public function processCreation($withdrawalAmount,Reporting $reporting,Wallet $wallet)
+    public function processCreation($month,$year,$withdrawalAmount,Reporting $reporting,Wallet $wallet)
     {
         $actualWalletAmount = $wallet->getActualAmount();
         $newWalletAmount = $actualWalletAmount - $withdrawalAmount;
-
+        $date = new \DateTime('01-' . $month .'-' . $year);
         //handle Reporting Movement
         $reportingMovement = new ReportingMovement();
+        $reportingMovement->setCreatedAt($date);
         $reportingMovement->setName(Movement::WITHDRAWAL);
+        $reportingMovement->setInterestRates($wallet->getInterestRates());
         $reportingMovement->setReporting($reporting);
+        $reportingMovement->setMonth($month);
+        $reportingMovement->setYear($year);
         $reportingMovement->setWalletAmountBeforeMovement($actualWalletAmount);
         $reportingMovement->setWalletAmountAfterMovement($newWalletAmount);
 

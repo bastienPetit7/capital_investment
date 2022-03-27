@@ -120,7 +120,11 @@ class HandleWalletController extends AbstractController
         {
             $depositAmount = $formDepositAmount->get('amount')->getData();
 
-            $depositMovementPersister->processCreation($depositAmount,$reporting,$wallet);
+            $month = $formDepositAmount->get('month')->getData();
+
+            $year = $formDepositAmount->get('year')->getData();
+
+            $depositMovementPersister->processCreation($month,$year,$depositAmount,$reporting,$wallet);
 
             $em->flush();
 
@@ -138,7 +142,11 @@ class HandleWalletController extends AbstractController
         {
             $withdrawalAmount = $formWithdrawalAmount->get('amount')->getData();
 
-            $withdrawalMovementPersister->processCreation($withdrawalAmount,$reporting,$wallet);
+            $month = $formWithdrawalAmount->get('month')->getData();
+
+            $year = $formWithdrawalAmount->get('year')->getData();
+
+            $withdrawalMovementPersister->processCreation($month,$year,$withdrawalAmount,$reporting,$wallet);
 
             $em->flush();
 

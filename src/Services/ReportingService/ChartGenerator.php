@@ -55,12 +55,12 @@ class ChartGenerator
             }elseif ($movement->getName() === Movement::WITHDRAWAL)
             {
                 $value = end($data);
-                $data[] = round(($value + ($movement->getCashOut()->getAmount() / 100)), 2);
+                $data[] = round(($value - ($movement->getCashOut()->getAmount() / 100)), 2);
 
             }elseif ($movement->getName() === Movement::EARNING)
             {
                 $value = end($data);
-                $data[] = round(($value - ($movement->getInterestEarn()->getAmount() / 100)), 2);
+                $data[] = round(($value + ($movement->getInterestEarn()->getAmount() / 100)), 2);
 
             }
         }

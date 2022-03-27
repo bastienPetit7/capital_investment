@@ -42,6 +42,8 @@ class EarningMovementPersister
         $reportingMovement->setWalletAmountBeforeMovement($actualWalletAmount);
         $reportingMovement->setWalletAmountAfterMovement($newWalletAmount);
 
+
+
         //handle earning
         $earning = new InterestEarn();
         $earning->setAmount($earningAmount);
@@ -60,9 +62,13 @@ class EarningMovementPersister
             $secondReportingMovement = new ReportingMovement();
             $secondReportingMovement->setCreatedAt($date);
             $secondReportingMovement->setName(Movement::WITHDRAWAL);
+            $secondReportingMovement->setInterestRates($wallet->getInterestRates());
             $secondReportingMovement->setReporting($reporting);
+            $secondReportingMovement->setMonth($month);
+            $secondReportingMovement->setYear($year);
             $secondReportingMovement->setWalletAmountBeforeMovement($newWalletAmount);
             $secondReportingMovement->setWalletAmountAfterMovement($actualWalletAmount);
+
 
             //handle cash in
             $cashOut = new CashOut();
