@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Dictionary\Movement;
 use App\Repository\WalletRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -52,6 +53,21 @@ class Wallet
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $interestType;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $currency;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $interestRecoveryFound;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $totalActif;
 
     public function getId(): ?int
     {
@@ -145,5 +161,58 @@ class Wallet
         $this->interestType = $interestType;
 
         return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(?string $currency): self
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getInterestRecoveryFound(): ?int
+    {
+        return $this->interestRecoveryFound;
+    }
+
+    public function setInterestRecoveryFound(?int $interestRecoveryFound): self
+    {
+        $this->interestRecoveryFound = $interestRecoveryFound;
+
+        return $this;
+    }
+
+    public function getTotalActif(): ?int
+    {
+        return $this->totalActif;
+    }
+
+    public function setTotalActif(?int $totalActif): self
+    {
+        $this->totalActif = $totalActif;
+
+        return $this;
+    }
+
+    public function getTotalInterest()
+    {
+        $movements = $this->getReporting()->getReportingMovements();
+
+        $earning = 0;
+
+        foreach ($movements as $movement)
+        {
+            if($movement->getName() === Movement::EARNING)
+           {
+               $earning += $movement->getInterestEarn()->getAmount();
+           }
+        }
+
+        return $earning;
     }
 }

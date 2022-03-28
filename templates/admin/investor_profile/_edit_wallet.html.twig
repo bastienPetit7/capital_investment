@@ -1,0 +1,152 @@
+<div class="col-12 col-md-6  mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            <h6 class="mb-0">Wallet Initial Amount</h6>
+        </div>
+        <div class="card-body p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">
+                {% if investor.wallet.currency is same as "€" %}
+                    {{ investor.wallet.initialAmount | priceInEuros }}
+                {% elseif investor.wallet.currency is same as "$" %}
+                    {{ investor.wallet.initialAmount | priceInDollar }}
+                {% elseif investor.wallet.currency is same as "CHF" %}
+                    {{ investor.wallet.initialAmount | priceInFranc }}
+                {% endif %}
+            </h6>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-6  mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            <h6 class="mb-0">Wallet Actual Amount</h6>
+        </div>
+        <div class="card-body p-3">
+
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">
+                {% if investor.wallet.currency is same as "€" %}
+                    {{ investor.wallet.actualAmount | priceInEuros }}
+                {% elseif investor.wallet.currency is same as "$" %}
+                    {{ investor.wallet.actualAmount | priceInDollar }}
+                {% elseif investor.wallet.currency is same as "CHF" %}
+                    {{ investor.wallet.actualAmount | priceInFranc }}
+                {% endif %}
+            </h6>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-6 col-xl-4 mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                <h6 class="mb-0">Currency <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-currency"><i class="fas fa-pen"></i></a></h6>
+            {% else %}
+                <h6 class="mb-0">Currency</h6>
+            {% endif %}
+        </div>
+        <div class="card-body p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ investor.wallet.currency }}</h6>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-6 col-xl-4 mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                <h6 class="mb-0">Interest Recovery Found <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-total-interest-recovery-found"><i class="fas fa-pen"></i></a></h6>
+            {% else %}
+                <h6 class="mb-0">Interest Recovery Found</h6>
+            {% endif %}
+        </div>
+        <div class="card-body p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">
+                {% if investor.wallet.currency is same as "€" %}
+                    {{ investor.wallet.interestRecoveryFound | priceInEuros }}
+                {% elseif investor.wallet.currency is same as "$" %}
+                    {{ investor.wallet.interestRecoveryFound | priceInDollar }}
+                {% elseif investor.wallet.currency is same as "CHF" %}
+                    {{ investor.wallet.interestRecoveryFound | priceInFranc }}
+                {% endif %}
+            </h6>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-6 col-xl-4 mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                <h6 class="mb-0">Total Actif <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-total-actif"><i class="fas fa-pen"></i></a></h6>
+            {% else %}
+                <h6 class="mb-0">Total Actif</h6>
+            {% endif %}
+        </div>
+        <div class="card-body p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">
+                {% if investor.wallet.currency is same as "€" %}
+                    {{ investor.wallet.totalActif | priceInEuros }}
+                {% elseif investor.wallet.currency is same as "$" %}
+                    {{ investor.wallet.totalActif | priceInDollar }}
+                {% elseif investor.wallet.currency is same as "CHF" %}
+                    {{ investor.wallet.totalActif | priceInFranc }}
+                {% endif %}
+            </h6>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-6 col-xl-4 mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            <div class="row">
+                <div class="col-md-8 d-flex align-items-center">
+                    {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                        <h6 class="mb-0">Status <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-status"><i class="fas fa-pen"></i></a></h6>
+                    {% else %}
+                        <h6 class="mb-0">Status</h6>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ investor.wallet.status }}</h6>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-6 col-xl-4 mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            <div class="row">
+                <div class="col-md-8 d-flex align-items-center">
+                    {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                        <h6 class="mb-0">Interest Rates <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-interest-rates"><i class="fas fa-pen"></i></a></h6>
+                    {% else %}
+                        <h6 class="mb-0">Interest Rates</h6>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ investor.wallet.interestRates }} %</h6>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-6 col-xl-4 mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            <div class="row">
+                <div class="col-md-8 d-flex align-items-center">
+                    {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                        <h6 class="mb-0">Interest Type <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-interest-type"><i class="fas fa-pen"></i></a></h6>
+                    {% else %}
+                        <h6 class="mb-0">Interest Type</h6>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        <div class="card-body p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ investor.wallet.interestType }}</h6>
+        </div>
+    </div>
+</div>

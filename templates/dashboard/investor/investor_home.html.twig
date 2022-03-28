@@ -27,7 +27,13 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold"> Initial Wallet</p>
                         <h5 class="font-weight-bolder mb-0">
-                          $100 000
+                          {% if investor.wallet.currency is same as "€" %}
+                            {{ investor.wallet.initialAmount | priceInEuros }}
+                          {% elseif investor.wallet.currency is same as "$" %}
+                            {{ investor.wallet.initialAmount | priceInDollar }}
+                          {% elseif investor.wallet.currency is same as "CHF" %}
+                            {{ investor.wallet.initialAmount | priceInFranc }}
+                          {% endif %}
                           <span class="text-danger text-sm font-weight-bolder"></span>
                         </h5>
                       </div>
@@ -48,8 +54,13 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Interest</p>
                         <h5 class="font-weight-bolder mb-0">
-                          $53000
-                          <span class="text-success text-sm font-weight-bolder">+7%</span>
+                          {% if investor.wallet.currency is same as "€" %}
+                            {{ investor.wallet.totalInterest | priceInEuros }}
+                          {% elseif investor.wallet.currency is same as "$" %}
+                            {{ investor.wallet.totalInterest | priceInDollar }}
+                          {% elseif investor.wallet.currency is same as "CHF" %}
+                            {{ investor.wallet.totalInterest | priceInFranc }}
+                          {% endif %}
                         </h5>
                       </div>
                     </div>
@@ -70,8 +81,13 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Actual Wallet</p>
                         <h5 class="font-weight-bolder mb-0">
-                          $153,000
-                          <span class="text-success text-sm font-weight-bolder">+55%</span>
+                          {% if investor.wallet.currency is same as "€" %}
+                            {{ investor.wallet.actualAmount | priceInEuros }}
+                          {% elseif investor.wallet.currency is same as "$" %}
+                            {{ investor.wallet.actualAmount | priceInDollar }}
+                          {% elseif investor.wallet.currency is same as "CHF" %}
+                            {{ investor.wallet.actualAmount | priceInFranc }}
+                          {% endif %}
                         </h5>
                       </div>
                     </div>
@@ -90,7 +106,7 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Returns Rate</p>
                         <h5 class="font-weight-bolder mb-0">
-                          12.9%
+                          {{ returnRate }}%
                           {# <span class="text-success text-sm font-weight-bolder">+50.3%</span> #}
                         </h5>
                       </div>
@@ -114,8 +130,7 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Fond recouvrement Total</p>
                         <h5 class="font-weight-bolder mb-0">
-                          $53,000
-                          <span class="text-success text-sm font-weight-bolder">+55%</span>
+                          {{ capitalInvestmentAsset.recoveryFoundTotal | priceInEuros }}
                         </h5>
                       </div>
                     </div>
@@ -134,8 +149,8 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Fond sous gestion</p>
                         <h5 class="font-weight-bolder mb-0">
-                          $10 710
-                          <span class="text-success text-sm font-weight-bolder">+7%</span>
+                          {{ capitalInvestmentAsset.totalAsset | priceInEuros }}
+
                         </h5>
                       </div>
                     </div>
@@ -156,8 +171,13 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Fond recouvrement dédié</p>
                         <h5 class="font-weight-bolder mb-0">
-                          $100 000
-                          <span class="text-danger text-sm font-weight-bolder"></span>
+                          {% if investor.wallet.currency is same as "€" %}
+                            {{ investor.wallet.interestRecoveryFound | priceInEuros }}
+                          {% elseif investor.wallet.currency is same as "$" %}
+                            {{ investor.wallet.interestRecoveryFound | priceInDollar }}
+                          {% elseif investor.wallet.currency is same as "CHF" %}
+                            {{ investor.wallet.interestRecoveryFound | priceInFranc }}
+                          {% endif %}
                         </h5>
                       </div>
                     </div>
@@ -176,8 +196,13 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Actif</p>
                         <h5 class="font-weight-bolder mb-0">
-                          $153 000
-                          <span class="text-success text-sm font-weight-bolder">+50.3%</span>
+                          {% if investor.wallet.currency is same as "€" %}
+                            {{ investor.wallet.totalActif | priceInEuros }}
+                          {% elseif investor.wallet.currency is same as "$" %}
+                            {{ investor.wallet.totalActif | priceInDollar }}
+                          {% elseif investor.wallet.currency is same as "CHF" %}
+                            {{ investor.wallet.totalActif | priceInFranc }}
+                          {% endif %}
                         </h5>
                       </div>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Dictionary\Currency;
 use App\Dictionary\ProfileInvestorRateType;
 use App\Dictionary\ProfileInvestorWalletStatus;
 use App\Entity\Wallet;
@@ -71,6 +72,47 @@ class WalletType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Interest rate type is required.',
+                    ])
+                ]
+            ])
+            ->add('currency', ChoiceType::class, [
+                'label' => "Currency",
+                'placeholder' => '-- Select a currency --',
+                'required' => false,
+                'choices' => [
+                    Currency::EURO_SIGN =>  Currency::EURO_SIGN,
+                    Currency::DOLLAR_SIGN =>  Currency::DOLLAR_SIGN,
+                    Currency::FRANC_SUISSE_SIGN =>  Currency::FRANC_SUISSE_SIGN,
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Currency type is required.',
+                    ])
+                ]
+            ])
+            ->add('interestRecoveryFound', MoneyType::class, [
+                'label' => "Interest Recovery Found",
+                'attr' => [
+                    'placeholder' => 'amount',
+                ],
+                'divisor' => 100,
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Interest Recovery Found amount is required.',
+                    ])
+                ]
+            ])
+            ->add('totalActif', MoneyType::class, [
+                'label' => "Total Actif",
+                'attr' => [
+                    'placeholder' => 'amount',
+                ],
+                'divisor' => 100,
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Total Actif amount is required.',
                     ])
                 ]
             ])

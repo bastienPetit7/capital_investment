@@ -3,9 +3,12 @@
 namespace App\Controller\Admin\InvestorProfile;
 
 use App\Form\DepositAmountType;
+use App\Form\EditWalletCurrencyType;
 use App\Form\EditWalletInterestCompoundOrClassicType;
 use App\Form\EditWalletInterestRatesType;
+use App\Form\EditWalletInterestRecoveryFoundType;
 use App\Form\EditWalletStatusType;
+use App\Form\EditWalletTotalActifType;
 use App\Form\SimulateEarningType;
 use App\Form\WalletType;
 use App\Form\WithdrawalAmountType;
@@ -175,6 +178,66 @@ class HandleWalletController extends AbstractController
             return $this->redirectToRoute("admin_investor_profile_handle_wallet",['id'=>$id]);
         }
 
+        //FORM Interest Recovery Found
+        $formInterestRecoveryFound = $this->createForm(EditWalletInterestRecoveryFoundType::class,[
+            'interestRecoveryFound' => $wallet->getInterestRecoveryFound()
+        ]);
+
+        $formInterestRecoveryFound->handleRequest($request);
+
+        if($formInterestRecoveryFound->isSubmitted() && $formInterestRecoveryFound->isValid())
+        {
+            $interestRecoveryFound = $formInterestRecoveryFound->get('interestRecoveryFound')->getData();
+
+            $wallet->setInterestRecoveryFound($interestRecoveryFound);
+
+            $em->flush();
+
+            $this->addFlash("light","The wallet has been edited successfully.");
+
+            return $this->redirectToRoute("admin_investor_profile_handle_wallet",['id'=>$id]);
+        }
+
+        //FORM Total Actif
+        $formTotalActif = $this->createForm(EditWalletTotalActifType::class,[
+            'totalActif' => $wallet->getTotalActif()
+        ]);
+
+        $formTotalActif->handleRequest($request);
+
+        if($formTotalActif->isSubmitted() && $formTotalActif->isValid())
+        {
+            $totalActif = $formTotalActif->get('totalActif')->getData();
+
+            $wallet->setTotalActif($totalActif);
+
+            $em->flush();
+
+            $this->addFlash("light","The wallet has been edited successfully.");
+
+            return $this->redirectToRoute("admin_investor_profile_handle_wallet",['id'=>$id]);
+        }
+
+        //FORM Total Actif
+        $formCurrency = $this->createForm(EditWalletCurrencyType::class,[
+            'currency' => $wallet->getCurrency()
+        ]);
+
+        $formCurrency->handleRequest($request);
+
+        if($formCurrency->isSubmitted() && $formCurrency->isValid())
+        {
+            $currency = $formCurrency->get('currency')->getData();
+
+            $wallet->setCurrency($currency);
+
+            $em->flush();
+
+            $this->addFlash("light","The wallet has been edited successfully.");
+
+            return $this->redirectToRoute("admin_investor_profile_handle_wallet",['id'=>$id]);
+        }
+
         //HANDLE MOVEMENTS
         $movements = $reportingMovementRepository->findByReportingAndAsc($reporting);
 
@@ -195,6 +258,9 @@ class HandleWalletController extends AbstractController
             'formWithdrawalAmount' => $formWithdrawalAmount->createView(),
             'formDepositAmount' => $formDepositAmount->createView(),
             'formSimulateEarning' => $formSimulateEarning->createView(),
+            'formInterestRecoveryFound' => $formInterestRecoveryFound->createView(),
+            'formTotalActif' => $formTotalActif->createView(),
+            'formCurrency' => $formCurrency->createView(),
             'movements' => $movements,
             'chartLine' => $chartLine,
             'chartBar' => $chartBar,

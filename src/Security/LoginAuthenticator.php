@@ -67,7 +67,11 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
             return new RedirectResponse($this->urlGenerator->generate('admin_home'));
 
-        }else {
+        }else if(in_array("ROLE_MANAGER", $user->getRoles())){
+
+        return new RedirectResponse($this->urlGenerator->generate('admin_home'));
+
+        }   else {
 
              // For example:
             return new RedirectResponse($this->urlGenerator->generate('home'));

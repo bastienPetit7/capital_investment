@@ -1,0 +1,23 @@
+<div class="modal fade" id="modal-form-status" tabindex="-1" role="dialog" aria-labelledby="modal-form-status" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-info text-gradient">Edit Wallet Status</h3>
+                        <p class="mb-0">Select a status in the list</p>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(formEditStatus) }}
+
+                        {{ form_widget(formEditStatus) }}
+                        <button type="submit" class="btn btn-info">Edit</button>
+                        {{ form_end(formEditStatus) }}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

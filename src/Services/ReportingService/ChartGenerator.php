@@ -115,13 +115,14 @@ class ChartGenerator
                 if($typeInterest === ProfileInvestorRateType::INVESTOR_INTEREST_COMPOUND)
                 {
                     $valueInEuro = $resultMonthly->getWalletAmountAfterMovement() / 100;
+                    $data[] = $valueInEuro;
                 }
                 elseif ($typeInterest === ProfileInvestorRateType::INVESTOR_INTEREST_CLASSIC)
                 {
                     $valueInEuro = $resultMonthly->getWalletAmountBeforeMovement() / 100;
+                    $data[] = $valueInEuro;
                 }
 
-                $data[] = $valueInEuro;
             }
             else
             {

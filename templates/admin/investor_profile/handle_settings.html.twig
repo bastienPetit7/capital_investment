@@ -106,18 +106,23 @@
                             <p class="text-sm">
                                 <i class="fas fa-check-circle text-success" ></i> Account Available
                             </p>
-                            <h6 class="text-uppercase text-body text-xs font-weight-bolder">Disable Account</h6>
-                            <ul class="list-group">
-                                <a class="btn btn-danger" href="{{ path('admin_investor_edit_status_ghost',{'id': investor.id}) }}">Activate Mode Fantom</a>
-                            </ul>
+                            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                                <h6 class="text-uppercase text-body text-xs font-weight-bolder">Disable Account</h6>
+                                <ul class="list-group">
+                                    <a class="btn btn-danger" href="{{ path('admin_investor_edit_status_ghost',{'id': investor.id}) }}">Activate Mode Fantom</a>
+                                </ul>
+                            {% endif %}
+
                         {% else %}
                             <p class="text-sm">
                                 <i class="fas fa-times text-danger" ></i> Account Ghosted
                             </p>
+                            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
                             <h6 class="text-uppercase text-body text-xs font-weight-bolder">Reactivate Account</h6>
                             <ul class="list-group">
                                 <a class="btn btn-success" href="{{ path('admin_investor_edit_status_reactivate',{'id': investor.id}) }}">Reactivate Account</a>
                             </ul>
+                            {% endif %}
 
                         {% endif %}
                         <p class="text-sm">
@@ -136,11 +141,13 @@
                             <div class="col-md-8 d-flex align-items-center">
                                 <h6 class="mb-0">Profile Information</h6>
                             </div>
+                            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
                             <div class="col-md-4 text-end">
                                 <a data-bs-toggle="modal" data-bs-target="#modal-form-profile">
                                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
                                 </a>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="card-body p-3">

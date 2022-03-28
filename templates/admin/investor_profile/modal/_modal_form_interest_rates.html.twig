@@ -1,0 +1,23 @@
+<div class="modal fade" id="modal-form-interest-rates" tabindex="-1" role="dialog" aria-labelledby="modal-form-interest-rates" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-info text-gradient">Edit Interest Rates</h3>
+                        <p class="mb-0">Enter the new interest rates</p>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(formEditInterestRateType) }}
+
+                        {{ form_widget(formEditInterestRateType) }}
+                        <button type="submit" class="btn btn-info">Edit</button>
+                        {{ form_end(formEditInterestRateType) }}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
