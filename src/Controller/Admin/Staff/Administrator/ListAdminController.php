@@ -24,6 +24,11 @@ class ListAdminController extends AbstractController
             {
                 $admins[] = $user;
             }
+
+            if(in_array("ROLE_MANAGER", $user->getRoles()))
+            {
+                $admins[] = $user;
+            }
         }
 
         return $this->render("admin/staff/administrator/list.html.twig",[

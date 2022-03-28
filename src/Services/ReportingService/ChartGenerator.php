@@ -5,6 +5,7 @@ namespace App\Services\ReportingService;
 
 
 use App\Dictionary\Movement;
+use App\Dictionary\ProfileInvestorRateType;
 use App\Entity\ReportingMovement;
 use App\Entity\Wallet;
 use App\Repository\ReportingMovementRepository;
@@ -84,9 +85,10 @@ class ChartGenerator
             'datasets' => [
                 [
                     'label' => 'Reporting',
-                    'backgroundColor' => 'rgb(62, 182, 160)',
-                    'borderColor' => 'rgb(37, 106, 154)',
+                    'backgroundColor' => 'rgb(37, 106, 154)',
+                    'borderColor' => 'rgb(62, 182, 160)',
                     'data' => $data,
+                    'fill' => true
                 ],
             ],
         ]);
@@ -96,8 +98,12 @@ class ChartGenerator
         return $chart;
     }
 
-    private function getValueForChartBar($reporting,$labels,$year)
+    private function getValueForChartBar(Wallet $wallet,$labels,$year)
     {
+        $reporting = $wallet->getReporting();
+
+        $typeInterest = $wallet->getInterestType();
+
         $data = [];
 
         foreach ($labels as $month)
@@ -106,7 +112,15 @@ class ChartGenerator
 
             if($resultMonthly)
             {
-                $valueInEuro = $resultMonthly->getWalletAmountAfterMovement() / 100;
+                if($typeInterest === ProfileInvestorRateType::INVESTOR_INTEREST_COMPOUND)
+                {
+                    $valueInEuro = $resultMonthly->getWalletAmountAfterMovement() / 100;
+                }
+                elseif ($typeInterest === ProfileInvestorRateType::INVESTOR_INTEREST_CLASSIC)
+                {
+                    $valueInEuro = $resultMonthly->getWalletAmountBeforeMovement() / 100;
+                }
+
                 $data[] = $valueInEuro;
             }
             else
@@ -122,10 +136,9 @@ class ChartGenerator
 
     public function getChartBar(Wallet $wallet,$year)
     {
-        $reporting = $wallet->getReporting();
 
         $labels = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-        $data = $this->getValueForChartBar($reporting,$labels,$year);
+        $data = $this->getValueForChartBar($wallet,$labels,$year);
 
 
         //Set up the graph
