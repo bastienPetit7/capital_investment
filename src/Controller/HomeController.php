@@ -23,9 +23,9 @@ class HomeController extends AbstractController
         
        
         //   dd( $decode64);   
-        //   dd( json_decode($decode64)->details->transactionID);   
-       
-        
+        //   dd( json_decode($decode64)->details->transactionID);
+
+        return $this->redirectToRoute("app_login");
 
 
         return $this->render('home/index.html.twig', [
