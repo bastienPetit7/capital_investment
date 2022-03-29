@@ -12,27 +12,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentListController extends AbstractController
 {
     /**
-     * @Route("/investor/document/list/actofsale", name="investor_document_act_of_sale_list")
+     * @Route("/investor/document/list/contract", name="investor_document_contract_list")
      */
-    public function actOfSaleList(HandleDocument $handleDocument): Response
+    public function contractsList(HandleDocument $handleDocument): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
         $investor = $user->getInvestor();
 
-        $type = DocumentTypeInvestor::ACT_OF_SALE;
+        $type = DocumentTypeInvestor::CONTRACTS;
 
         $documents = $handleDocument->getDocumentsByType($investor,$type);
 
-        return $this->render("investor/documents/list.html.twig",[
+        return $this->render("dashboard/investor/documents/list.html.twig",[
             'type' => $type,
             'documents' => $documents
         ]);
     }
 
     /**
-     * @Route("/investor/document/list/actofpurchase", name="investor_document_act_of_purchase_list")
+     * @Route("/investor/document/list/personaldocuments", name="investor_document_personal_document_list")
      */
     public function actOfPurchaseList(HandleDocument $handleDocument): Response
     {
@@ -41,7 +41,7 @@ class DocumentListController extends AbstractController
 
         $investor = $user->getInvestor();
 
-        $type = DocumentTypeInvestor::ACT_OF_PURCHASE;
+        $type = DocumentTypeInvestor::PERSONAL_DOCUMENTS;
 
         $documents = $handleDocument->getDocumentsByType($investor,$type);
 
@@ -62,6 +62,26 @@ class DocumentListController extends AbstractController
         $investor = $user->getInvestor();
 
         $type = DocumentTypeInvestor::OPERATION_STATEMENT;
+
+        $documents = $handleDocument->getDocumentsByType($investor,$type);
+
+        return $this->render("dashboard/investor/documents/list.html.twig",[
+            'type' => $type,
+            'documents' => $documents
+        ]);
+    }
+
+    /**
+     * @Route("/investor/document/list/legalnotice", name="investor_document_legal_notice_list")
+     */
+    public function legalNoticeList(HandleDocument $handleDocument): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $investor = $user->getInvestor();
+
+        $type = DocumentTypeInvestor::MENTIONS_LEGALS;
 
         $documents = $handleDocument->getDocumentsByType($investor,$type);
 

@@ -2,7 +2,7 @@
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="navbar-brand m-0 bg-white" href="#" >
-      <img src="{{asset('theme/assets/mes_images/logo_capital_investment.svg')}}"  class="navbar-brand-img h-100" alt="main_logo" >
+      <img src="{{asset('theme/assets/mes_images/CAPITAL_INVESTMENT_HIGH.png')}}"  class="navbar-brand-img h-100" alt="main_logo" >
       <span class="ms-1 font-weight-bold text-dark text-uppercase">Capital Investment</span>
     </a>
   </div>
@@ -20,7 +20,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a  href="#" class="nav-link ">
+        <a  href="{{ path('investor_wallet_list') }}" class="nav-link ">
           <i class="fas fa-wallet" style="color: white;"></i>
           <span class="nav-link-text ms-1 text-white">Wallet</span>
         </a>
@@ -50,27 +50,27 @@
               </a>
             </li>
             <li class="nav-item ">
+              <a class="nav-link " href="{{ path('investor_document_contract_list') }}">
+                <span class="sidenav-mini-icon"> C </span>
+                <span class="sidenav-normal">  Contracts </span>
+              </a>
+            </li>
+            <li class="nav-item ">
               <a class="nav-link " href="{{ path('investor_document_operation_statement_list') }}">
-                <span class="sidenav-mini-icon"> OS</span>
+                <span class="sidenav-mini-icon"> C</span>
                 <span class="sidenav-normal">  Operation Statement</span>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link " href=" {{ path('investor_document_act_of_sale_list')}} ">
-                <span class="sidenav-mini-icon"> AS </span>
-                <span class="sidenav-normal">  Act of sale</span>
+              <a class="nav-link " href="{{ path('investor_document_personal_document_list') }}">
+                <span class="sidenav-mini-icon"> PD </span>
+                <span class="sidenav-normal">  Personal Documents</span>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link " href=" {{ path('investor_document_act_of_purchase_list')}} ">
-                <span class="sidenav-mini-icon"> AP </span>
-                <span class="sidenav-normal">  Act of purchase</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link " href=" {{ path('investor_document_act_of_purchase_list')}} ">
-                <span class="sidenav-mini-icon"> AC </span>
-                <span class="sidenav-normal">  Additional clause</span>
+              <a class="nav-link " href="{{ path('investor_document_legal_notice_list') }}">
+                <span class="sidenav-mini-icon"> LN </span>
+                <span class="sidenav-normal">  Legal Notice</span>
               </a>
             </li>
           </ul>
@@ -84,6 +84,18 @@
         <a  href="#" class="nav-link ">
           <i class="fas fa-calendar" style="color: white;"></i>
           <span class="nav-link-text ms-1 text-white">Breakfast Market</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a  href="#" class="nav-link ">
+          <i class="fas fa-video" style="color: white;"></i>
+          <span class="nav-link-text ms-1 text-white">Video</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a  href="#" class="nav-link ">
+          <i class="fas fa-headphones" style="color: white;"></i>
+          <span class="nav-link-text ms-1 text-white">Podcast</span>
         </a>
       </li>
       <li class="nav-item">

@@ -21,7 +21,7 @@ class EditWalletTotalActifType extends AbstractType
         $builder
             ->add('totalActif', MoneyType::class, [
                 'data' => $options['data']['totalActif'],
-                'label' => "Total Actif",
+                'label' => "Total Asset",
                 'attr' => [
                     'placeholder' => 'amount',
                 ],

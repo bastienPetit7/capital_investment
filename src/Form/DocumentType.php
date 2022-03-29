@@ -32,8 +32,10 @@ class DocumentType extends AbstractType
             ])
             ->add('type',ChoiceType::class,[
                 'choices' => [
-                    DocumentTypeInvestor::ACT_OF_PURCHASE => DocumentTypeInvestor::ACT_OF_PURCHASE,
-                    DocumentTypeInvestor::ACT_OF_SALE => DocumentTypeInvestor::ACT_OF_SALE,
+                    DocumentTypeInvestor::CONTRACTS => DocumentTypeInvestor::CONTRACTS,
+                    DocumentTypeInvestor::REPORTING => DocumentTypeInvestor::REPORTING,
+                    DocumentTypeInvestor::PERSONAL_DOCUMENTS => DocumentTypeInvestor::PERSONAL_DOCUMENTS,
+                    DocumentTypeInvestor::MENTIONS_LEGALS => DocumentTypeInvestor::MENTIONS_LEGALS,
                     DocumentTypeInvestor::OPERATION_STATEMENT => DocumentTypeInvestor::OPERATION_STATEMENT,
                 ],
                 'placeholder' => '-- Choose a type --',

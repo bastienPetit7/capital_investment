@@ -31,11 +31,14 @@ class EarningMovementPersister
         $earningAmount = ($actualWalletAmount * $wallet->getInterestRates()) / 100;
         $newWalletAmount = $actualWalletAmount + $earningAmount;
 
+        //Calcul interest Rates
+        $interestRate = round( ( ($earningAmount * 100 ) / $wallet->getInitialAmount() ),2);
+
         //handle Reporting Movement
         $reportingMovement = new ReportingMovement();
         $reportingMovement->setCreatedAt($date);
         $reportingMovement->setName(Movement::EARNING);
-        $reportingMovement->setInterestRates($wallet->getInterestRates());
+        $reportingMovement->setInterestRates($interestRate);
         $reportingMovement->setMonth($month);
         $reportingMovement->setYear($year);
         $reportingMovement->setReporting($reporting);

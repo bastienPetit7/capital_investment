@@ -21,7 +21,7 @@ class EditWalletInterestRecoveryFoundType extends AbstractType
         $builder
             ->add('interestRecoveryFound', MoneyType::class, [
                 'data' => $options['data']['interestRecoveryFound'],
-                'label' => "Interest Recovery Found",
+                'label' => "Personal Recovery Found",
                 'attr' => [
                     'placeholder' => 'amount',
                 ],
