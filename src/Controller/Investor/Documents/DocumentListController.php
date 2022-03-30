@@ -12,6 +12,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentListController extends AbstractController
 {
     /**
+     * @Route("/investor/document/list/reporting", name="investor_document_reporting_list")
+     */
+    public function reportingList(HandleDocument $handleDocument): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $investor = $user->getInvestor();
+
+        $type = DocumentTypeInvestor::REPORTING;
+
+        $documents = $handleDocument->getDocumentsByType($investor,$type);
+
+        return $this->render("dashboard/investor/documents/list.html.twig",[
+            'type' => $type,
+            'documents' => $documents
+        ]);
+    }
+
+    /**
      * @Route("/investor/document/list/contract", name="investor_document_contract_list")
      */
     public function contractsList(HandleDocument $handleDocument): Response

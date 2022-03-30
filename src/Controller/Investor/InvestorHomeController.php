@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\CapitalInvestmentAssetRepository;
 use App\Repository\ReportingMovementRepository;
 use App\Services\HomeInvestor\MultipleChartGenerator;
+use App\Services\ReportingService\ChartGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +17,9 @@ class InvestorHomeController extends AbstractController
      * @Route("/investor/home", name="investor_home")
      */
     public function index(CapitalInvestmentAssetRepository $capitalInvestmentAssetRepository,
-                          MultipleChartGenerator $multipleChartGenerator,ReportingMovementRepository $reportingMovementRepository): Response
+                          MultipleChartGenerator $multipleChartGenerator,
+                          ReportingMovementRepository $reportingMovementRepository,
+                          ChartGenerator $chartGenerator): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -40,6 +43,19 @@ class InvestorHomeController extends AbstractController
 
         $chartLineEvolutionRateInterest =  $multipleChartGenerator->getChartLineEvolutionRateInterest($movements);
 
+
+        //HANDLE MOVEMENTS
+        $movements = $reportingMovementRepository->findByReportingAndAsc($reporting);
+
+        $chart = $chartGenerator->getChartLine($movements,$wallet);
+
+        $initialAmount = $wallet->getInitialAmount();
+
+        $year = date('Y');
+
+        $chartBar = $chartGenerator->getChartBar($wallet, $year);
+
+
         return $this->render('dashboard/investor/home/index.html.twig',[
             'capitalInvestmentAsset' => $capitalInvestmentAsset,
             'wallet' => $wallet,
@@ -47,7 +63,13 @@ class InvestorHomeController extends AbstractController
             'returnRate' => $returnRate,
             'chartLineEvolutionCapital' => $chartLineEvolutionCapital,
             'chartLineEvolutionEarningInterest' => $chartLineEvolutionEarningInterest,
-            'chartLineEvolutionRateInterest' => $chartLineEvolutionRateInterest
+            'chartLineEvolutionRateInterest' => $chartLineEvolutionRateInterest,
+            'chart' => $chart,
+            'initialAmount' => $initialAmount,
+            'year' => $year,
+            'chartBar' => $chartBar,
+            'reporting' => $reporting,
+            'movements' => $movements
         ]);
     }
 }

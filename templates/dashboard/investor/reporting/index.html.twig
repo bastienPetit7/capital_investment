@@ -3,58 +3,7 @@
 
 {% block body %}
 
-    <div class="container-fluid py-4">
-
-        
-            
-        <div class="row">
-            {% include "shared/_messages_flash.html.twig" %}
-
-            <div class="col-12">
-                <div class="card">
-                    <h3 class="card-title p-4"> Year {{ year }} </h3>
-                    <div class="card-body">
-                        {% include "admin/investor_profile/_table_evolution_capital.html.twig" %}
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="col-12 mt-3">
-                <div class="card">
-                    <h3 class="card-title p-4"> Capital Evolution </h3>
-                    <div class="card-body">
-                        {{ render_chart(chartBar) }}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 mt-3">
-                <div class="card">
-                    <h3 class="card-title p-4"> {{ investor.user.name }}'s reporting movements </h3>
-                    <div class="card-body">
-                        {% if movements | length > 0 %}
-                            {% include "admin/investor_profile/_table_movement.html.twig" %}
-                        {% else %}
-                            <h6 class="text-uppercase text-body text-xs font-weight-bolder">No movement</h6>
-                        {% endif %}
-                    </div>
-
-                
-                </div>
-            </div>
-
-            <div class="col-12 mt-3">
-                <div class="card">
-                    <h3 class="card-title p-4"> All Reporting movements chart </h3>
-                    <div class="card-body">
-                        {{ render_chart(chart) }}
-                    </div>
-                </div>
-            </div>
-       
-    </div>
+   {% include "dashboard/investor/home/_reporting.html.twig" %}
 
 
 {% endblock %}

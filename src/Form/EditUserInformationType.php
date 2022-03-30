@@ -5,7 +5,9 @@ namespace App\Form;
 use App\Entity\Subscription;
 use App\Entity\SubscriptionKeyPoint;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\UX\Dropzone\Form\DropzoneType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,6 +34,19 @@ class EditUserInformationType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => "Email",
                 'data' => $options['data']['email']
+            ])
+            ->add('createdAt', DateType::class, [
+                'label' => "Date de création du contrat",
+                'required' => false,
+                'widget' => 'single_text',
+                'html5' => false,
+                'format' => 'MM/dd/yyyy',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Created date is required.',
+                    ])
+                ],
+                'data' => $options['data']['createdAt']
             ])
 
         ;

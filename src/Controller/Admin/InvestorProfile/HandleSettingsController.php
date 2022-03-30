@@ -32,10 +32,13 @@ class HandleSettingsController extends AbstractController
 
         $telephone = $user->getTelephone();
 
+        $createdAt = $investor->getCreatedAt();
+
         $form = $this->createForm(EditUserInformationType::class,[
             'email' => $email,
             'name' => $name,
-            'telephone' => $telephone
+            'telephone' => $telephone,
+            'createdAt' => $createdAt
         ]);
 
         $form->handleRequest($request);

@@ -1,12 +1,8 @@
-<h2 class="mt-5">Info marché</h2>
+<h2>Market Review</h2>
 <div class="row">
-    <div class="col-xl-7">
-        <div class="card">
-            <div class="card-header d-flex pb-0 p-3">
-                Graphique
-            </div>
-            <div class="card-body  p-3 mt-2">
-                <div class="tab-content" id="v-pills-tabContent">
+    <div class="col-12 col-md-12">
+
+
                     <!-- TradingView Widget BEGIN -->
                     <div class="tradingview-widget-container ">
                         <div id="tradingview_cecab" ></div>
@@ -17,10 +13,10 @@
                             new TradingView.widget(
                                 {
                                     "autosize": true,
-                                    "symbol": "BITSTAMP:BTCUSD",
+                                    "symbol": "FOREXCOM:XAUUSD",
                                     "interval": "1",
                                     "timezone": "Etc/UTC",
-                                    "theme": "light",
+                                    "theme": "dark",
                                     "style": "1",
                                     "locale": "fr",
                                     "toolbar_bg": "#f1f3f6",
@@ -32,41 +28,49 @@
                         </script>
                     </div>
                     <!-- TradingView Widget END -->
-                </div>
-            </div>
-        </div>
+
     </div>
-    <div class="col-xl-5 ms-auto mt-xl-0 mt-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="card bg-gradient-info">
-                    <div class="card-body p-3">
+
+    <div class="col-12 mt-3">
+
                         <!-- TradingView Widget BEGIN -->
-                        <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container" id="rollerWidget">
                             <div class="tradingview-widget-container__widget"></div>
-                            {# <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com" rel="noopener" target="_blank"><span class="blue-text">Ticker Tape</span></a> par TradingView</div> #}
+                            <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text">Marchés</span></a> par TradingView</div>
                             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
                                 {
                                     "symbols": [
-                                    {
-                                        "proName": "FOREXCOM:SPXUSD",
-                                        "title": "S&P 500"
-                                    },
-                                    {
-                                        "proName": "FOREXCOM:NSXUSD",
-                                        "title": "US 100"
-                                    },
                                     {
                                         "proName": "FX_IDC:EURUSD",
                                         "title": "EUR/USD"
                                     },
                                     {
-                                        "proName": "BITSTAMP:BTCUSD",
-                                        "title": "Bitcoin"
+                                        "description": "EUR/AED",
+                                        "proName": "FX_IDC:EURAED"
                                     },
                                     {
-                                        "proName": "BITSTAMP:ETHUSD",
-                                        "title": "Ethereum"
+                                        "description": "EUR/GPB",
+                                        "proName": "FX:EURGBP"
+                                    },
+                                    {
+                                        "description": "EUR/CHF",
+                                        "proName": "FX:EURCHF"
+                                    },
+                                    {
+                                        "description": "USD/JPY",
+                                        "proName": "FX:USDJPY"
+                                    },
+                                    {
+                                        "description": "USD/CHF",
+                                        "proName": "FX:USDCHF"
+                                    },
+                                    {
+                                        "description": "GBP/USD",
+                                        "proName": "FX:GBPUSD"
+                                    },
+                                    {
+                                        "description": "USD/CAD",
+                                        "proName": "FX:USDCAD"
                                     }
                                 ],
                                     "showSymbolLogo": true,
@@ -78,150 +82,303 @@
                             </script>
                         </div>
                         <!-- TradingView Widget END -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
 
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container-2">
-                        <div class="tradingview-widget-container__widget"></div>
-                        {# <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text">Marchés financiers</span></a> par TradingView</div> #}
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+
+    </div>
+    <div class="col-12 mt-3">
+        <div class="card">
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container" style="width: 100% !important;"; id="widgetCrypto">
+                <div class="tradingview-widget-container__widget"></div>
+                <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/markets/cryptocurrencies/prices-all/" rel="noopener" target="_blank"><span class="blue-text">Marchés des crypto-monnaies</span></a> par TradingView</div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                    {
+                        "width": 1000,
+                        "height": 490,
+                        "defaultColumn": "overview",
+                        "screener_type": "crypto_mkt",
+                        "displayCurrency": "USD",
+                        "colorTheme": "light",
+                        "locale": "fr"
+                    }
+                </script>
+            </div>
+            <!-- TradingView Widget END -->
+        </div>
+
+    </div>
+    <div class="col-12 col-md-12 col-lg-8 mt-3">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container" id="widgetClignotte">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/markets/currencies/forex-cross-rates/" rel="noopener" target="_blank"><span class="blue-text">Taux de change</span></a> par TradingView</div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+                {
+                    "width": 770,
+                    "height": 400,
+                    "currencies": [
+                    "EUR",
+                    "USD",
+                    "JPY",
+                    "GBP",
+                    "CHF",
+                    "AUD",
+                    "CAD",
+                    "CNY"
+                ],
+                    "isTransparent": false,
+                    "colorTheme": "dark",
+                    "locale": "fr"
+                }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container" id="widgetPays">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/markets/currencies/economic-calendar/" rel="noopener" target="_blank"><span class="blue-text">Calendrier Economique</span></a> par TradingView</div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+                {
+                    "width": "100%",
+                    "height": "100%",
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "locale": "fr",
+                    "importanceFilter": "-1,0,1",
+                    "currencyFilter": "FRF,USD,GBP,DEM,JPY"
+                }
+            </script>
+        </div>
+        <!-- TradingView Widget END -->
+
+    </div>
+    <div class="col-12 col-md-12 col-lg-4 mt-3">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container" id="widgetInfoMarche">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text">Marchés financiers</span></a> par TradingView</div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                    "colorTheme": "dark",
+                    "dateRange": "12M",
+                    "showChart": true,
+                    "locale": "fr",
+                    "largeChartUrl": "",
+                    "isTransparent": false,
+                    "showSymbolLogo": true,
+                    "showFloatingTooltip": false,
+                    "width": "400",
+                    "height": "660",
+                    "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+                    "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+                    "gridLineColor": "rgba(240, 243, 250, 0)",
+                    "scaleFontColor": "rgba(120, 123, 134, 1)",
+                    "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+                    "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+                    "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+                    "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+                    "symbolActiveColor": "rgba(41, 98, 255, 0.12)",
+                    "tabs": [
+                    {
+                        "title": "Indices",
+                        "symbols": [
                             {
-                                "width": "100%",
-                                "height": "100%",
-                                "symbolsGroups": [
-                                    {
-                                        "name": "Indices",
-                                        "originalName": "Indices",
-                                        "symbols": [
-                                            {
-                                                "name": "FOREXCOM:SPXUSD",
-                                                "displayName": "S&P 500"
-                                            },
-                                            {
-                                                "name": "FOREXCOM:NSXUSD",
-                                                "displayName": "US 100"
-                                            },
-                                            {
-                                                "name": "FOREXCOM:DJI",
-                                                "displayName": "Dow 30"
-                                            },
-                                            {
-                                                "name": "INDEX:NKY",
-                                                "displayName": "Nikkei 225"
-                                            },
-                                            {
-                                                "name": "INDEX:DEU40",
-                                                "displayName": "DAX Index"
-                                            },
-                                            {
-                                                "name": "FOREXCOM:UKXGBP",
-                                                "displayName": "UK 100"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Contrats à terme",
-                                        "originalName": "Futures",
-                                        "symbols": [
-                                            {
-                                                "name": "CME_MINI:ES1!",
-                                                "displayName": "S&P 500"
-                                            },
-                                            {
-                                                "name": "CME:6E1!",
-                                                "displayName": "Euro"
-                                            },
-                                            {
-                                                "name": "COMEX:GC1!",
-                                                "displayName": "Gold"
-                                            },
-                                            {
-                                                "name": "NYMEX:CL1!",
-                                                "displayName": "Crude Oil"
-                                            },
-                                            {
-                                                "name": "NYMEX:NG1!",
-                                                "displayName": "Natural Gas"
-                                            },
-                                            {
-                                                "name": "CBOT:ZC1!",
-                                                "displayName": "Corn"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Obligations",
-                                        "originalName": "Bonds",
-                                        "symbols": [
-                                            {
-                                                "name": "CME:GE1!",
-                                                "displayName": "Eurodollar"
-                                            },
-                                            {
-                                                "name": "CBOT:ZB1!",
-                                                "displayName": "T-Bond"
-                                            },
-                                            {
-                                                "name": "CBOT:UB1!",
-                                                "displayName": "Ultra T-Bond"
-                                            },
-                                            {
-                                                "name": "EUREX:FGBL1!",
-                                                "displayName": "Euro Bund"
-                                            },
-                                            {
-                                                "name": "EUREX:FBTP1!",
-                                                "displayName": "Euro BTP"
-                                            },
-                                            {
-                                                "name": "EUREX:FGBM1!",
-                                                "displayName": "Euro BOBL"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Forex",
-                                        "originalName": "Forex",
-                                        "symbols": [
-                                            {
-                                                "name": "FX:EURUSD"
-                                            },
-                                            {
-                                                "name": "FX:GBPUSD"
-                                            },
-                                            {
-                                                "name": "FX:USDJPY"
-                                            },
-                                            {
-                                                "name": "FX:USDCHF"
-                                            },
-                                            {
-                                                "name": "FX:AUDUSD"
-                                            },
-                                            {
-                                                "name": "FX:USDCAD"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "showSymbolLogo": true,
-                                "colorTheme": "light",
-                                "isTransparent": false,
-                                "locale": "fr"
+                                "s": "FOREXCOM:SPXUSD",
+                                "d": "S&P 500"
+                            },
+                            {
+                                "s": "FOREXCOM:NSXUSD",
+                                "d": "US 100"
+                            },
+                            {
+                                "s": "FOREXCOM:DJI",
+                                "d": "Dow 30"
+                            },
+                            {
+                                "s": "INDEX:NKY",
+                                "d": "Nikkei 225"
+                            },
+                            {
+                                "s": "INDEX:DEU40",
+                                "d": "DAX Index"
+                            },
+                            {
+                                "s": "FOREXCOM:UKXGBP",
+                                "d": "UK 100"
                             }
-                        </script>
-                    </div>
-                    <!-- TradingView Widget END -->
-
-                </div>
-            </div>
-
+                        ],
+                        "originalTitle": "Indices"
+                    },
+                    {
+                        "title": "Contrats à terme",
+                        "symbols": [
+                            {
+                                "s": "CME_MINI:ES1!",
+                                "d": "S&P 500"
+                            },
+                            {
+                                "s": "CME:6E1!",
+                                "d": "Euro"
+                            },
+                            {
+                                "s": "COMEX:GC1!",
+                                "d": "Gold"
+                            },
+                            {
+                                "s": "NYMEX:CL1!",
+                                "d": "Crude Oil"
+                            },
+                            {
+                                "s": "NYMEX:NG1!",
+                                "d": "Natural Gas"
+                            },
+                            {
+                                "s": "CBOT:ZC1!",
+                                "d": "Corn"
+                            }
+                        ],
+                        "originalTitle": "Futures"
+                    },
+                    {
+                        "title": "Obligations",
+                        "symbols": [
+                            {
+                                "s": "CME:GE1!",
+                                "d": "Eurodollar"
+                            },
+                            {
+                                "s": "CBOT:ZB1!",
+                                "d": "T-Bond"
+                            },
+                            {
+                                "s": "CBOT:UB1!",
+                                "d": "Ultra T-Bond"
+                            },
+                            {
+                                "s": "EUREX:FGBL1!",
+                                "d": "Euro Bund"
+                            },
+                            {
+                                "s": "EUREX:FBTP1!",
+                                "d": "Euro BTP"
+                            },
+                            {
+                                "s": "EUREX:FGBM1!",
+                                "d": "Euro BOBL"
+                            }
+                        ],
+                        "originalTitle": "Bonds"
+                    },
+                    {
+                        "title": "Forex",
+                        "symbols": [
+                            {
+                                "s": "FX:EURUSD"
+                            },
+                            {
+                                "s": "FX:GBPUSD"
+                            },
+                            {
+                                "s": "FX:USDJPY"
+                            },
+                            {
+                                "s": "FX:USDCHF"
+                            },
+                            {
+                                "s": "FX:AUDUSD"
+                            },
+                            {
+                                "s": "FX:USDCAD"
+                            }
+                        ],
+                        "originalTitle": "Forex"
+                    }
+                ]
+                }
+            </script>
         </div>
+        <!-- TradingView Widget END -->
+
+                <div class="tradingview-widget-container" id="widgetAnalyse">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/symbols/NASDAQ-AAPL/technicals/" rel="noopener" target="_blank"><span class="blue-text"> Analyse technique pour AAPL</span></a> par TradingView</div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                        {
+                            "interval": "1m",
+                            "width": "100%",
+                            "isTransparent": false,
+                            "height": "100%",
+                            "symbol": "NASDAQ:AAPL",
+                            "showIntervalTabs": true,
+                            "locale": "fr",
+                            "colorTheme": "dark"
+                        }
+                    </script>
+                </div>
+                <!-- TradingView Widget END -->
+
+
     </div>
 </div>
+
+
+<style>
+    .tradingview-widget-copyright
+    {
+        display: none !important;
+
+    }
+    #rollerWidget
+    {
+        height: 51px !important;
+        min-height: 51px !important;
+    }
+    #widgetCrypto
+    {
+        width: 100% !important;
+    }
+    #widgetCrypto iframe
+    {
+        width: 100% !important;
+    }
+    #widgetClignotte
+    {
+        width: 100% !important;
+    }
+    #widgetClignotte iframe
+    {
+        width: 100% !important;
+    }
+    #widgetInfoMarche
+    {
+        width: 100% !important;
+    }
+    #widgetInfoMarche iframe
+    {
+        width: 100% !important;
+    }
+
+    #widgetPays
+    {
+        width: 100% !important;
+        max-height: 600px !important;
+        height: 600px !important;
+    }
+    #widgetPays iframe
+    {
+        width: 100% !important;
+        max-height: 600px !important;
+        height: 600px !important;
+    }
+
+    #widgetAnalyse
+    {
+        max-height: 500px !important;
+        height: 500px !important;
+    }
+    #widgetAnalyse iframe
+    {
+        width: 100% !important;
+    }
+</style>

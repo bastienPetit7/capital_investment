@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,6 +40,18 @@ class InvestorProfileFormType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Email is required.',
+                    ])
+                ]
+            ])
+            ->add('createdAt', DateType::class, [
+                'label' => "Date de création du contrat",
+                'required' => false,
+                'widget' => 'single_text',
+                'html5' => false,
+                'format' => 'MM/dd/yyyy',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Created date is required.',
                     ])
                 ]
             ])

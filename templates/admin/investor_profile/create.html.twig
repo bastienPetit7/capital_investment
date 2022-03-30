@@ -11,7 +11,22 @@
                     <div class="card-body">
                         {{ form_start(form) }}
 
-                        {{ form_widget(form) }}
+                        <div class="mb-3">
+                            {{ form_row(form.name) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.telephone) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.email) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.createdAt,{'attr': { 'class' : "datepicker",'onfocus': 'focused(this)','onfocusout' : 'defocused(this)' } }) }}
+                        </div>
+
                         <button type="submit" class="btn btn-info" id="buttonValid">Save</button>
                         <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinner">
                             <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
@@ -25,7 +40,14 @@
     </div>
 
 
-
+    <script src="{{ asset('theme/assets/js/plugins/flatpickr.min.js') }}"></script>
+    <script>
+        if (document.querySelector('.datepicker')) {
+            flatpickr('.datepicker', {
+                mode: "range"
+            });
+        }
+    </script>
 
 
 {% endblock %}

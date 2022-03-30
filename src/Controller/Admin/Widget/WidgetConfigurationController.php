@@ -128,7 +128,7 @@ class WidgetConfigurationController extends AbstractController
 
             $this->addFlash("light","Widget add with success");
 
-            return $this->redirectToRoute("admin_widget_list");
+            return $this->redirectToRoute("admin_widget_set",['id' => $widget->getId()]);
         }
 
         return $this->render("admin/wallet_widget/widget/create.html.twig",[
