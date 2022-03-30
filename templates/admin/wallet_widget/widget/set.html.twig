@@ -2,6 +2,7 @@
 
 {% block body %}
 
+
     <div class="container-fluid py-4">
         <div class="row">
             {% include "shared/_messages_flash.html.twig" %}
@@ -9,7 +10,11 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5>Configure {{ widget.name }}</h5>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-line" class="btn btn-dark"><i class="fas fa-plus"></i> Add Line</a>
+                        <div>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-config-lines" class="btn btn-dark"><i class="fas fa-cog"></i> Config Lines</a>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-add-line" class="btn btn-dark"><i class="fas fa-plus"></i> Add Line</a>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-add-code" class="btn btn-dark"><i class="fas fa-plus"></i> Add Code</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         {% include "admin/wallet_widget/widget/_base_widget_trading_view.html.twig" %}
@@ -18,5 +23,75 @@
             </div>
         </div>
     </div>
-    {% include "admin/wallet_widget/widget/modal/_modal_form_line.html.twig" %}
+    {% include "admin/wallet_widget/widget/modal/_modal_form_add_line.html.twig" %}
+    {% include "admin/wallet_widget/widget/modal/_modal_form_add_code.html.twig" %}
+    {% include "admin/wallet_widget/widget/modal/_modal_form_config_lines.html.twig" %}
+
+    {% for key,line in widget.widgetLines %}
+        <div class="modal fade" id="modal-form-config-code-{{ key }}" tabindex="-1" role="dialog" aria-labelledby="modal-form-config-code-{{ key }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="card card-plain">
+                            <div class="card-header pb-0 text-left d-flex justify-content-between">
+                                <h3 class="font-weight-bolder text-info text-gradient">Config Code for Line : {{ line.name }}</h3>
+                                <button type="button" class="btn-close text-black" data-bs-dismiss="modal" aria-label="Close" style="color: black !important;">
+                                    <span aria-hidden="true" class="text-black">&times;</span>
+                                </button>
+                            </div>
+                            <div class="card-body">
+
+                                <div>
+                                    <form method="POST" action="{{ path('admin_widget_edit_line',{'id': line.id,'idWidget': widget.id}) }}">
+                                        <div class="mb-3">
+                                            <label for="widget_line_name_{{ line.id }}" class="form-label required">Name</label>
+                                            <input type="text" id="widget_line_name_{{ line.id }}" name="widget_line_{{ line.id }}[name]" required="required" class="form-control" value="{{ line.name }}"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn btn-info">Edit name</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0 table-striped table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Code</th>
+                                            <th class="text-secondary opacity-7">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for key,content in line.widgetContentLines %}
+                                            <tr>
+                                                <td>    <p class="text-xs font-weight-bold mb-0">{{ content.widgetCode.name }}</p></td>
+
+                                                <td class="align-middle">
+                                                    <a href="{{ path('admin_widget_delete_content_line',{'id': content.id,'idWidget': widget.id}) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete">
+                                                        <i class="fas fa-trash" style="color: red;"></i>Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <div>
+                                    <a class="btn  btn-danger" href="{{ path('admin_widget_delete_line',{'id': line.id,'idWidget': widget.id}) }}"><i class="fas fa-trash"></i> Delete completely the line</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}

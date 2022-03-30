@@ -1,11 +1,13 @@
-<div class="modal fade" id="modal-form-line" tabindex="-1" role="dialog" aria-labelledby="modal-form-line" aria-hidden="true">
+<div class="modal fade" id="modal-form-add-line" tabindex="-1" role="dialog" aria-labelledby="modal-form-line" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="card card-plain">
-                    <div class="card-header pb-0 text-left">
-                        <h3 class="font-weight-bolder text-info text-gradient"></h3>
-                        <p class="mb-0">Add a line</p>
+                    <div class="card-header pb-0 text-left d-flex justify-content-between">
+                        <h3 class="font-weight-bolder text-info text-gradient">Add a line</h3>
+                        <button type="button" class="btn-close text-black" data-bs-dismiss="modal" aria-label="Close" style="color: black !important;">
+                            <span aria-hidden="true" class="text-black">&times;</span>
+                        </button>
                     </div>
                     <div class="card-body">
                         {{ form_start(formLine) }}

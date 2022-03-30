@@ -29,11 +29,16 @@ class WidgetCode
      */
     private $displayName;
 
+    /**
+     * @ORM\OneToMany(targetEntity=WidgetContentLine::class, mappedBy="WidgetCode", orphanRemoval=true)
+     */
+    private $widgetContentLines;
 
 
     public function __construct()
     {
         $this->widgetLines = new ArrayCollection();
+        $this->widgetContentLines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,6 +66,36 @@ class WidgetCode
     public function setDisplayName(string $displayName): self
     {
         $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|WidgetContentLine[]
+     */
+    public function getWidgetContentLines(): Collection
+    {
+        return $this->widgetContentLines;
+    }
+
+    public function addWidgetContentLine(WidgetContentLine $widgetContentLine): self
+    {
+        if (!$this->widgetContentLines->contains($widgetContentLine)) {
+            $this->widgetContentLines[] = $widgetContentLine;
+            $widgetContentLine->setWidgetCode($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWidgetContentLine(WidgetContentLine $widgetContentLine): self
+    {
+        if ($this->widgetContentLines->removeElement($widgetContentLine)) {
+            // set the owning side to null (unless already changed)
+            if ($widgetContentLine->getWidgetCode() === $this) {
+                $widgetContentLine->setWidgetCode(null);
+            }
+        }
 
         return $this;
     }

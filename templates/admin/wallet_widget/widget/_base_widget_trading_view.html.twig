@@ -7,6 +7,28 @@
             "width": "100%",
             "height": "100%",
             "symbolsGroups": [
+            {% for key,line in widget.widgetLines %}
+                {
+                    "name": "{{ line.name }}",
+                    "originalName": "{{ line.name }}",
+                    "symbols": [
+                        {% for keyContent,content in line.widgetContentLines %}
+                                {
+                                    "name": "{{ content.widgetCode.name }}",
+                                    "displayName": "{{ content.widgetCode.displayName }}"
+                                }
+                            {% if keyContent is not same as ( line.widgetContentLines | length - 1) %}
+                            ,
+                            {% endif %}
+                        {% endfor %}
+                    ]
+                }
+
+                {% if key is not same as ( widget.widgetLines | length - 1) %}
+                ,
+                {% endif %}
+
+            {% endfor %}
 
         ],
             "showSymbolLogo": true,

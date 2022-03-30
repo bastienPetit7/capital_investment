@@ -1,0 +1,43 @@
+<div class="modal fade" id="modal-form-config-lines" tabindex="-1" role="dialog" aria-labelledby="modal-form-line" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left d-flex justify-content-between">
+                        <h3 class="font-weight-bolder text-info text-gradient">Config lines</h3>
+                        <button type="button" class="btn-close text-black" data-bs-dismiss="modal" aria-label="Close" style="color: black !important;">
+                            <span aria-hidden="true" class="text-black">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0 table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Line Name</th>
+                                        <th class="text-secondary opacity-7">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for key,line in widget.widgetLines %}
+                                    <tr>
+                                        <td>    <p class="text-xs font-weight-bold mb-0">{{ line.name }}</p></td>
+
+                                        <td class="align-middle">
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-config-code-{{ key }}">
+                                                <i class="fas fa-pen text-primary"></i> Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

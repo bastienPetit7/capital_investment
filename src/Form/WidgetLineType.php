@@ -14,9 +14,7 @@ class WidgetLineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('place',IntegerType::class,[
 
-            ])
             ->add('name',TextType::class,[
 
             ])

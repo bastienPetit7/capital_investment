@@ -4,13 +4,17 @@ namespace App\Controller\Admin\Widget;
 
 use App\Entity\Widget;
 use App\Entity\WidgetCode;
+use App\Entity\WidgetContentLine;
 use App\Entity\WidgetLine;
 use App\Entity\WidgetTheme;
 use App\Form\WidgetCodeType;
+use App\Form\WidgetLineContentType;
 use App\Form\WidgetLineType;
 use App\Form\WidgetThemeType;
 use App\Form\WidgetType;
 use App\Repository\WidgetCodeRepository;
+use App\Repository\WidgetContentLineRepository;
+use App\Repository\WidgetLineRepository;
 use App\Repository\WidgetRepository;
 use App\Repository\WidgetThemeRepository;
 use App\Services\ImageService;
@@ -21,7 +25,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class WidgetCodeController extends AbstractController
+class WidgetConfigurationController extends AbstractController
 {
     #[Route('/admin/widget/code/list', name: 'admin_widget_code_list', methods: ['GET'])]
     public function listCode(WidgetCodeRepository $widgetCodeRepository,PaginatorInterface $paginator, Request $request)
@@ -125,15 +129,15 @@ class WidgetCodeController extends AbstractController
     {
         $widget = $widgetRepository->find($id);
 
+        //HANDLE FORM LINE
         $widgetLine = new WidgetLine();
-
         $formLine = $this->createForm(WidgetLineType::class,$widgetLine);
-
         $formLine->handleRequest($request);
-
         if($formLine->isSubmitted() && $formLine->isValid())
         {
             $em->persist($widgetLine);
+
+            $widgetLine->setWidget($widget);
 
             $em->flush();
 
@@ -142,9 +146,34 @@ class WidgetCodeController extends AbstractController
             return $this->redirectToRoute("admin_widget_set",['id' => $id]);
         }
 
+        //HANDLE FORM CODE
+        $contentLine = new WidgetContentLine();
+        $formCode = $this->createForm(WidgetLineContentType::class,[
+            'lines' => $widget->getWidgetLines()
+        ]);
+        $formCode->handleRequest($request);
+        if($formCode->isSubmitted() && $formCode->isValid())
+        {
+            $code = $formCode->get('code')->getData();
+            $line = $formCode->get('line')->getData();
+            $lineName = $line->getName();
+
+            $contentLine->setWidgetCode($code);
+            $contentLine->setWidgetLine($line);
+
+            $em->persist($contentLine);
+            $em->flush();
+
+            $this->addFlash("light","A new code has been added to line $lineName");
+
+            return $this->redirectToRoute("admin_widget_set",['id' => $id]);
+        }
+
+
         return $this->render("admin/wallet_widget/widget/set.html.twig",[
             "widget" => $widget,
-            'formLine' => $formLine->createView()
+            'formLine' => $formLine->createView(),
+            'formCode' => $formCode->createView()
         ]);
     }
 
@@ -171,5 +200,110 @@ class WidgetCodeController extends AbstractController
         return $this->render("admin/wallet_widget/widget/create.html.twig",[
             "form" => $form->createView()
         ]);
+    }
+
+
+    #[Route('/admin/widget/delete/contentLine/{id}/{idWidget}', name: 'admin_widget_delete_content_line')]
+    public function deleteContentWidget($id,$idWidget,WidgetRepository $widgetRepository,WidgetContentLineRepository $widgetContentLineRepository,EntityManagerInterface $em)
+    {
+        $widget = $widgetRepository->find($idWidget);
+
+        if(!$widget)
+        {
+            $this->addFlash("danger","Widget not found");
+
+            return $this->redirectToRoute("admin_widget_list");
+        }
+
+        $content = $widgetContentLineRepository->find($id);
+
+        if(!$content)
+        {
+            $this->addFlash("danger","Content Code not found");
+
+            return $this->redirectToRoute("admin_widget_set",['id' => $idWidget]);
+        }
+
+        $em->remove($content);
+
+        $em->flush();
+
+        $this->addFlash("light","Content Code has been deleted");
+
+        return $this->redirectToRoute("admin_widget_set",['id' => $idWidget]);
+
+    }
+
+    #[Route('/admin/widget/edit/line/{id}/{idWidget}', name: 'admin_widget_edit_line')]
+    public function editLine($id,$idWidget,WidgetRepository $widgetRepository,WidgetLineRepository $widgetLineRepository,EntityManagerInterface $em,Request $request)
+    {
+        $widget = $widgetRepository->find($idWidget);
+
+        if(!$widget)
+        {
+            $this->addFlash("danger","Widget not found");
+
+            return $this->redirectToRoute("admin_widget_list");
+        }
+
+        $line = $widgetLineRepository->find($id);
+
+        if(!$line)
+        {
+            $this->addFlash("danger","Line not found");
+
+            return $this->redirectToRoute("admin_widget_set",['id' => $idWidget]);
+        }
+
+        $data = $request->request;
+
+        $form = $data->get("widget_line_$id");
+
+        if(!$form)
+        {
+            $this->addFlash("danger","Form not found");
+
+            return $this->redirectToRoute("admin_widget_set",['id' => $idWidget]);
+        }
+
+        $name = $form['name'];
+
+        $line->setName($name);
+
+        $em->flush();
+
+        $this->addFlash("light","Line has been updated");
+
+        return $this->redirectToRoute("admin_widget_set",['id' => $idWidget]);
+    }
+
+    #[Route('/admin/widget/delete/line/{id}/{idWidget}', name: 'admin_widget_delete_line')]
+    public function deleteLine($id,$idWidget,WidgetRepository $widgetRepository,WidgetLineRepository $widgetLineRepository,EntityManagerInterface $em,Request $request)
+    {
+        $widget = $widgetRepository->find($idWidget);
+
+        if(!$widget)
+        {
+            $this->addFlash("danger","Widget not found");
+
+            return $this->redirectToRoute("admin_widget_list");
+        }
+
+        $line = $widgetLineRepository->find($id);
+
+        if(!$line)
+        {
+            $this->addFlash("danger","Line not found");
+
+            return $this->redirectToRoute("admin_widget_set",['id' => $idWidget]);
+        }
+
+        $em->remove($line);
+
+        $em->flush();
+
+        $this->addFlash("light","Line has been removed");
+
+        return $this->redirectToRoute("admin_widget_set",['id' => $idWidget]);
     }
 }
