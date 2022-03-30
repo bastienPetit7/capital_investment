@@ -33,13 +33,8 @@ class Subscription
     private $price;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Periodicity is required")
-     */
-    private $periodInDays;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Subtitle is required")
      */
     private $subTitle;
 
@@ -109,17 +104,6 @@ class Subscription
         return $this;
     }
 
-    public function getPeriodInDays(): ?int
-    {
-        return $this->periodInDays;
-    }
-
-    public function setPeriodInDays(int $periodInDays): self
-    {
-        $this->periodInDays = $periodInDays;
-
-        return $this;
-    }
 
     public function getSubTitle(): ?string
     {

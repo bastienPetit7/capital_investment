@@ -30,11 +30,11 @@
                         </div>
 
                         <div>
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-edit-widget" class="btn btn-dark"><i class="fas fa-edit"></i> Edit info</a>
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-config-publish" class="btn btn-dark"><i class="fas fa-cog"></i> Toggle publish</a>
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-config-lines" class="btn btn-dark"><i class="fas fa-cog"></i> Config Lines</a>
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-add-line" class="btn btn-dark"><i class="fas fa-plus"></i> Add Line</a>
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-add-code" class="btn btn-dark"><i class="fas fa-plus"></i> Add Code</a>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-edit-widget" class="btn btn-dark openModal" data-js-button-open="modal-form-edit-widget"><i class="fas fa-edit"></i> Edit info</a>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-config-publish" class="btn btn-dark openModal" data-js-button-open="modal-form-config-publish"><i class="fas fa-cog"></i> Toggle publish</a>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-config-lines" class="btn btn-dark openModal" data-js-button-open="modal-form-config-lines"><i class="fas fa-cog"></i> Config Lines</a>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-add-line" class="btn btn-dark openModal" data-js-button-open="modal-form-add-line"><i class="fas fa-plus"></i> Add Line</a>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-add-code" class="btn btn-dark openModal" data-js-button-open="modal-form-add-code"><i class="fas fa-plus"></i> Add Code</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -57,7 +57,7 @@
     {% include "admin/wallet_widget/widget/modal/_modal_form_config_lines.html.twig" %}
 
     {% for key,line in widget.widgetLines %}
-        <div class="modal fade" id="modal-form-config-code-{{ key }}" tabindex="-1" role="dialog" aria-labelledby="modal-form-config-code-{{ key }}" aria-hidden="true">
+        <div class="modal fade" id="modal-form-config-code-{{ key }}" tabindex="-1" role="dialog" aria-labelledby="modal-form-config-code-{{ key }}" aria-hidden="true" data-js-open-auto="modal-form-config-code-{{ key }}">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-body p-0">
@@ -123,4 +123,30 @@
         </div>
     {% endfor %}
 
+    <script>
+        //Code javascript pour ouvrir automatiquement une modal qui contient des erreurs de validation de formulaire
+        const invalidFeedbacks = Array.from(document.getElementsByClassName('invalid-feedback'));
+        const allButtonModalOpen = Array.from(document.getElementsByClassName('openModal'));
+        const findButton = (invalid) => {
+            let invalidParent = invalid.parentNode;
+            let idInvalidParent = invalidParent.getAttribute('id');
+            allButtonModalOpen.forEach((button) => {
+                openAuto(button,idInvalidParent)
+            })
+        }
+        const openAuto = (button,idInvalidParent) => {
+            let dataJsOpen = button.getAttribute('data-js-button-open')
+
+            if(dataJsOpen === idInvalidParent)
+            {
+                document.addEventListener("DOMContentLoaded", function(){
+                    button.click();
+                });
+            }
+        }
+        invalidFeedbacks.forEach((invalid) => {
+            findButton(invalid)
+        })
+
+    </script>
 {% endblock %}

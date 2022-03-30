@@ -10,8 +10,35 @@
                     <div class="card-body">
                         {{ form_start(formDepositAmount) }}
 
-                        {{ form_widget(formDepositAmount) }}
-                        <button type="submit" class="btn btn-info">Deposit</button>
+
+                        <div class="mb-3">
+                            {{ form_label(formDepositAmount.month) }}
+                            {{ form_widget(formDepositAmount.month) }}
+                            <div class="form-error" id="modal-form-deposit">
+                                {{ form_errors(formDepositAmount.month) }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(formDepositAmount.year) }}
+                            {{ form_widget(formDepositAmount.year) }}
+                            <div class="form-error" id="modal-form-deposit">
+                                {{ form_errors(formDepositAmount.year) }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(formDepositAmount.amount) }}
+                            {{ form_widget(formDepositAmount.amount) }}
+                            <div class="form-error" id="modal-form-deposit">
+                                {{ form_errors(formDepositAmount.amount) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info" id="buttonEditDeposit">Edit</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerDeposit">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(formDepositAmount) }}
 
                     </div>
@@ -21,3 +48,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    const buttonEditDeposit = document.getElementById('buttonEditDeposit');
+    const buttonSpinnerDeposit = document.getElementById('buttonSpinnerDeposit');
+
+    if(buttonEditDeposit)
+    {
+        buttonEditDeposit.addEventListener('click', () => {
+            buttonEditDeposit.style.display = 'none';
+            buttonSpinnerDeposit.style.display = 'initial';
+        });
+    }
+</script>

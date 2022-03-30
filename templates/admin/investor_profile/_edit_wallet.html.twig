@@ -39,7 +39,7 @@
     <div class="card h-100">
         <div class="card-header pb-0 p-3">
             {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
-                <h6 class="mb-0">Currency <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-currency"><i class="fas fa-pen"></i></a></h6>
+                <h6 class="mb-0">Currency <a class="openModal" type="button" data-bs-toggle="modal" data-bs-target="#modal-form-currency" data-js-button-open="modal-form-currency"><i class="fas fa-pen"></i></a></h6>
             {% else %}
                 <h6 class="mb-0">Currency</h6>
             {% endif %}
@@ -53,7 +53,7 @@
     <div class="card h-100">
         <div class="card-header pb-0 p-3">
             {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
-                <h6 class="mb-0">Personal Recovery Found <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-total-interest-recovery-found"><i class="fas fa-pen"></i></a></h6>
+                <h6 class="mb-0">Personal Recovery Found <a class="openModal" type="button" data-bs-toggle="modal" data-bs-target="#modal-form-total-interest-recovery-found" data-js-button-open="modal-form-total-interest-recovery-found"><i class="fas fa-pen"></i></a></h6>
             {% else %}
                 <h6 class="mb-0">Personal Recovery Found</h6>
             {% endif %}
@@ -75,7 +75,7 @@
     <div class="card h-100">
         <div class="card-header pb-0 p-3">
             {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
-                <h6 class="mb-0">Total Asset <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-total-actif"><i class="fas fa-pen"></i></a></h6>
+                <h6 class="mb-0">Total Asset <a type="button" class="openModal"  data-bs-toggle="modal" data-bs-target="#modal-form-total-actif" data-js-button-open="modal-form-total-actif"><i class="fas fa-pen"></i></a></h6>
             {% else %}
                 <h6 class="mb-0">Total Asset</h6>
             {% endif %}
@@ -99,7 +99,7 @@
             <div class="row">
                 <div class="col-md-8 d-flex align-items-center">
                     {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
-                        <h6 class="mb-0">Status <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-status"><i class="fas fa-pen"></i></a></h6>
+                        <h6 class="mb-0">Status <a type="button" data-bs-toggle="modal" class="openModal" data-bs-target="#modal-form-status" data-js-button-open="modal-form-status"><i class="fas fa-pen"></i></a></h6>
                     {% else %}
                         <h6 class="mb-0">Status</h6>
                     {% endif %}
@@ -118,7 +118,7 @@
             <div class="row">
                 <div class="col-md-8 d-flex align-items-center">
                     {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
-                        <h6 class="mb-0">Interest Rates <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-interest-rates"><i class="fas fa-pen"></i></a></h6>
+                        <h6 class="mb-0">Interest Rates <a type="button" data-bs-toggle="modal" class="openModal" data-bs-target="#modal-form-interest-rates" data-js-button-open="modal-form-interest-rates"><i class="fas fa-pen"></i></a></h6>
                     {% else %}
                         <h6 class="mb-0">Interest Rates</h6>
                     {% endif %}
@@ -137,7 +137,7 @@
             <div class="row">
                 <div class="col-md-8 d-flex align-items-center">
                     {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
-                        <h6 class="mb-0">Interest Type <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-interest-type"><i class="fas fa-pen"></i></a></h6>
+                        <h6 class="mb-0">Interest Type <a type="button" data-bs-toggle="modal" class="openModal" data-bs-target="#modal-form-interest-type" data-js-button-open="modal-form-interest-type"><i class="fas fa-pen"></i></a></h6>
                     {% else %}
                         <h6 class="mb-0">Interest Type</h6>
                     {% endif %}

@@ -10,8 +10,18 @@
                     <div class="card-body">
                         {{ form_start(formTotalActif) }}
 
-                        {{ form_widget(formTotalActif) }}
-                        <button type="submit" class="btn btn-info">Edit</button>
+                        <div class="mb-3">
+                            {{ form_label(formTotalActif.totalActif) }}
+                            {{ form_widget(formTotalActif.totalActif) }}
+                            <div class="form-error" id="modal-form-total-actif">
+                                {{ form_errors(formTotalActif.totalActif) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info" id="buttonEditTotalActif">Edit</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerTotalActif">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(formTotalActif) }}
 
                     </div>
@@ -21,3 +31,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    const buttonEditTotalActif = document.getElementById('buttonEditTotalActif');
+    const buttonSpinnerTotalActif = document.getElementById('buttonSpinnerTotalActif');
+
+    if(buttonEditTotalActif)
+    {
+        buttonEditTotalActif.addEventListener('click', () => {
+            buttonEditTotalActif.style.display = 'none';
+            buttonSpinnerTotalActif.style.display = 'initial';
+        });
+    }
+</script>

@@ -44,7 +44,7 @@ class WidgetWalletThemeController extends AbstractController
             else
             {
                 $this->addFlash("danger","You must add an image.");
-                return $this->redirectToRoute("admin_widget_theme_create");
+                return $this->redirectToRoute("admin_widget_wallet_theme_create");
             }
 
             $em->persist($widgetTheme);

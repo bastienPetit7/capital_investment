@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Subscription;
 use App\Entity\SubscriptionKeyPoint;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\UX\Dropzone\Form\DropzoneType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,7 @@ class SubscriptionType extends AbstractType
                 'label' => 'Subscription\'s name', 
                 'required' => false,
             ])
-            ->add('subtitle', TextType::class, [
+            ->add('subTitle', TextType::class, [
                 'label' => 'Subscription\'s subtitle',
                 'required' => false
             ])
@@ -31,6 +32,9 @@ class SubscriptionType extends AbstractType
                 'required' => false,
                 'mapped' => false,
                 'constraints' => [
+                    new NotBlank([
+                        'message' => 'Image is required'
+                    ]),
                     new File([
                         'maxSize' => '2m',
                         'maxSizeMessage' => 'File max size allowed is 2 Mo.',
@@ -42,7 +46,6 @@ class SubscriptionType extends AbstractType
                 'divisor' => 100,
                 'required' => false,
             ])
-            ->add('periodInDays')
             ->add('keyPoint_id', EntityType::class, [
                 'label' => 'Key points', 
                 'mapped' => true,

@@ -10,8 +10,32 @@
                     <div class="card-body">
                         {{ form_start(formWithdrawalAmount) }}
 
-                        {{ form_widget(formWithdrawalAmount) }}
-                        <button type="submit" class="btn btn-info">Withdrawal</button>
+                        <div class="mb-3">
+                            {{ form_label(formWithdrawalAmount.month) }}
+                            {{ form_widget(formWithdrawalAmount.month) }}
+                            <div class="form-error" id="modal-form-withdrawal">
+                                {{ form_errors(formWithdrawalAmount.month) }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(formWithdrawalAmount.year) }}
+                            {{ form_widget(formWithdrawalAmount.year) }}
+                            <div class="form-error" id="modal-form-withdrawal">
+                                {{ form_errors(formWithdrawalAmount.year) }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(formWithdrawalAmount.amount) }}
+                            {{ form_widget(formWithdrawalAmount.amount) }}
+                            <div class="form-error" id="modal-form-withdrawal">
+                                {{ form_errors(formWithdrawalAmount.amount) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info" id="buttonEditWithdrawal">Edit</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerWithdrawal">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(formWithdrawalAmount) }}
 
                     </div>
@@ -21,3 +45,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    const buttonEditWithdrawal = document.getElementById('buttonEditWithdrawal');
+    const buttonSpinnerWithdrawal = document.getElementById('buttonSpinnerWithdrawal');
+
+    if(buttonEditWithdrawal)
+    {
+        buttonEditWithdrawal.addEventListener('click', () => {
+            buttonEditWithdrawal.style.display = 'none';
+            buttonSpinnerWithdrawal.style.display = 'initial';
+        });
+    }
+</script>

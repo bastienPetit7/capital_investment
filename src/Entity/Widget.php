@@ -6,6 +6,7 @@ use App\Repository\WidgetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=WidgetRepository::class)
@@ -22,16 +23,19 @@ class Widget
     /**
      * @ORM\ManyToOne(targetEntity=WidgetTheme::class, inversedBy="widgets")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Theme wallet is required")
      */
     private $widgetTheme;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Name is required")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Background color is required")
      */
     private $bgColor;
 
@@ -72,7 +76,7 @@ class Widget
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 

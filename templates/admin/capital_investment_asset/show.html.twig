@@ -65,7 +65,11 @@
                             {{ form_start(formTotalAsset) }}
 
                             {{ form_widget(formTotalAsset) }}
-                            <button type="submit" class="btn btn-info">Edit</button>
+                            <button type="submit" class="btn btn-info" id="buttonEditAsset"> Edit</button>
+                            <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerAsset">
+                                <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                                Loading...
+                            </button>
                             {{ form_end(formTotalAsset) }}
 
                         </div>
@@ -88,7 +92,11 @@
                             {{ form_start(formRecoveryFound) }}
 
                             {{ form_widget(formRecoveryFound) }}
-                            <button type="submit" class="btn btn-info">Edit</button>
+                            <button type="submit" class="btn btn-info" id="buttonEditFound">Edit</button>
+                            <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerFound">
+                                <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                                Loading...
+                            </button>
                             {{ form_end(formRecoveryFound) }}
 
                         </div>
@@ -98,4 +106,26 @@
             </div>
         </div>
     </div>
+    <script>
+        const buttonEditFound = document.getElementById('buttonEditFound');
+        const buttonSpinnerFound = document.getElementById('buttonSpinnerFound');
+        const buttonEditAsset = document.getElementById('buttonEditAsset');
+        const buttonSpinnerAsset = document.getElementById('buttonSpinnerAsset');
+
+        if(buttonEditFound)
+        {
+            buttonEditFound.addEventListener('click', () => {
+                buttonEditFound.style.display = 'none';
+                buttonSpinnerFound.style.display = 'initial';
+            });
+        }
+
+        if(buttonEditAsset)
+        {
+            buttonEditAsset.addEventListener('click', () => {
+                buttonEditAsset.style.display = 'none';
+                buttonSpinnerAsset.style.display = 'initial';
+            });
+        }
+    </script>
 {% endblock %}

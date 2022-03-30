@@ -7,6 +7,7 @@ use App\Form\SubscriptionType;
 use App\Services\ImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,8 +35,8 @@ class CreateSubscription extends AbstractController
             }
             else
             {
-                $this->addFlash("danger","You must upload Image.");
-                return $this->redirectToRoute("admin_study_case_create");
+                $this->addFlash("danger","You must upload an Image.");
+                return $this->redirectToRoute("admin_subscription_create");
             }
 
 

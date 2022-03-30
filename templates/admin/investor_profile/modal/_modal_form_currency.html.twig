@@ -10,8 +10,19 @@
                     <div class="card-body">
                         {{ form_start(formCurrency) }}
 
-                        {{ form_widget(formCurrency) }}
-                        <button type="submit" class="btn btn-info">Edit</button>
+                        <div class="mb-3">
+                            {{ form_label(formCurrency.currency) }}
+                            {{ form_widget(formCurrency.currency) }}
+                            <div class="form-error" id="modal-form-currency">
+                                {{ form_errors(formCurrency.currency) }}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-info" id="buttonEditCurrency">Edit</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerCurrency">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(formCurrency) }}
 
                     </div>
@@ -21,3 +32,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    const buttonEditCurrency = document.getElementById('buttonEditCurrency');
+    const buttonSpinnerCurrency = document.getElementById('buttonSpinnerCurrency');
+
+
+    if(buttonEditCurrency)
+    {
+        buttonEditCurrency.addEventListener('click', () => {
+            buttonEditCurrency.style.display = 'none';
+            buttonSpinnerCurrency.style.display = 'initial';
+        });
+    }
+</script>

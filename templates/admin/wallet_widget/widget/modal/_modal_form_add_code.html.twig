@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-form-add-code" tabindex="-1" role="dialog" aria-labelledby="modal-form-code" aria-hidden="true">
+<div class="modal fade" id="modal-form-add-code" tabindex="-1" role="dialog" aria-labelledby="modal-form-code" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body p-0">
@@ -13,12 +13,24 @@
                         {{ form_start(formCode) }}
 
                         <div class="mb-3">
-                            {{ form_row(formCode.code) }}
+                            {{ form_label(formCode.code) }}
+                            {{ form_widget(formCode.code) }}
+                            <div class="form-error" id="modal-form-add-code">
+                                {{ form_errors(formCode.code) }}
+                            </div>
                         </div>
                         <div class="mb-3">
-                            {{ form_row(formCode.line) }}
+                            {{ form_label(formCode.line) }}
+                            {{ form_widget(formCode.line) }}
+                            <div class="form-error" id="modal-form-add-code">
+                                {{ form_errors(formCode.line) }}
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-info">Add</button>
+                        <button type="submit" class="btn btn-info" id="buttonAddCode">Add</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerCode">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(formCode) }}
 
                     </div>
@@ -28,3 +40,16 @@
         </div>
     </div>
 </div>
+<script>
+    const buttonAddCode = document.getElementById('buttonAddCode');
+    const buttonSpinnerCode = document.getElementById('buttonSpinnerCode');
+
+
+    if(buttonAddCode)
+    {
+        buttonAddCode.addEventListener('click', () => {
+            buttonAddCode.style.display = 'none';
+            buttonSpinnerCode.style.display = 'initial';
+        });
+    }
+</script>

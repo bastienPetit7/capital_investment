@@ -11,9 +11,18 @@
                     </div>
                     <div class="card-body">
                         {{ form_start(formLine) }}
-
-                        {{ form_widget(formLine) }}
-                        <button type="submit" class="btn btn-info">Add</button>
+                        <div class="mb-3">
+                            {{ form_label(formLine.name) }}
+                            {{ form_widget(formLine.name) }}
+                            <div class="form-error" id="modal-form-add-line">
+                                {{ form_errors(formLine.name) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info" id="buttonAddLine">Add</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerLine">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(formLine) }}
 
                     </div>
@@ -23,3 +32,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    const buttonAddLine = document.getElementById('buttonAddLine');
+    const buttonSpinnerLine = document.getElementById('buttonSpinnerLine');
+
+
+    if(buttonAddLine)
+    {
+        buttonAddLine.addEventListener('click', () => {
+            buttonAddLine.style.display = 'none';
+            buttonSpinnerLine.style.display = 'initial';
+        });
+    }
+</script>

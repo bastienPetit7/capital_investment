@@ -123,4 +123,31 @@
     {% include "admin/investor_profile/modal/_modal_form_total_actif.html.twig" %}
     {% include "admin/investor_profile/modal/_modal_form_currency.html.twig" %}
 
+    <script>
+        //Code javascript pour ouvrir automatiquement une modal qui contient des erreurs de validation de formulaire
+        const invalidFeedbacks = Array.from(document.getElementsByClassName('invalid-feedback'));
+        const allButtonModalOpen = Array.from(document.getElementsByClassName('openModal'));
+        const findButton = (invalid) => {
+            let invalidParent = invalid.parentNode;
+            let idInvalidParent = invalidParent.getAttribute('id');
+            allButtonModalOpen.forEach((button) => {
+                openAuto(button,idInvalidParent)
+            })
+        }
+        const openAuto = (button,idInvalidParent) => {
+            let dataJsOpen = button.getAttribute('data-js-button-open')
+
+            if(dataJsOpen === idInvalidParent)
+            {
+                document.addEventListener("DOMContentLoaded", function(){
+                    button.click();
+                });
+            }
+        }
+        invalidFeedbacks.forEach((invalid) => {
+            findButton(invalid)
+        })
+
+    </script>
+
 {% endblock %}

@@ -15,7 +15,11 @@
                         {{ form_start(form) }}
 
                         {{ form_widget(form) }}
-                        <button type="submit" class="btn btn-info">Edit</button>
+                        <button type="submit" class="btn btn-info" id="buttonValid">Edit</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinner">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(form) }}
                     </div>
                 </div>

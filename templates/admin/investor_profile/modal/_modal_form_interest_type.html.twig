@@ -10,8 +10,18 @@
                     <div class="card-body">
                         {{ form_start(formEditInterest) }}
 
-                        {{ form_widget(formEditInterest) }}
-                        <button type="submit" class="btn btn-info">Edit</button>
+                        <div class="mb-3">
+                            {{ form_label(formEditInterest.interestType) }}
+                            {{ form_widget(formEditInterest.interestType) }}
+                            <div class="form-error" id="modal-form-interest-type">
+                                {{ form_errors(formEditInterest.interestType) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info" id="buttonEditInterestType">Edit</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerInterestType">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(formEditInterest) }}
 
                     </div>
@@ -21,3 +31,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    const buttonEditInterestType = document.getElementById('buttonEditInterestType');
+    const buttonSpinnerInterestType = document.getElementById('buttonSpinnerInterestType');
+
+    if(buttonEditInterestType)
+    {
+        buttonEditInterestType.addEventListener('click', () => {
+            buttonEditInterestType.style.display = 'none';
+            buttonSpinnerInterestType.style.display = 'initial';
+        });
+    }
+</script>

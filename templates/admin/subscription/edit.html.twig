@@ -3,7 +3,12 @@
 {% block body %}
     <div class="container-fluid py-4">
         <div class="row">
+            {% include "shared/_messages_flash.html.twig" %}
+            <div class="col-12 mb-3">
+                <a class="btn btn-dark" href="{{ path('admin_subscription_list') }}"><i class="fas fa-arrow-left"></i> Return</a>
+            </div>
             <div class="col-12">
+
                 <div class="card card-frame">
                     <div class="card-header">
                         <h3><i class="fas fa-plus-circle"></i> Edit a subscription</h3>
@@ -13,9 +18,8 @@
                         {{ form_start(form) }}
 
                         {{ form_row(form.name) }}
-                        {{ form_row(form.subtitle)}}
+                        {{ form_row(form.subTitle)}}
                         {{ form_row(form.price) }}
-                        {{ form_row(form.periodInDays) }}
                         {{ form_row(form.image)}}
 
                         <div class="row">
@@ -30,7 +34,11 @@
 
                         {{form_row(form.description)}}
                         {{form_row(form.shortDescription)}}
-                        <button type="submit" class="btn btn-info">Edit</button>
+                        <button type="submit" class="btn btn-info" id="buttonValid">Edit</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinner">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
 
                         {{ form_end(form) }}
                         {{ include("admin/subscription/_delete_form.html.twig" ) }}

@@ -20,14 +20,18 @@ class WidgetType extends AbstractType
     {
         $builder
             ->add('name',TextType::class,[
+                'required' => false,
             ])
             ->add('bgColor',ChoiceType::class,[
+                'required' => false,
+                'placeholder' => '--Choisir une couleur--',
                 'choices' => [
                     'dark' => 'dark',
                     'light' => 'light'
                 ]
             ])
             ->add('widgetTheme',EntityType::class,[
+                'required' => false,
                 'choice_label' => 'name',
                 'placeholder' => '-- Choose a wallet --',
                 'class' => WidgetTheme::class

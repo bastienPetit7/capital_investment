@@ -10,8 +10,28 @@
                     <div class="card-body">
                         {{ form_start(formSimulateEarning) }}
 
-                        {{ form_widget(formSimulateEarning) }}
-                        <button type="submit" class="btn btn-info">Simulate Earning</button>
+
+                        <div class="mb-3">
+                            {{ form_label(formSimulateEarning.month) }}
+                            {{ form_widget(formSimulateEarning.month) }}
+                            <div class="form-error" id="modal-form-earning">
+                                {{ form_errors(formSimulateEarning.month) }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(formSimulateEarning.year) }}
+                            {{ form_widget(formSimulateEarning.year) }}
+                            <div class="form-error" id="modal-form-earning">
+                                {{ form_errors(formSimulateEarning.year) }}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-info" id="buttonEditEarning">Simulate Earning</button>
+                        <button class="btn btn-info" type="button" disabled style="display: none;color: white;" id="buttonSpinnerEarning">
+                            <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
+                            Loading...
+                        </button>
                         {{ form_end(formSimulateEarning) }}
 
                     </div>
@@ -21,3 +41,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    const buttonEditEarning = document.getElementById('buttonEditEarning');
+    const buttonSpinnerEarning = document.getElementById('buttonSpinnerEarning');
+
+    if(buttonEditEarning)
+    {
+        buttonEditEarning.addEventListener('click', () => {
+            buttonEditEarning.style.display = 'none';
+            buttonSpinnerEarning.style.display = 'initial';
+        });
+    }
+</script>

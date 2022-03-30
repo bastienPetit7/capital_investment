@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class WidgetLineContentType extends AbstractType
 {
@@ -24,14 +25,24 @@ class WidgetLineContentType extends AbstractType
                 'required' => false,
                 'choice_label' => 'name',
                 'placeholder' => '-- Choose a code --',
-                'class' => WidgetCode::class
+                'class' => WidgetCode::class,
+                'constraints' => [
+                    New NotBlank([
+                        'message' => 'The name is required'
+                    ])
+                ]
             ])
             ->add('line',EntityType::class,[
                 'required' => false,
                 'choice_label' => 'name',
                 'placeholder' => '-- Choose a line --',
                 'choices' => $options['data']['lines'],
-                'class' => WidgetLine::class
+                'class' => WidgetLine::class,
+                'constraints' => [
+                    New NotBlank([
+                        'message' => 'The line is required'
+                    ])
+                ]
             ])
         ;
     }
