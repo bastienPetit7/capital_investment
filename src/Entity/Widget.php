@@ -31,9 +31,19 @@ class Widget
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $bgColor;
+
+    /**
      * @ORM\OneToMany(targetEntity=WidgetLine::class, mappedBy="widget", orphanRemoval=true)
      */
     private $widgetLines;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished = false;
 
     public function __construct()
     {
@@ -98,4 +108,32 @@ class Widget
 
         return $this;
     }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+
+    public function getBgColor()
+    {
+        return $this->bgColor;
+    }
+
+
+    public function setBgColor($bgColor)
+    {
+        $this->bgColor = $bgColor;
+
+        return $this;
+    }
+
+
 }

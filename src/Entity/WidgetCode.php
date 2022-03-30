@@ -30,7 +30,7 @@ class WidgetCode
     private $displayName;
 
     /**
-     * @ORM\OneToMany(targetEntity=WidgetContentLine::class, mappedBy="WidgetCode", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=WidgetContentLine::class, mappedBy="widgetCode", orphanRemoval=true)
      */
     private $widgetContentLines;
 

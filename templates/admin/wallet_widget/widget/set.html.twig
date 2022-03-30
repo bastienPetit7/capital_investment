@@ -6,11 +6,32 @@
     <div class="container-fluid py-4">
         <div class="row">
             {% include "shared/_messages_flash.html.twig" %}
+            <div class="col-12 mb-3">
+                <a class="btn btn-dark" href="{{ path('admin_widget_list') }}"><i class="fas fa-arrow-left"></i> Return List Widget</a>
+            </div>
             <div class="col-12 mb-4">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5>Configure {{ widget.name }}</h5>
                         <div>
+                            <h5>Configure {{ widget.name }}</h5>
+                            {% if widget.isPublished %}
+
+                                <div>
+                                    <span class="badge badge-success me-2">Published</span>
+                                </div>
+
+                            {% else %}
+
+                                <div>
+                                    <span class="badge badge-danger me-2">Unpublished</span>
+                                </div>
+
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-edit-widget" class="btn btn-dark"><i class="fas fa-edit"></i> Edit info</a>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-config-publish" class="btn btn-dark"><i class="fas fa-cog"></i> Toggle publish</a>
                             <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-config-lines" class="btn btn-dark"><i class="fas fa-cog"></i> Config Lines</a>
                             <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-add-line" class="btn btn-dark"><i class="fas fa-plus"></i> Add Line</a>
                             <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-add-code" class="btn btn-dark"><i class="fas fa-plus"></i> Add Code</a>
@@ -21,8 +42,16 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12 mb-4">
+                <div>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-delete-widget" class="btn btn-danger">Delete the widget</a>
+                </div>
+            </div>
         </div>
     </div>
+{% include "admin/wallet_widget/widget/modal/_modal_form_edit_widget.html.twig" %}
+    {% include "admin/wallet_widget/widget/modal/_modal_form_delete_widget.html.twig" %}
+    {% include "admin/wallet_widget/widget/modal/_modal_form_config_publish.html.twig" %}
     {% include "admin/wallet_widget/widget/modal/_modal_form_add_line.html.twig" %}
     {% include "admin/wallet_widget/widget/modal/_modal_form_add_code.html.twig" %}
     {% include "admin/wallet_widget/widget/modal/_modal_form_config_lines.html.twig" %}

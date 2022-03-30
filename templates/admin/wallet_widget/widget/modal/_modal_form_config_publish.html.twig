@@ -1,0 +1,48 @@
+<div class="modal fade" id="modal-form-config-publish" tabindex="-1" role="dialog" aria-labelledby="modal-form-config-publish" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left d-flex justify-content-between">
+                        <h3 class="font-weight-bolder text-info text-gradient">Change status publication</h3>
+                        <button type="button" class="btn-close text-black" data-bs-dismiss="modal" aria-label="Close" style="color: black !important;">
+                            <span aria-hidden="true" class="text-black">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        {% if widget.isPublished %}
+
+                            <div>
+                                <p>Actual status : <span class="badge badge-success me-2">Published</span></p>
+                            </div>
+
+                        {% else %}
+
+                            <div>
+                                <p>Actual status : <span class="badge badge-danger me-2">Unpublished</span></p>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+                    <div class="card-body">
+                        {% if widget.isPublished %}
+
+                            <div>
+                                <a class="btn btn-danger" href="{{ path('admin_widget_edit_status',{'id': widget.id}) }}">Change status for Unpublished</a>
+                            </div>
+
+                        {% else %}
+
+                            <div>
+                                <a class="btn btn-success" href="{{ path('admin_widget_edit_status',{'id': widget.id}) }}">Change status for Published</a>
+                            </div>
+
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
