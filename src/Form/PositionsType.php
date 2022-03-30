@@ -76,13 +76,6 @@ class PositionsType extends AbstractType
                 ],
                 'label' => 'isActive'
             ])
-            ->add('positionType', EntityType::class, [
-                'class' => PositionType::class, 
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('p')
-                        ->orderBy('p.name', 'ASC');
-                },
-            ])
         ;
     }
 

@@ -1,0 +1,22 @@
+{% extends "admin/base_admin.html.twig" %}
+
+{% block body %}
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            {% include "shared/_messages_flash.html.twig" %}
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5>Configure {{ widget.name }}</h5>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modal-form-line" class="btn btn-dark"><i class="fas fa-plus"></i> Add Line</a>
+                    </div>
+                    <div class="card-body">
+                        {% include "admin/wallet_widget/widget/_base_widget_trading_view.html.twig" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "admin/wallet_widget/widget/modal/_modal_form_line.html.twig" %}
+{% endblock %}
