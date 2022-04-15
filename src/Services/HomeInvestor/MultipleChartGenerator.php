@@ -66,6 +66,11 @@ class MultipleChartGenerator
                 $value = end($data);
                 $data[] = round(($value + ($movement->getInterestEarn()->getAmount() / 100)), 2);
 
+            }elseif ($movement->getName() === Movement::BONUS)
+            {
+                $value = end($data);
+                $data[] = round(($value + ($movement->getBonus()->getAmount() / 100)), 2);
+
             }
         }
 
@@ -74,7 +79,7 @@ class MultipleChartGenerator
 
     public function getChartLineEvolutionCapital($movements,Wallet $wallet)
     {
-        $depositInitial = $wallet->getInitialAmount();
+        $depositInitial = $wallet->getOriginInitialAmount();
         $dateDepositInitial = $wallet->getInvestor()->getCreatedAt();
 
 

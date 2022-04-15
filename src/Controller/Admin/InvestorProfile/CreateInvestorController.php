@@ -8,6 +8,7 @@ use App\Entity\Reporting;
 use App\Entity\User;
 use App\Entity\Wallet;
 use App\Form\InvestorProfileFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,7 @@ class CreateInvestorController extends AbstractController
      * @Route("/admin/investorprofile/create", name="admin_investor_profile_create")
      */
     public function create(Request $request, UserPasswordHasherInterface $userPasswordHasher,
-                            EntityManagerInterface $entityManager)
+                            EntityManagerInterface $entityManager,UserRepository $userRepository)
     {
 
         $form = $this->createForm(InvestorProfileFormType::class);
@@ -31,6 +32,17 @@ class CreateInvestorController extends AbstractController
             $user = new User();
 
             $email = $form->get('email')->getData();
+
+            $isUserExist = $userRepository->findOneBy([
+               'email' => $email
+            ]);
+
+            if($isUserExist)
+            {
+                $this->addFlash("danger","An investor already exist with this email : $email.");
+
+                return $this->redirectToRoute("admin_investor_profile_create");
+            }
 
             $user->setEmail($email);
 
@@ -53,6 +65,10 @@ class CreateInvestorController extends AbstractController
             $user->setRoles(["ROLE_INVESTOR"]);
 
             $investor = new Investor();
+
+            $createdAt = $form->get('createdAt')->getData();
+
+            $investor->setCreatedAt($createdAt);
 
             $investor->setUser($user);
 

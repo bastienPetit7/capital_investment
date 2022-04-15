@@ -30,7 +30,12 @@ class InvestorHomeController extends AbstractController
 
         $wallet = $investor->getWallet();
 
-        $returnRate = ceil(($wallet->getTotalInterest() * 100) / $wallet->getInitialAmount());
+        $returnRate = 0;
+
+        if($wallet->getInitialAmount() > 0)
+        {
+            $returnRate = ceil(($wallet->getTotalInterest() * 100) / $wallet->getInitialAmount());
+        }
 
         $reporting = $wallet->getReporting();
 

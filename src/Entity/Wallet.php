@@ -27,6 +27,11 @@ class Wallet
     /**
      * @ORM\Column(type="integer",nullable="true")
      */
+    private $originInitialAmount;
+
+    /**
+     * @ORM\Column(type="integer",nullable="true")
+     */
     private $initialAmount;
 
     /**
@@ -215,4 +220,20 @@ class Wallet
 
         return $earning;
     }
+
+
+    public function getOriginInitialAmount()
+    {
+        return $this->originInitialAmount;
+    }
+
+
+    public function setOriginInitialAmount($originInitialAmount)
+    {
+        $this->originInitialAmount = $originInitialAmount;
+
+        return $this;
+    }
+
+
 }

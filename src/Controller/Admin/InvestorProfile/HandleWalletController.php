@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\InvestorProfile;
 
+use App\Form\BonusAmountType;
 use App\Form\DepositAmountType;
 use App\Form\EditWalletCurrencyType;
 use App\Form\EditWalletInterestCompoundOrClassicType;
@@ -14,6 +15,7 @@ use App\Form\WalletType;
 use App\Form\WithdrawalAmountType;
 use App\Repository\InvestorRepository;
 use App\Repository\ReportingMovementRepository;
+use App\Services\ReportingService\BonusMovementPersister;
 use App\Services\ReportingService\ChartGenerator;
 use App\Services\ReportingService\DepositMovementPersister;
 use App\Services\ReportingService\EarningMovementPersister;
@@ -31,7 +33,8 @@ class HandleWalletController extends AbstractController
     public function show(int $id,InvestorRepository $investorRepository,EntityManagerInterface $em,
                          Request $request,ReportingMovementRepository $reportingMovementRepository,
                          DepositMovementPersister $depositMovementPersister,WithdrawalMovementPersister $withdrawalMovementPersister,
-                         EarningMovementPersister $earningMovementPersister,ChartGenerator $chartGenerator)
+                         EarningMovementPersister $earningMovementPersister,ChartGenerator $chartGenerator,
+                         BonusMovementPersister $bonusMovementPersister)
     {
         $investor = $investorRepository->find($id);
 
@@ -53,6 +56,7 @@ class HandleWalletController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $wallet->setActualAmount($wallet->getInitialAmount());
+            $wallet->setOriginInitialAmount($wallet->getInitialAmount());
             $em->flush();
 
             $this->addFlash("light","The wallet has been initialized successfully.");
@@ -128,6 +132,28 @@ class HandleWalletController extends AbstractController
             $year = $formDepositAmount->get('year')->getData();
 
             $depositMovementPersister->processCreation($month,$year,$depositAmount,$reporting,$wallet);
+
+            $em->flush();
+
+            $this->addFlash("light","The wallet has been edited successfully.");
+
+            return $this->redirectToRoute("admin_investor_profile_handle_wallet",['id'=>$id]);
+        }
+
+        //FORM BONUS
+        $formBonusAmount = $this->createForm(BonusAmountType::class);
+
+        $formBonusAmount->handleRequest($request);
+
+        if($formBonusAmount->isSubmitted() && $formBonusAmount->isValid())
+        {
+            $bonusAmount = $formBonusAmount->get('amount')->getData();
+
+            $month = $formBonusAmount->get('month')->getData();
+
+            $year = $formBonusAmount->get('year')->getData();
+
+            $bonusMovementPersister->processCreation($month,$year,$bonusAmount,$reporting,$wallet);
 
             $em->flush();
 
@@ -267,6 +293,7 @@ class HandleWalletController extends AbstractController
             'reporting' => $reporting,
             'year' => $year,
             'initialAmount' => $initialAmount,
+            'formBonusAmount' => $formBonusAmount->createView()
         ]);
     }
 }

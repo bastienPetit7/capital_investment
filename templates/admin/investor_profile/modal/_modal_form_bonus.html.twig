@@ -1,37 +1,37 @@
-<div class="modal fade" id="modal-form-deposit" tabindex="-1" role="dialog" aria-labelledby="modal-form-deposit" aria-hidden="true">
+<div class="modal fade" id="modal-form-bonus" tabindex="-1" role="dialog" aria-labelledby="modal-form-bonus" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="card card-plain">
                     <div class="card-header pb-0 text-left">
-                        <h3 class="font-weight-bolder text-info text-gradient">Deposit Amount</h3>
+                        <h3 class="font-weight-bolder text-info text-gradient">Bonus Amount</h3>
                         <p class="mb-0">Enter an amount</p>
                     </div>
                     <div class="card-body">
-                        {{ form_start(formDepositAmount) }}
+                        {{ form_start(formBonusAmount) }}
 
 
                         <div class="mb-3">
-                            {{ form_label(formDepositAmount.month) }}
-                            {{ form_widget(formDepositAmount.month) }}
-                            <div class="form-error" id="modal-form-deposit">
-                                {{ form_errors(formDepositAmount.month) }}
+                            {{ form_label(formBonusAmount.month) }}
+                            {{ form_widget(formBonusAmount.month) }}
+                            <div class="form-error" id="modal-form-bonus">
+                                {{ form_errors(formBonusAmount.month) }}
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            {{ form_label(formDepositAmount.year) }}
-                            {{ form_widget(formDepositAmount.year) }}
-                            <div class="form-error" id="modal-form-deposit">
-                                {{ form_errors(formDepositAmount.year) }}
+                            {{ form_label(formBonusAmount.year) }}
+                            {{ form_widget(formBonusAmount.year) }}
+                            <div class="form-error" id="modal-form-bonus">
+                                {{ form_errors(formBonusAmount.year) }}
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            {{ form_label(formDepositAmount.amount) }}
-                            {{ form_widget(formDepositAmount.amount) }}
-                            <div class="form-error" id="modal-form-deposit">
-                                {{ form_errors(formDepositAmount.amount) }}
+                            {{ form_label(formBonusAmount.amount) }}
+                            {{ form_widget(formBonusAmount.amount) }}
+                            <div class="form-error" id="modal-form-bonus">
+                                {{ form_errors(formBonusAmount.amount) }}
                             </div>
                         </div>
                         <button type="submit" class="btn btn-info" id="buttonEditDeposit">Edit</button>
@@ -39,8 +39,10 @@
                             <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" style="color: white;"></span>
                             Loading...
                         </button>
-                        {{ form_end(formDepositAmount) }}
+                        {{ form_end(formBonusAmount) }}
+
                     </div>
+
                 </div>
             </div>
         </div>

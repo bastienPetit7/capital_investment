@@ -48,10 +48,12 @@ class HandleSettingsController extends AbstractController
             $email = $form->get('email')->getData();
             $name = $form->get('name')->getData();
             $telephone = $form->get('telephone')->getData();
+            $createdAt = $form->get('createdAt')->getData();
 
             $user->setEmail($email);
             $user->setName($name);
             $user->setTelephone($telephone);
+            $investor->setCreatedAt($createdAt);
 
             $em->flush();
 

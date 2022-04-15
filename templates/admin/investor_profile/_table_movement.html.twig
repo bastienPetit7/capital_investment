@@ -19,6 +19,8 @@
                         <span class="text-danger">WITHDRAWAL</span>
                     {% elseif movement.interestEarn is not same as null %}
                         <span style="color: rgb(62, 182, 160);">EARNING</span>
+                    {% elseif movement.bonus is not same as null %}
+                        <span class="text-warning">BONUS</span>
                     {% endif %}
                 </td>
                 <td class="text-sm font-weight-normal">
@@ -52,6 +54,16 @@
                                                                     {{ movement.interestEarn.amount | priceInFranc }}
                                                                 {% endif %}
                                                             </span>
+                    {% elseif movement.bonus is not same as null %}
+                        <span class="text-warning"><i class="fas fa-plus-circle"></i>
+                                                                {% if investor.wallet.currency is same as "€" %}
+                                                                    {{ movement.bonus.amount | priceInEuros }}
+                                                                {% elseif investor.wallet.currency is same as "$" %}
+                                                                    {{ movement.bonus.amount | priceInDollar }}
+                                                                {% elseif investor.wallet.currency is same as "CHF" %}
+                                                                    {{ movement.bonus.amount | priceInFranc }}
+                                                                {% endif %}
+                                                            </span>
                     {% endif %}
                 </td>
                 <td class="text-sm font-weight-normal"><strong>
@@ -63,7 +75,8 @@
                         {% elseif investor.wallet.currency is same as "CHF" %}
                             {{ movement.walletAmountAfterMovement | priceInFranc }}
                         {% endif %}
-                    </strong></td>
+                    </strong>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

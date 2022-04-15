@@ -40,7 +40,7 @@ class EditUserInformationType extends AbstractType
                 'required' => false,
                 'widget' => 'single_text',
                 'html5' => false,
-                'format' => 'MM/dd/yyyy',
+                'format' => 'yyyy-MM-dd',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Created date is required.',

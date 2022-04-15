@@ -7,4 +7,5 @@ class Movement
     public const DEPOSIT = "DEPOSIT";
     public const WITHDRAWAL = "WITHDRAWAL";
     public const EARNING = "EARNING";
+    public const BONUS = "BONUS";
 }

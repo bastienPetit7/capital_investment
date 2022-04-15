@@ -16,8 +16,8 @@ class SimulateEarningType extends AbstractType
     {
         $builder
             ->add('month', ChoiceType::class, [
-                'label' => "Deposit Amount",
-                'placeholder' => 'Month Period',
+                'label' => "Month",
+                'placeholder' => 'Month',
                 'choices' => [
                     'January' => 'January',
                     'February' => 'February',
@@ -40,8 +40,8 @@ class SimulateEarningType extends AbstractType
                 ]
             ])
             ->add('year', ChoiceType::class, [
-                'label' => "Deposit Amount",
-                'placeholder' => 'Year Period',
+                'label' => "Year",
+                'placeholder' => 'Year',
                 'choices' => [
                     '2021' => '2021',
                     '2022' => '2022'

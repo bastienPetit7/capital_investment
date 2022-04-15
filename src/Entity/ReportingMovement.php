@@ -76,6 +76,11 @@ class ReportingMovement
     private $interestEarn;
 
     /**
+     * @ORM\OneToOne(targetEntity=Bonus::class, mappedBy="reportingMovement", cascade={"persist", "remove"})
+     */
+    private $bonus;
+
+    /**
      * @ORM\PrePersist
      */
     public function prePersist()
@@ -242,6 +247,23 @@ class ReportingMovement
     public function setYear($year)
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getBonus(): ?Bonus
+    {
+        return $this->bonus;
+    }
+
+    public function setBonus(Bonus $bonus): self
+    {
+        // set the owning side of the relation if necessary
+        if ($bonus->getReportingMovement() !== $this) {
+            $bonus->setReportingMovement($this);
+        }
+
+        $this->bonus = $bonus;
 
         return $this;
     }

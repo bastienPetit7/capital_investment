@@ -3,13 +3,13 @@
 namespace App\Services\ReportingService;
 
 use App\Dictionary\Movement;
-use App\Entity\CashIn;
+use App\Entity\Bonus;
 use App\Entity\Reporting;
 use App\Entity\ReportingMovement;
 use App\Entity\Wallet;
 use Doctrine\ORM\EntityManagerInterface;
 
-class DepositMovementPersister
+class BonusMovementPersister
 {
     /**
      * @var EntityManagerInterface
@@ -21,17 +21,17 @@ class DepositMovementPersister
         $this->em = $em;
     }
 
-    public function processCreation($month,$year,$depositAmount,Reporting $reporting,Wallet $wallet)
+    public function processCreation($month,$year,$bonusAmount,Reporting $reporting,Wallet $wallet)
     {
         $actualWalletAmount = $wallet->getActualAmount();
-        $newWalletAmount = $actualWalletAmount + $depositAmount;
+        $newWalletAmount = $actualWalletAmount + $bonusAmount;
 
         $date = new \DateTime('01-' . $month .'-' . $year);
 
         //handle Reporting Movement
         $reportingMovement = new ReportingMovement();
         $reportingMovement->setCreatedAt($date);
-        $reportingMovement->setName(Movement::DEPOSIT);
+        $reportingMovement->setName(Movement::BONUS);
         $reportingMovement->setInterestRates($wallet->getInterestRates());
         $reportingMovement->setMonth($month);
         $reportingMovement->setYear($year);
@@ -40,18 +40,15 @@ class DepositMovementPersister
         $reportingMovement->setWalletAmountAfterMovement($newWalletAmount);
 
         //handle cash in
-        $cashIn = new CashIn();
-        $cashIn->setAmount($depositAmount);
-        $cashIn->setReportingMovement($reportingMovement);
+        $bonus = new Bonus();
+        $bonus->setAmount($bonusAmount);
+        $bonus->setReportingMovement($reportingMovement);
 
         //handle Wallet
         $wallet->setActualAmount($newWalletAmount);
 
-        //handle Initial Amount
-        $wallet->setInitialAmount($wallet->getInitialAmount() + $depositAmount);
-
         //handle persist
         $this->em->persist($reportingMovement);
-        $this->em->persist($cashIn);
+        $this->em->persist($bonus);
     }
 }
