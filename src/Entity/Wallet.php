@@ -19,12 +19,6 @@ class Wallet
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Investor::class, inversedBy="wallet", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $investor;
-
-    /**
      * @ORM\Column(type="integer",nullable="true")
      */
     private $originInitialAmount;
@@ -43,6 +37,11 @@ class Wallet
      * @ORM\OneToOne(targetEntity=Reporting::class, mappedBy="wallet", cascade={"persist", "remove"})
      */
     private $reporting;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -74,21 +73,15 @@ class Wallet
      */
     private $totalActif;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Investor::class, inversedBy="wallets")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $investor;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getInvestor(): ?Investor
-    {
-        return $this->investor;
-    }
-
-    public function setInvestor(Investor $investor): self
-    {
-        $this->investor = $investor;
-
-        return $this;
     }
 
     public function getInitialAmount(): ?int
@@ -234,6 +227,32 @@ class Wallet
 
         return $this;
     }
+
+    public function getInvestor(): ?Investor
+    {
+        return $this->investor;
+    }
+
+    public function setInvestor(?Investor $investor): self
+    {
+        $this->investor = $investor;
+
+        return $this;
+    }
+
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
 
 
 }

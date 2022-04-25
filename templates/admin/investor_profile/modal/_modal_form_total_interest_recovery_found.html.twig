@@ -8,7 +8,7 @@
                         <p class="mb-0">Personal Recovery Found</p>
                     </div>
                     <div class="card-body">
-                        {{ form_start(formInterestRecoveryFound) }}
+                        {{ form_start(formInterestRecoveryFound,{'attr': {'action': path('admin_investor_profile_handle_wallet_edit_interest_recovery_found',{ 'id' : wallet.id }) } } ) }}
 
                         <div class="mb-3">
                             {{ form_label(formInterestRecoveryFound.interestRecoveryFound) }}

@@ -22,8 +22,10 @@
                 </div>
             </div>
         </div>
+        {% if chartBar %}
         <div class="card-body">
             {{ render_chart(chartBar) }}
         </div>
+        {% endif %}
     </div>
 </div>

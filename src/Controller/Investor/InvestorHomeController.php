@@ -3,23 +3,27 @@
 namespace App\Controller\Investor;
 
 use App\Entity\User;
+use App\Form\ChoiceYearType;
 use App\Repository\CapitalInvestmentAssetRepository;
 use App\Repository\ReportingMovementRepository;
+use App\Repository\WalletRepository;
 use App\Services\HomeInvestor\MultipleChartGenerator;
 use App\Services\ReportingService\ChartGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class InvestorHomeController extends AbstractController
 {
     /**
-     * @Route("/investor/home", name="investor_home")
+     * @Route("/investor/home/{idWallet}", name="investor_home")
      */
-    public function index(CapitalInvestmentAssetRepository $capitalInvestmentAssetRepository,
+    public function index($idWallet = null,CapitalInvestmentAssetRepository $capitalInvestmentAssetRepository,
                           MultipleChartGenerator $multipleChartGenerator,
                           ReportingMovementRepository $reportingMovementRepository,
-                          ChartGenerator $chartGenerator): Response
+                          ChartGenerator $chartGenerator,WalletRepository $walletRepository,Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -28,7 +32,26 @@ class InvestorHomeController extends AbstractController
 
         $capitalInvestmentAsset = $capitalInvestmentAssetRepository->findOneBy([]);
 
-        $wallet = $investor->getWallet();
+        $wallets = $investor->getWallets();
+
+        $wallet = null;
+
+        if(count($wallets) > 0 && $idWallet === null)
+        {
+            $wallet = $wallets[0];
+        }
+        elseif(count($wallets) > 0 && $idWallet !== null)
+        {
+            $wallet = $walletRepository->findOneBy([
+               'id' => $idWallet,
+               'investor' => $investor
+            ]);
+
+            if(!$wallet)
+            {
+                return $this->redirectToRoute('investor_home');
+            }
+        }
 
         $returnRate = 0;
 
@@ -55,8 +78,18 @@ class InvestorHomeController extends AbstractController
         $chart = $chartGenerator->getChartLine($movements,$wallet);
 
         $initialAmount = $wallet->getInitialAmount();
-
         $year = date('Y');
+
+        $formYear = $this->createForm(ChoiceYearType::class,['year' => $year]);
+        $formYear->handleRequest($request);
+
+        $ancre = null;
+
+        if($formYear->isSubmitted() && $formYear->isValid())
+        {
+            $year = $formYear->get('year')->getData();
+            $ancre = 'reportingSmooth';
+        }
 
         $chartBar = $chartGenerator->getChartBar($wallet, $year);
 
@@ -64,6 +97,7 @@ class InvestorHomeController extends AbstractController
         return $this->render('dashboard/investor/home/index.html.twig',[
             'capitalInvestmentAsset' => $capitalInvestmentAsset,
             'wallet' => $wallet,
+            'wallets' => $wallets,
             'investor' => $investor,
             'returnRate' => $returnRate,
             'chartLineEvolutionCapital' => $chartLineEvolutionCapital,
@@ -74,7 +108,9 @@ class InvestorHomeController extends AbstractController
             'year' => $year,
             'chartBar' => $chartBar,
             'reporting' => $reporting,
-            'movements' => $movements
+            'movements' => $movements,
+            'formYear' => $formYear->createView(),
+            'ancre' => $ancre
         ]);
     }
 }

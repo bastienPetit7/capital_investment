@@ -52,7 +52,24 @@
 
     </div>
 
+    <script>
+        {% if ancre is same as 'reportingSmooth' %}
 
+        document.addEventListener("DOMContentLoaded", () => {
+
+            let elementToSearch = document.getElementById("reportingScroll");
+
+            console.log(elementToSearch);
+
+            let offset = elementToSearch.offsetTop;
+
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth',
+            });
+        });
+        {% endif %}
+    </script>
 
 
 {% endblock %}

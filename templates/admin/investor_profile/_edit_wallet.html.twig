@@ -1,3 +1,31 @@
+<div class="col-12">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3 d-flex align-items-center justify-content-between">
+            <h6 class="mb-0">Action</h6>
+            <a class="btn btn-dark" href="{{ path('admin_investor_profile_create_new_wallet',{'id': investor.id}) }}"><i class="fas fa-plus-circle"></i> Add a new wallet</a>
+        </div>
+        <div class="card-body p-3">
+            {% for w in wallets %}
+                <a class="btn btn-info" href="{{ path('admin_investor_profile_handle_wallet',{'id': investor.id,'idWallet' : w.id }) }}"> Consulter Wallet : {{ w.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="col-12 mt-4">
+    <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+            <h6 class="mb-0">Wallet Name</h6>
+        </div>
+        <div class="card-body p-3">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">
+                {{ wallet.name }}
+            </h6>
+        </div>
+    </div>
+</div>
+
 <div class="col-12 col-md-6  mt-4">
     <div class="card h-100">
         <div class="card-header pb-0 p-3">
@@ -5,12 +33,12 @@
         </div>
         <div class="card-body p-3">
             <h6 class="text-uppercase text-body text-xs font-weight-bolder">
-                {% if investor.wallet.currency is same as "€" %}
-                    {{ investor.wallet.initialAmount | priceInEuros }}
-                {% elseif investor.wallet.currency is same as "$" %}
-                    {{ investor.wallet.initialAmount | priceInDollar }}
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    {{ investor.wallet.initialAmount | priceInFranc }}
+                {% if wallet.currency is same as "€" %}
+                    {{ wallet.initialAmount | priceInEuros }}
+                {% elseif wallet.currency is same as "$" %}
+                    {{ wallet.initialAmount | priceInDollar }}
+                {% elseif wallet.currency is same as "CHF" %}
+                    {{ wallet.initialAmount | priceInFranc }}
                 {% endif %}
             </h6>
         </div>
@@ -24,12 +52,12 @@
         <div class="card-body p-3">
 
             <h6 class="text-uppercase text-body text-xs font-weight-bolder">
-                {% if investor.wallet.currency is same as "€" %}
-                    {{ investor.wallet.actualAmount | priceInEuros }}
-                {% elseif investor.wallet.currency is same as "$" %}
-                    {{ investor.wallet.actualAmount | priceInDollar }}
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    {{ investor.wallet.actualAmount | priceInFranc }}
+                {% if wallet.currency is same as "€" %}
+                    {{ wallet.actualAmount | priceInEuros }}
+                {% elseif wallet.currency is same as "$" %}
+                    {{ wallet.actualAmount | priceInDollar }}
+                {% elseif wallet.currency is same as "CHF" %}
+                    {{ wallet.actualAmount | priceInFranc }}
                 {% endif %}
             </h6>
         </div>
@@ -45,7 +73,7 @@
             {% endif %}
         </div>
         <div class="card-body p-3">
-            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ investor.wallet.currency }}</h6>
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ wallet.currency }}</h6>
         </div>
     </div>
 </div>
@@ -60,12 +88,12 @@
         </div>
         <div class="card-body p-3">
             <h6 class="text-uppercase text-body text-xs font-weight-bolder">
-                {% if investor.wallet.currency is same as "€" %}
-                    {{ investor.wallet.interestRecoveryFound | priceInEuros }}
-                {% elseif investor.wallet.currency is same as "$" %}
-                    {{ investor.wallet.interestRecoveryFound | priceInDollar }}
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    {{ investor.wallet.interestRecoveryFound | priceInFranc }}
+                {% if wallet.currency is same as "€" %}
+                    {{ wallet.interestRecoveryFound | priceInEuros }}
+                {% elseif wallet.currency is same as "$" %}
+                    {{ wallet.interestRecoveryFound | priceInDollar }}
+                {% elseif wallet.currency is same as "CHF" %}
+                    {{ wallet.interestRecoveryFound | priceInFranc }}
                 {% endif %}
             </h6>
         </div>
@@ -82,12 +110,12 @@
         </div>
         <div class="card-body p-3">
             <h6 class="text-uppercase text-body text-xs font-weight-bolder">
-                {% if investor.wallet.currency is same as "€" %}
-                    {{ investor.wallet.totalActif | priceInEuros }}
-                {% elseif investor.wallet.currency is same as "$" %}
-                    {{ investor.wallet.totalActif | priceInDollar }}
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    {{ investor.wallet.totalActif | priceInFranc }}
+                {% if wallet.currency is same as "€" %}
+                    {{ wallet.totalActif | priceInEuros }}
+                {% elseif wallet.currency is same as "$" %}
+                    {{ wallet.totalActif | priceInDollar }}
+                {% elseif wallet.currency is same as "CHF" %}
+                    {{ wallet.totalActif | priceInFranc }}
                 {% endif %}
             </h6>
         </div>
@@ -108,7 +136,7 @@
             </div>
         </div>
         <div class="card-body p-3">
-            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ investor.wallet.status }}</h6>
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ wallet.status }}</h6>
         </div>
     </div>
 </div>
@@ -127,7 +155,7 @@
             </div>
         </div>
         <div class="card-body p-3">
-            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ investor.wallet.interestRates }} %</h6>
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ wallet.interestRates }} %</h6>
         </div>
     </div>
 </div>
@@ -146,7 +174,7 @@
             </div>
         </div>
         <div class="card-body p-3">
-            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ investor.wallet.interestType }}</h6>
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{ wallet.interestType }}</h6>
         </div>
     </div>
 </div>

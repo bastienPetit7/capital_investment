@@ -94,7 +94,6 @@ class ChartGenerator
                     'backgroundColor' => 'rgb(37, 106, 154)',
                     'borderColor' => 'rgb(62, 182, 160)',
                     'data' => $data,
-                    'fill' => true
                 ],
             ],
         ]);

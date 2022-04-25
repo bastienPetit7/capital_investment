@@ -8,7 +8,7 @@
                         <p class="mb-0">Enter an amount</p>
                     </div>
                     <div class="card-body">
-                        {{ form_start(formSimulateEarning) }}
+                        {{ form_start(formSimulateEarning,{'attr': {'action': path('admin_investor_profile_handle_wallet_edit_simulate_earning',{ 'id' : wallet.id }) } } ) }}
 
 
                         <div class="mb-3">

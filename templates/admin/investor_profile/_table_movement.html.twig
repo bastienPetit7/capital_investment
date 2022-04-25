@@ -26,41 +26,41 @@
                 <td class="text-sm font-weight-normal">
                     {% if movement.cashIn is not same as null %}
                         <span style="color: rgb(37, 106, 154);"><i class="fas fa-plus-circle"></i>
-                                                                {% if investor.wallet.currency is same as "€" %}
+                                                                {% if wallet.currency is same as "€" %}
                                                                     {{ movement.cashIn.amount | priceInEuros }}
-                                                                {% elseif investor.wallet.currency is same as "$" %}
+                                                                {% elseif wallet.currency is same as "$" %}
                                                                     {{ movement.cashIn.amount | priceInDollar }}
-                                                                {% elseif investor.wallet.currency is same as "CHF" %}
+                                                                {% elseif wallet.currency is same as "CHF" %}
                                                                     {{ movement.cashIn.amount | priceInFranc }}
                                                                 {% endif %}
                                                             </span>
                     {% elseif movement.cashOut is not same as null %}
                         <span class="text-danger"><i class="fas fa-minus-circle"></i>
-                                                                {% if investor.wallet.currency is same as "€" %}
+                                                                {% if wallet.currency is same as "€" %}
                                                                     {{ movement.cashOut.amount | priceInEuros }}
-                                                                {% elseif investor.wallet.currency is same as "$" %}
+                                                                {% elseif wallet.currency is same as "$" %}
                                                                     {{ movement.cashOut.amount | priceInDollar }}
-                                                                {% elseif investor.wallet.currency is same as "CHF" %}
+                                                                {% elseif wallet.currency is same as "CHF" %}
                                                                     {{ movement.cashOut.amount | priceInFranc }}
                                                                 {% endif %}
                                                             </span>
                     {% elseif movement.interestEarn is not same as null %}
                         <span style="color: rgb(62, 182, 160);"><i class="fas fa-plus-circle"></i>
-                                                                {% if investor.wallet.currency is same as "€" %}
+                                                                {% if wallet.currency is same as "€" %}
                                                                     {{ movement.interestEarn.amount | priceInEuros }}
-                                                                {% elseif investor.wallet.currency is same as "$" %}
+                                                                {% elseif wallet.currency is same as "$" %}
                                                                     {{ movement.interestEarn.amount | priceInDollar }}
-                                                                {% elseif investor.wallet.currency is same as "CHF" %}
+                                                                {% elseif wallet.currency is same as "CHF" %}
                                                                     {{ movement.interestEarn.amount | priceInFranc }}
                                                                 {% endif %}
                                                             </span>
                     {% elseif movement.bonus is not same as null %}
                         <span class="text-warning"><i class="fas fa-plus-circle"></i>
-                                                                {% if investor.wallet.currency is same as "€" %}
+                                                                {% if wallet.currency is same as "€" %}
                                                                     {{ movement.bonus.amount | priceInEuros }}
-                                                                {% elseif investor.wallet.currency is same as "$" %}
+                                                                {% elseif wallet.currency is same as "$" %}
                                                                     {{ movement.bonus.amount | priceInDollar }}
-                                                                {% elseif investor.wallet.currency is same as "CHF" %}
+                                                                {% elseif wallet.currency is same as "CHF" %}
                                                                     {{ movement.bonus.amount | priceInFranc }}
                                                                 {% endif %}
                                                             </span>
@@ -68,11 +68,11 @@
                 </td>
                 <td class="text-sm font-weight-normal"><strong>
 
-                        {% if investor.wallet.currency is same as "€" %}
+                        {% if wallet.currency is same as "€" %}
                             {{ movement.walletAmountAfterMovement | priceInEuros }}
-                        {% elseif investor.wallet.currency is same as "$" %}
+                        {% elseif wallet.currency is same as "$" %}
                             {{ movement.walletAmountAfterMovement | priceInDollar }}
-                        {% elseif investor.wallet.currency is same as "CHF" %}
+                        {% elseif wallet.currency is same as "CHF" %}
                             {{ movement.walletAmountAfterMovement | priceInFranc }}
                         {% endif %}
                     </strong>

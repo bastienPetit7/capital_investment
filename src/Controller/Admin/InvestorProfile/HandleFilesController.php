@@ -114,4 +114,42 @@ class HandleFilesController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route("/admin/investorprofile/deletefile/{id}/{documentId}", name="admin_investor_profile_delete_file")
+     */
+    public function deleteShow(int $id,int $documentId,EntityManagerInterface $em,InvestorRepository $investorRepository,DocumentRepository $documentRepository)
+    {
+        $investor = $investorRepository->find($id);
+
+        if(!$investor)
+        {
+            $this->addFlash("danger","This investor profile cannot be found");
+            return $this->redirectToRoute("admin_investor_profile_list");
+        }
+
+        $document = $documentRepository->find($documentId);
+
+        if(!$document)
+        {
+            $this->addFlash("danger","This document cannot be found");
+            return $this->redirectToRoute("admin_investor_profile_handle_files",['id' => $id]);
+        }
+
+        $fileToDownload = $document->getPathToFile();
+
+        $filePathInServer = $this->getParameter('app_files_directory') . '/../..' . $fileToDownload;
+
+
+        if (file_exists($filePathInServer)) {
+           unlink($filePathInServer);
+        }
+
+        $em->remove($document);
+
+        $em->flush();
+
+        return $this->redirectToRoute('admin_investor_profile_handle_files',['id' => $id]);
+
+    }
 }

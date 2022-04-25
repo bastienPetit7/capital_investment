@@ -16,7 +16,7 @@ class InvestorPositionController extends AbstractController
     public function positionOfTheDay(PositionRepository $positionRepository): Response
     {
 
-        $positions = $positionRepository->findActives(); 
+        $positions = $positionRepository->findAll();
 
         $positionsOfTheDay = []; 
         $now = new DateTime();
@@ -30,7 +30,6 @@ class InvestorPositionController extends AbstractController
 
             }
         }
-
 
         return $this->render('dashboard/investor/position/live_trading.html.twig', [
             'positions' => $positionsOfTheDay

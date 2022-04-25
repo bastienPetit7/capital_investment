@@ -75,18 +75,9 @@ class CreateInvestorController extends AbstractController
             $listDocument = new ListDocument();
 
             $investor->setListDocument($listDocument);
-
-            $wallet = new Wallet();
-
-            $investor->setWallet($wallet);
-
-            $reporting = new Reporting();
-
-            $reporting->setWallet($wallet);
+            
 
             $entityManager->persist($investor);
-            $entityManager->persist($wallet);
-            $entityManager->persist($reporting);
             $entityManager->persist($listDocument);
             $entityManager->persist($user);
             $entityManager->flush();

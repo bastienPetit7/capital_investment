@@ -31,7 +31,7 @@ class EditWalletInterestRecoveryFoundType extends AbstractType
                     new NotBlank([
                         'message' => 'Amount is required.',
                     ])
-                ]
+                ],
             ])
         ;
     }

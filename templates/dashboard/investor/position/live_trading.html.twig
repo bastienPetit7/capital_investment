@@ -8,85 +8,34 @@
         <h1>Our Actual Positions</h1>
             <div class="row mt-4">
 
-        {% for position in positions %}
+                {% for position in positions %}
 
-                <div class="col-lg-3 mt-3">
-                <div class="card bg-white tilt" data-tilt="" style="will-change: transform; transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);">
-                    <div class="card-header pb-0 p-3">
-                    <div class="d-flex align-items-center">
-                        <h6 class="mb-0 text-uppercase">{{position.name}}</h6>
-                    
-                    </div>
-                    </div>
-                    <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-12">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                            <tbody>
-                                <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-0">
-                                    <span class="badge bg-success me-3"> </span>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm ">Sell at</h6>
-                                    </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold  "> {{position.sellAt}} </span>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-0">
-                                    <span class="badge bg-gradient-info me-3"> </span>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm ">Target price 1</h6>
-                                    </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold "> {{position.tp1}} </span>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-0">
-                                    <span class="badge bg-gradient-info me-3"> </span>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm ">Target price 2</h6>
-                                    </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold "> {{position.tp2}} </span>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-0">
-                                    <span class="badge bg-danger me-3"> </span>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm ">Stop loss</h6>
-                                    </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold "> {{position.stopLoss}} </span>
-                                </td>
-                                </tr>
-                                
-                            </tbody>
-                            </table>
-                        </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4 pt-2">
+                        <div class="card" style="border: 1px solid rgba(37, 106, 154, 1);">
+                            <div class="card-header">
+                                <strong>{{ position.name }} </strong>
+                                <br/>
+                                {% if position.activeRight  %}
+                                    {{ position.action }} {{ position.activeLeft }} / {{ position.activeRight }} at CMP - {{ position.price }}
+                                {% else %}
+                                    {{ position.action }} {{ position.activeLeft }}  at CMP - {{ position.price }}
+                                {% endif %}
+
+                            </div>
+                            <div class="card-body">
+                                <p>✅ TP1: {{ position.tp1 }}</p>
+                                <p>✅ TP2: {{ position.tp2 }}</p>
+                                <p>✅ TP3: {{ position.tp3 }}</p>
+                                <p>✅ TP4: {{ position.tp4 }}</p>
+                                <p>❌  SL: {{ position.stopLoss }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <p>Published at {{ position.publishedAt | date('d-M-Y') }}</p>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                </div>
-                </div>
 
-        {% endfor %}
+                {% endfor %}
             </div>
 
     </div>

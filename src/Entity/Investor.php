@@ -28,11 +28,6 @@ class Investor
     private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity=Wallet::class, mappedBy="investor", cascade={"persist", "remove"})
-     */
-    private $wallet;
-
-    /**
      * @ORM\OneToOne(targetEntity=ListDocument::class, mappedBy="investor", cascade={"persist", "remove"})
      */
     private $listDocument;
@@ -52,9 +47,15 @@ class Investor
      */
     private $reportings;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Wallet::class, mappedBy="investor", orphanRemoval=true)
+     */
+    private $wallets;
+
     public function __construct()
     {
         $this->reportings = new ArrayCollection();
+        $this->wallets = new ArrayCollection();
     }
 
     /**
@@ -97,22 +98,6 @@ class Investor
         return $this;
     }
 
-    public function getWallet(): ?Wallet
-    {
-        return $this->wallet;
-    }
-
-    public function setWallet(Wallet $wallet): self
-    {
-        // set the owning side of the relation if necessary
-        if ($wallet->getInvestor() !== $this) {
-            $wallet->setInvestor($this);
-        }
-
-        $this->wallet = $wallet;
-
-        return $this;
-    }
 
     public function getListDocument(): ?ListDocument
     {
@@ -167,6 +152,36 @@ class Investor
             // set the owning side to null (unless already changed)
             if ($reporting->getInvestorId() === $this) {
                 $reporting->setInvestorId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Wallet[]
+     */
+    public function getWallets(): Collection
+    {
+        return $this->wallets;
+    }
+
+    public function addWallet(Wallet $wallet): self
+    {
+        if (!$this->wallets->contains($wallet)) {
+            $this->wallets[] = $wallet;
+            $wallet->setInvestor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWallet(Wallet $wallet): self
+    {
+        if ($this->wallets->removeElement($wallet)) {
+            // set the owning side to null (unless already changed)
+            if ($wallet->getInvestor() === $this) {
+                $wallet->setInvestor(null);
             }
         }
 

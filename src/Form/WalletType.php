@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -20,6 +21,18 @@ class WalletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('name',TextType::class,[
+                'label' => 'Wallet name',
+                'attr' => [
+                    'placeholder' => 'name',
+                ],
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Wallet name is required.',
+                    ])
+                ]
+            ])
             ->add('initialAmount', MoneyType::class, [
                 'label' => "Initial Amount",
                 'attr' => [

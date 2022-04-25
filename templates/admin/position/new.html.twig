@@ -4,6 +4,9 @@
  
  <div class="container-fluid py-4">
         <div class="row">
+            <div class="col-12 mb-3">
+                <a class="btn btn-dark" href="{{ path('position_index') }}"><i class="fas fa-arrow-left"></i> Return</a>
+            </div>
             <div class="col-12">
                 <div class="card card-frame">
                     <div class="card-header">
@@ -15,36 +18,27 @@
                         {{ form_row(form.name) }}
 
                         <div class="row">
+                            <div class="col-md-6">{{ form_row(form.activeLeft)}}</div>
+                            <div class="col-md-6">{{ form_row(form.activeRight)}}</div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">{{ form_row(form.tp1)}}</div>
                             <div class="col-md-6">{{ form_row(form.tp2)}}</div>
-                    
                         </div>
                         <div class="row">
                             <div class="col-md-6">{{ form_row(form.tp3)}}</div>
                             <div class="col-md-6">{{ form_row(form.tp4)}}</div>
-                    
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">{{ form_row(form.tp5)}}</div>
-                            <div class="col-md-6">{{ form_row(form.tp6)}}</div>
-                    
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">{{ form_row(form.tp7)}}</div>
-                            <div class="col-md-6">{{ form_row(form.tp8)}}</div>
-                    
                         </div>
                         <div class="row">
                             <div class="col-md-6">{{ form_row(form.stopLoss)}}</div>
-                            <div class="col-md-6">{{ form_row(form.sellAt)}}</div>
-                    
+                            <div class="col-md-6">{{ form_row(form.price)}}</div>
                         </div>
-                        
-                        {{ form_row(form.isActive) }}
-                        
-
-                     
-
+                        <div class="row">
+                            <div class="col-md-6">{{ form_row(form.action)}}</div>
+                            <div class="col-md-6">
+                                {{ form_row(form.publishedAt,{'attr': { 'class' : "datepicker",'onfocus': 'focused(this)','onfocusout' : 'defocused(this)' } }) }}
+                            </div>
+                        </div>
 
                         <button type="submit" class="btn btn-info">Save</button>
                         {{ form_end(form) }}
@@ -54,5 +48,12 @@
         </div>
     </div>
 
-
+    <script src="{{ asset('theme/assets/js/plugins/flatpickr.min.js') }}"></script>
+    <script>
+        if (document.querySelector('.datepicker')) {
+            flatpickr('.datepicker', {
+                mode: "single"
+            });
+        }
+    </script>
 {% endblock %}

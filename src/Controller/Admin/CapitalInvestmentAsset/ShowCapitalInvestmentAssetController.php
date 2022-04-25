@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\CapitalInvestmentAsset;
 
+use App\Entity\CapitalInvestmentAsset;
 use App\Form\EditRecoveryFoundTotalType;
 use App\Form\EditTotalAssetType;
 use App\Repository\CapitalInvestmentAssetRepository;
@@ -19,6 +20,13 @@ class ShowCapitalInvestmentAssetController extends AbstractController
                          EntityManagerInterface $em,Request $request)
     {
         $capitalInvestmentAsset = $capitalInvestmentAssetRepository->findOneBy([]);
+
+        if(!$capitalInvestmentAsset)
+        {
+            $capitalInvestmentAsset = new CapitalInvestmentAsset();
+            $em->persist($capitalInvestmentAsset);
+            $em->flush();
+        }
 
         //FORM POUR HANDLE RECOVERY FOUND TOTAL
         $formRecoveryFound = $this->createForm(EditRecoveryFoundTotalType::class,[

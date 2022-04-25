@@ -29,7 +29,8 @@ class EditWalletStatusType extends AbstractType
                     new NotBlank([
                         'message' => 'Status investor is required.',
                     ])
-                ]
+                ],
+                'data' => $options['data']['status']
             ])
 
 

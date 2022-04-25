@@ -3,11 +3,11 @@
         <thead class="thead-light">
         <tr>
             <th class="text-uppercase text-secondary  font-weight-bolder opacity-7">
-                {% if investor.wallet.currency is same as "€" %}
+                {% if wallet.currency is same as "€" %}
                     {{ initialAmount | priceInEuros }}
-                {% elseif investor.wallet.currency is same as "$" %}
+                {% elseif wallet.currency is same as "$" %}
                     {{ initialAmount | priceInDollar }}
-                {% elseif investor.wallet.currency is same as "CHF" %}
+                {% elseif wallet.currency is same as "CHF" %}
                     {{ initialAmount | priceInFranc }}
                 {% endif %}
             </th>
@@ -16,253 +16,256 @@
             <th class="text-uppercase text-secondary  font-weight-bolder opacity-7">% INTEREST RATES</th>
         </tr>
         </thead>
-        <tbody>
+        {% if reporting.id != null %}
+            <tbody>
 
-        <tr>
-            <td class="text-sm font-weight-normal">JANUARY</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).interestEarn.amount | priceInFranc }}</td>
+            <tr>
+                <td class="text-sm font-weight-normal">JANUARY</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'January',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">FEBRUARY</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">FEBRUARY</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'February',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">MARCH</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">MARCH</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'March',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">APRIL</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">APRIL</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'April',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">MAY</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">MAY</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'May',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">JUNE</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">JUNE</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'June',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">JULY</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">JULY</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'July',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">AUGUST</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">AUGUST</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'August',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">SEPTEMBER</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">SEPTEMBER</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'September',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">OCTOBER</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">OCTOBER</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'October',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
-            <td class="text-sm font-weight-normal">NOVEMBER</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).interestEarn.amount | priceInFranc }}</td>
+            </tr>
+            <tr>
+                <td class="text-sm font-weight-normal">NOVEMBER</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'November',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
+            </tr>
 
-        <tr>
-            <td class="text-sm font-weight-normal">DECEMBER</td>
-            {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year) %}
-                {% if investor.wallet.currency is same as "€" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).walletAmountAfterMovement | priceInEuros }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).interestEarn.amount | priceInEuros }}</td>
-                {% elseif investor.wallet.currency is same as "$" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).walletAmountAfterMovement | priceInDollar }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).interestEarn.amount | priceInDollar }}</td>
-                {% elseif investor.wallet.currency is same as "CHF" %}
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).walletAmountAfterMovement | priceInFranc }}</td>
-                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).interestEarn.amount | priceInFranc }}</td>
+            <tr>
+                <td class="text-sm font-weight-normal">DECEMBER</td>
+                {% if reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year) %}
+                    {% if wallet.currency is same as "€" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).walletAmountAfterMovement | priceInEuros }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).interestEarn.amount | priceInEuros }}</td>
+                    {% elseif wallet.currency is same as "$" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).walletAmountAfterMovement | priceInDollar }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).interestEarn.amount | priceInDollar }}</td>
+                    {% elseif wallet.currency is same as "CHF" %}
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).walletAmountAfterMovement | priceInFranc }}</td>
+                        <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).interestEarn.amount | priceInFranc }}</td>
+                    {% endif %}
+                    <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).interestRates }}%</td>
+                {% else %}
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
+                    <td class="text-sm font-weight-normal">-</td>
                 {% endif %}
-                <td class="text-sm font-weight-normal">{{ reportingMovementRepository.findMovementPerMonthAndYearAndReporting(reporting,'December',year).interestRates }}%</td>
-            {% else %}
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-                <td class="text-sm font-weight-normal">-</td>
-            {% endif %}
-        </tr>
-        <tr>
+            </tr>
+            <tr>
 
-        </tr>
+            </tr>
 
-        </tbody>
+            </tbody>
+        {% endif %}
+
     </table>
 </div>

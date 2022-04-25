@@ -109,7 +109,7 @@
                             {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
                                 <h6 class="text-uppercase text-body text-xs font-weight-bolder">Disable Account</h6>
                                 <ul class="list-group">
-                                    <a class="btn btn-danger" href="{{ path('admin_investor_edit_status_ghost',{'id': investor.id}) }}">Activate Mode Fantom</a>
+                                    <a class="btn btn-dark" href="{{ path('admin_investor_edit_status_ghost',{'id': investor.id}) }}">Activate Mode Fantom</a>
                                 </ul>
                             {% endif %}
 
@@ -131,6 +131,21 @@
                         <p class="text-sm">
                             When you activate the mode fantom, the investor will not be able to connect to the Capital Investment Platform anymore.
                         </p>
+                        {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                            <hr/>
+                            <h6 class="text-uppercase text-body text-xs font-weight-bolder"></h6>
+                            <ul class="list-group">
+                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-form-delete">
+                                    DELETE
+                                </a>
+                            </ul>
+                            <p class="text-sm">
+                                <strong class="text-dark">Help:</strong> What will happen ?
+                            </p>
+                            <p class="text-sm">
+                                When you delete the account, the investor profile will be definitively removed.
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -210,6 +225,42 @@
         if (document.querySelector('.datepicker')) {
             flatpickr('.datepicker', {
                 mode: "single"
+            });
+        }
+    </script>
+
+    <div class="modal fade" id="modal-form-delete" tabindex="-1" role="dialog" aria-labelledby="modal-form-delete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="card card-plain">
+                        <div class="card-header pb-0 text-left">
+                            <h3 class="font-weight-bolder text-info text-gradient">DELETE ACCOUNT</h3>
+                            <p class="mb-0">Are you sure ?</p>
+                        </div>
+
+                        <div class="card-body">
+                            <a class="btn btn-danger" href="{{ path('admin_investor_delete_account',{'id': investor.id }) }}">
+                                YES , DELETE THE ACCOUNT
+                            </a>
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const buttonEditDeposit = document.getElementById('buttonEditDeposit');
+        const buttonSpinnerDeposit = document.getElementById('buttonSpinnerDeposit');
+
+        if(buttonEditDeposit)
+        {
+            buttonEditDeposit.addEventListener('click', () => {
+                buttonEditDeposit.style.display = 'none';
+                buttonSpinnerDeposit.style.display = 'initial';
             });
         }
     </script>

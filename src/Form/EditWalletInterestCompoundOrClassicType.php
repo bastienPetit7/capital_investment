@@ -26,7 +26,8 @@ class EditWalletInterestCompoundOrClassicType extends AbstractType
                     new NotBlank([
                         'message' => 'Interest rate type is required.',
                     ])
-                ]
+                ],
+                'data' => $options['data']['interestType']
             ])
 
         ;
