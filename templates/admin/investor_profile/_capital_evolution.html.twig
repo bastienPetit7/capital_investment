@@ -2,8 +2,12 @@
     <div class="card h-100">
         <div class="card-header pb-0 p-3">
             <div class="row">
-                <div class="col-md-8 d-flex align-items-center">
+                <div class="col-md-12 d-flex align-items-center justify-content-between">
                     <h6 class="mb-0">Year {{ year }} : capital evolution</h6>
+                    {{ form_start(formYear,{'attr': {'class': 'row row-cols-lg-auto g-3 align-items-center','style': 'position: relative;top: 8px;'}}) }}
+                    {{ form_widget(formYear) }}
+                    <button type="submit" class="btn btn-info">Search</button>
+                    {{ form_end(formYear) }}
                 </div>
 
             </div>

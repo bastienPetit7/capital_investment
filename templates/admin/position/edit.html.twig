@@ -35,6 +35,9 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">{{ form_row(form.action)}}</div>
+                            <div class="col-md-6">{{ form_row(form.type)}}</div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 {{ form_row(form.publishedAt,{'attr': { 'class' : "datepicker",'onfocus': 'focused(this)','onfocusout' : 'defocused(this)' } }) }}
                             </div>

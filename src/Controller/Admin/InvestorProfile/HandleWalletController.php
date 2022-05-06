@@ -5,6 +5,7 @@ namespace App\Controller\Admin\InvestorProfile;
 use App\Entity\Reporting;
 use App\Entity\Wallet;
 use App\Form\BonusAmountType;
+use App\Form\ChoiceYearType;
 use App\Form\DepositAmountType;
 use App\Form\EditWalletCurrencyType;
 use App\Form\EditWalletInterestCompoundOrClassicType;
@@ -106,6 +107,15 @@ class HandleWalletController extends AbstractController
         $chartLine = null;
         $chartBar = null;
         $year = date('Y');
+
+        $formYear = $this->createForm(ChoiceYearType::class,['year' => $year]);
+        $formYear->handleRequest($request);
+
+        if($formYear->isSubmitted() && $formYear->isValid())
+        {
+            $year = $formYear->get('year')->getData();
+        }
+
         //HANDLE MOVEMENTS
         if($reporting->getWallet())
         {
@@ -137,7 +147,8 @@ class HandleWalletController extends AbstractController
             'reporting' => $reporting,
             'year' => $year,
             'initialAmount' => $initialAmount,
-            'formBonusAmount' => $formBonusAmount->createView()
+            'formBonusAmount' => $formBonusAmount->createView(),
+            'formYear' => $formYear->createView()
         ]);
     }
 

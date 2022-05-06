@@ -41,6 +41,11 @@ class Position
     private $action;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
+    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $tp1;
@@ -279,6 +284,19 @@ class Position
     public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
+        return $this;
+    }
+
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+
+    public function setType($type)
+    {
+        $this->type = $type;
         return $this;
     }
 

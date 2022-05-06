@@ -70,6 +70,17 @@ class PositionsType extends AbstractType
                 ]
 
             ])
+            ->add('type', ChoiceType::class, [
+                'required' => false,
+                'label' => "Type",
+                'placeholder' => '-- Choose a type --',
+                'choices' => [
+                    'CMP' => 'CMP',
+                    'LIMIT' => 'LIMIT',
+                    'STOP' => 'STOP',
+                ]
+
+            ])
             ->add('name', TextType::class, [
                 'label' => "Position's name", 
 

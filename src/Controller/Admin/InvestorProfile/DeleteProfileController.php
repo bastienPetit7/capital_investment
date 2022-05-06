@@ -33,6 +33,8 @@ class DeleteProfileController extends AbstractController
 
         $em->remove($user);
 
+        $em->flush();
+
         $this->addFlash("success","The account has been deleted.");
 
         return $this->redirectToRoute("admin_investor_profile_list");

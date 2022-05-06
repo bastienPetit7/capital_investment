@@ -110,19 +110,21 @@
 
                 {% include "admin/investor_profile/_capital_evolution.html.twig" %}
 
+                {% include "admin/investor_profile/modal/_modal_form_bonus.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_status.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_interest_rates.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_interest_type.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_deposit.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_withdrawal.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_earning.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_total_interest_recovery_found.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_total_actif.html.twig" %}
+                {% include "admin/investor_profile/modal/_modal_form_currency.html.twig" %}
+
             {% endif %}
         </div>
     </div>
-    {% include "admin/investor_profile/modal/_modal_form_bonus.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_status.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_interest_rates.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_interest_type.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_deposit.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_withdrawal.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_earning.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_total_interest_recovery_found.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_total_actif.html.twig" %}
-    {% include "admin/investor_profile/modal/_modal_form_currency.html.twig" %}
+
 
     <script>
         //Code javascript pour ouvrir automatiquement une modal qui contient des erreurs de validation de formulaire

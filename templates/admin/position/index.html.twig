@@ -22,22 +22,38 @@
                                                <strong>{{ position.name }} </strong>
                                                 <br/>
                                                 {% if position.activeRight  %}
-                                                    {{ position.action }} {{ position.activeLeft }} / {{ position.activeRight }} at CMP - {{ position.price }}
+                                                    <span style="font-size: 22px;">{{ position.action }}</span>
+                                                    <br/>
+                                                    <span style="font-size: 20px;"> {{ position.activeLeft }} / {{ position.activeRight }} at {{ position.type  }} - {{ position.price }}</span>
                                                 {% else %}
-                                                    {{ position.action }} {{ position.activeLeft }}  at CMP - {{ position.price }}
+                                                    <span style="font-size: 22px;">{{ position.action }}</span>
+                                                    <br/>
+                                                    <span style="font-size: 20px;">{{ position.activeLeft }}  at {{ position.type  }} - {{ position.price }}</span>
                                                 {% endif %}
 
                                             </div>
                                             <div class="card-body">
-                                                <p>✅ TP1: {{ position.tp1 }}</p>
-                                                <p>✅ TP2: {{ position.tp2 }}</p>
-                                                <p>✅ TP3: {{ position.tp3 }}</p>
-                                                <p>✅ TP4: {{ position.tp4 }}</p>
+                                                {% if position.tp1 != null %}
+                                                    <p>✅ TP1: {{ position.tp1 }}</p>
+                                                {% endif %}
+                                                {% if position.tp2 != null %}
+                                                    <p>✅ TP2: {{ position.tp2 }}</p>
+                                                {% endif %}
+                                                {% if position.tp3 != null %}
+                                                    <p>✅ TP3: {{ position.tp3 }}</p>
+                                                {% endif %}
+                                                {% if position.tp4 != null %}
+                                                    <p>✅ TP4: {{ position.tp4 }}</p>
+                                                {% endif %}
                                                 <p>❌  SL: {{ position.stopLoss }}</p>
                                             </div>
                                             <div class="card-footer">
                                                 <p>Published at {{ position.publishedAt | date('d-M-Y') }}</p>
                                                 <a class="btn btn-info" href="{{ path('position_edit',{'id': position.id}) }}"><i class="fas fa-pen"></i> Modifier</a>
+                                                <form method="post" action="{{ path('position_delete', {'id': position.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ position.id) }}">
+                                                    <button class="btn btn-danger">Delete</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

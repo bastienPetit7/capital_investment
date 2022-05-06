@@ -18,9 +18,9 @@ use Symfony\Component\Validator\Constraints\Choice;
 class InvestorHomeController extends AbstractController
 {
     /**
-     * @Route("/investor/home/{idWallet}", name="investor_home")
+     * @Route("/investor/home/{idWallet?null}", name="investor_home")
      */
-    public function index($idWallet = null,CapitalInvestmentAssetRepository $capitalInvestmentAssetRepository,
+    public function index($idWallet,CapitalInvestmentAssetRepository $capitalInvestmentAssetRepository,
                           MultipleChartGenerator $multipleChartGenerator,
                           ReportingMovementRepository $reportingMovementRepository,
                           ChartGenerator $chartGenerator,WalletRepository $walletRepository,Request $request): Response
@@ -36,11 +36,11 @@ class InvestorHomeController extends AbstractController
 
         $wallet = null;
 
-        if(count($wallets) > 0 && $idWallet === null)
+        if(count($wallets) > 0 && $idWallet === 'null')
         {
             $wallet = $wallets[0];
         }
-        elseif(count($wallets) > 0 && $idWallet !== null)
+        elseif(count($wallets) > 0 && $idWallet !== 'null')
         {
             $wallet = $walletRepository->findOneBy([
                'id' => $idWallet,
