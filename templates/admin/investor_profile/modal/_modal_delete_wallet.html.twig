@@ -1,0 +1,23 @@
+
+<div class="modal fade" id="modal-form-delete" tabindex="-1" role="dialog" aria-labelledby="modal-form-delete" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-left">
+                        <h3 class="font-weight-bolder text-info text-gradient">DELETE WALLET</h3>
+                        <p class="mb-0">Are you sure ?</p>
+                    </div>
+
+                    <div class="card-body">
+                        <a class="btn btn-danger" href="{{ path('admin_investor_profile_delete_wallet',{'idWallet': wallet.id }) }}">
+                            YES , DELETE THE WALLET
+                        </a>
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -198,4 +198,27 @@ class HandleWalletController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * @Route("/admin/investorprofile/deletewallet/{idWallet}", name="admin_investor_profile_delete_wallet")
+     */
+    public function deleteWallet($idWallet,WalletRepository $walletRepository, EntityManagerInterface $em)
+    {
+        $wallet = $walletRepository->find($idWallet);
+
+        if(!$wallet)
+        {
+            $this->addFlash("danger","This investor profile cannot be found");
+            return $this->redirectToRoute("admin_investor_profile_list");
+        }
+
+        $em->remove($wallet);
+
+        $em->flush();
+
+        $this->addFlash("success","The wallet has been deleted.");
+
+        return $this->redirectToRoute("admin_investor_profile_list");
+    }
 }
