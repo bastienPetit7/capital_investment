@@ -43,6 +43,9 @@ class SimulateEarningType extends AbstractType
                 'label' => "Year",
                 'placeholder' => 'Year',
                 'choices' => [
+                    '2018' => '2018',
+                    '2019' => '2019',
+                    '2020' => '2020',
                     '2021' => '2021',
                     '2022' => '2022'
                 ],

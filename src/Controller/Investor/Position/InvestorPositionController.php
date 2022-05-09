@@ -12,27 +12,53 @@ class InvestorPositionController extends AbstractController
 {
 
 
-    #[Route('investor/position', name: 'investor_position', methods: ['GET'])]
+    #[Route('investor/position/all', name: 'investor_position', methods: ['GET'])]
+    public function positionAll(PositionRepository $positionRepository): Response
+    {
+
+        $positions = $positionRepository->findBy([],[
+            'publishedAt' => 'DESC'
+        ]);
+
+        return $this->render('dashboard/investor/position/live_trading.html.twig', [
+            'positions' => $positions,
+            'date' => 'All'
+        ]);
+    }
+
+    #[Route('investor/position/week', name: 'investor_position_week', methods: ['GET'])]
+    public function positionOfTheWeek(PositionRepository $positionRepository): Response
+    {
+
+        $date = new DateTime();
+
+        $positions = $positionRepository->findBy([
+            'weekOfCreation' => $date->format("W")
+        ],[
+            'publishedAt' => 'DESC'
+        ]);
+
+        return $this->render('dashboard/investor/position/live_trading.html.twig', [
+            'positions' => $positions,
+            'date' => 'Week ' . $date->format("W")
+        ]);
+    }
+
+    #[Route('investor/position/day', name: 'investor_position_day', methods: ['GET'])]
     public function positionOfTheDay(PositionRepository $positionRepository): Response
     {
 
-        $positions = $positionRepository->findAll();
+        $date = new DateTime();
 
-        $positionsOfTheDay = []; 
-        $now = new DateTime();
-        $today = $now->format('Y-M-d');
-
-        foreach($positions as $position){
-
-            if($position->getCreatedAt()->format('Y-M-d') === $today){
-
-                $positionsOfTheDay[] = $position; 
-
-            }
-        }
+        $positions = $positionRepository->findBy([
+            'publishedAt' => $date
+        ],[
+            'publishedAt' => 'DESC'
+        ]);
 
         return $this->render('dashboard/investor/position/live_trading.html.twig', [
-            'positions' => $positionsOfTheDay
+            'positions' => $positions,
+            'date' => $date->format('d-M-Y')
         ]);
     }
 

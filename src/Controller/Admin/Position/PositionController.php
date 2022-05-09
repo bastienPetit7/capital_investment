@@ -35,9 +35,10 @@ class PositionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $date = new DateTime(); 
-            $weekOfCreation = $date->format("W"); 
 
+            $date = $position->getPublishedAt()->format('Y-m-d');
+            $good_format=strtotime ($date);
+            $weekOfCreation = date('W',$good_format);
             $position->setWeekOfCreation($weekOfCreation); 
             $entityManager->persist($position);
             $entityManager->flush();

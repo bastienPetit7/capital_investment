@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass=PositionRepository::class)
- * @ORM\HasLifecycleCallbacks
  */
 class Position
 {
@@ -70,13 +69,9 @@ class Position
      */
     private $stopLoss;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $publishedAt;
 
@@ -95,16 +90,8 @@ class Position
      */
     private $weekOfCreation;
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function prePersist()
-    {
-        if(empty($this->createdAt))
-        {
-            $this->createdAt = new DateTime();
-        }
-    }
+
+
 
     public function getId(): ?int
     {
@@ -183,18 +170,6 @@ class Position
     public function setStopLoss(?float $stopLoss): self
     {
         $this->stopLoss = $stopLoss;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }
