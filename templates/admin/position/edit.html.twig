@@ -41,6 +41,7 @@
                             <div class="col-md-6">
                                 {{ form_row(form.publishedAt,{'attr': { 'class' : "datepicker",'onfocus': 'focused(this)','onfocusout' : 'defocused(this)' } }) }}
                             </div>
+                            <div class="col-md-6">{{ form_row(form.positionState)}}</div>
                         </div>
 
                         <button type="submit" class="btn btn-info">Save</button>

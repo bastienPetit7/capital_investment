@@ -127,6 +127,19 @@ class PositionsType extends AbstractType
                 'label' => "Price",
                 'required'=> false
             ] )
+            ->add('positionState', ChoiceType::class, [
+                'required' => false,
+                'label' => "Final State",
+                'placeholder' => '-- Choose a state --',
+                'choices' => [
+                    'tp1' => 'tp1',
+                    'tp2' => 'tp2',
+                    'tp3' => 'tp3',
+                    'tp4' => 'tp4',
+                    'stopLoss' => 'stopLoss',
+                ]
+
+            ])
 
         ;
     }

@@ -6,6 +6,7 @@
 parameters:
     app_images_directory: '%kernel.project_dir%/public/uploads/images'
     app_files_directory: '%kernel.project_dir%/public/uploads/files'
+    app_temp_directory: '%kernel.project_dir%/public/tempfile'
 
 services:
     # default configuration for services in *this* file

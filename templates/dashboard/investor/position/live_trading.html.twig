@@ -6,39 +6,42 @@
     <div class="container-fluid py-4">
 
         <h1>Positions : {{ date }}</h1>
+
+        <a class="btn btn-info" href="{{ path(pathRoute,{'export': 'csv'}) }}"> <i class="fas fa-cloud-download-alt"></i> CSV</a>
+        <a class="btn btn-info" href="{{ path('investor_position_pdf_all') }}"> <i class="fas fa-cloud-download-alt"></i> PDF</a>
             <div class="row mt-4">
 
-                {% for position in positions %}
-
-                    <div class="col-sm-12 col-md-6 col-lg-4 pt-2">
-                        <div class="card" style="border: 1px solid rgba(37, 106, 154, 1);">
-                            <div class="card-header">
-                                <strong>{{ position.name }} </strong>
-                                <br/>
-                                {% if position.activeRight  %}
-                                    {{ position.action }} {{ position.activeLeft }} / {{ position.activeRight }} at CMP - {{ position.price }}
-                                {% else %}
-                                    {{ position.action }} {{ position.activeLeft }}  at CMP - {{ position.price }}
-                                {% endif %}
-
-                            </div>
-                            <div class="card-body">
-                                <p>✅ TP1: {{ position.tp1 }}</p>
-                                <p>✅ TP2: {{ position.tp2 }}</p>
-                                <p>✅ TP3: {{ position.tp3 }}</p>
-                                <p>✅ TP4: {{ position.tp4 }}</p>
-                                <p>❌  SL: {{ position.stopLoss }}</p>
-                            </div>
-                            <div class="card-footer">
-                                <p>Published at {{ position.publishedAt | date('d-M-Y') }}</p>
-                            </div>
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            {% include "admin/position/_table.html.twig" %}
                         </div>
                     </div>
-
-                {% endfor %}
+                </div>
             </div>
 
     </div>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" />
+
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js">
+    </script>
+
+
+
+    <script>
+        $(document).ready( function () {
+            $('#datatableCustom').DataTable({
+                order: [
+                    [0, 'desc'],
+                ],
+            });
+        } );
+    </script>
 
 {% endblock %}

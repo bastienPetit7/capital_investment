@@ -69,7 +69,6 @@ class Position
      */
     private $stopLoss;
 
-
     /**
      * @ORM\Column(type="date")
      */
@@ -90,8 +89,10 @@ class Position
      */
     private $weekOfCreation;
 
-
-
+    /**
+     * @ORM\Column(type="string", length=255, nullable="true")
+     */
+    private $positionState = null;
 
     public function getId(): ?int
     {
@@ -157,10 +158,6 @@ class Position
 
         return $this;
     }
-
-
-
-
 
     public function getStopLoss(): ?float
     {
@@ -276,5 +273,16 @@ class Position
     }
 
 
+    public function getPositionState()
+    {
+        return $this->positionState;
+    }
+
+
+    public function setPositionState($positionState)
+    {
+        $this->positionState = $positionState;
+        return $this;
+    }
 
 }

@@ -1,0 +1,37 @@
+@font-face
+{
+  font-family: 'ITCKabelStd-Bold';
+  src: url('../../fonts/ITCKabel/ITCKabelStd-Bold.otf') format('truetype');
+}
+
+@font-face
+{
+  font-family: 'ITCKabelStd-Book';
+  src: url('../../fonts/ITCKabel/ITCKabelStd-Book.otf') format('truetype');
+}
+
+
+@font-face
+{
+  font-family: 'ITCKabelStd-Demi';
+  src: url('../../fonts/ITCKabel/ITCKabelStd-Demi.otf') format('truetype');
+}
+
+@font-face
+{
+  font-family: 'ITCKabelStd-Medium';
+  src: url('../../fonts/ITCKabel/ITCKabelStd-Medium.otf') format('truetype');
+}
+
+@font-face
+{
+  font-family: 'ITCKabelStd-Ultra';
+  src: url('../../fonts/ITCKabel/ITCKabelStd-Ultra.otf') format('truetype');
+}
+h1 , h2, h3, h4, h5, h6, li  {
+  font-family: ITCKabelStd-Bold, serif !important;
+}
+
+body , p, button, label, input,span,a {
+  font-family: ITCKabelStd-Medium, serif !important;
+}

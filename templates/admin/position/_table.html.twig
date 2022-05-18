@@ -1,0 +1,84 @@
+<div class="table-responsive">
+    <table class="table align-items-center mb-0 pt-4" id="datatableCustom">
+        <thead>
+        <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Left</th>
+            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Right</th>
+            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
+            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">TP</th>
+            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">RESULT</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for position in positions %}
+            <tr>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}" >
+                        <p class="text-sm text-secondary mb-0">{{ position.publishedAt | date('Y-m-d') }}</p>
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        <p class="text-sm text-secondary mb-0">{{ position.name }}</p>
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        <p class="text-sm text-secondary mb-0">{{ position.action }}</p>
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        <p class="text-sm text-secondary mb-0">{{ position.activeLeft }}</p>
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        <p class="text-sm text-secondary mb-0">{{ position.activeRight }}</p>
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        <p class="text-sm text-secondary mb-0">{{ position.type }}</p>
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        <p class="text-sm text-secondary mb-0">{{ position.price }}</p>
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        <p class="text-sm text-secondary mb-0">✅ TP1: {{ position.tp1 }}</p>
+                        <p class="text-sm text-secondary mb-0">✅ TP2: {{ position.tp2 }}</p>
+                        <p class="text-sm text-secondary mb-0">✅ TP3: {{ position.tp3 }}</p>
+                        <p class="text-sm text-secondary mb-0">✅ TP4: {{ position.tp4 }}</p>
+                        <p class="text-sm text-secondary mb-0">❌ SL: {{ position.stopLoss }}</p>
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        {% if position.positionState == 'tp1' %}
+                            <p class="text-sm text-secondary mb-0"><strong>✅ TP1 HIT {{ position.tp1 }}</strong></p>
+                        {% elseif position.positionState == 'tp2' %}
+                            <p class="text-sm text-secondary mb-0"><strong>✅ TP2 HIT {{ position.tp2 }}</strong></p>
+                        {% elseif position.positionState == 'tp3' %}
+                            <p class="text-sm text-secondary mb-0"><strong>✅ TP3 HIT {{ position.tp3 }}</strong></p>
+                        {% elseif position.positionState == 'tp4' %}
+                            <p class="text-sm text-secondary mb-0"><strong>✅ TP4 HIT {{ position.tp4 }}</strong></p>
+                        {% elseif position.positionState == 'stopLoss' %}
+                            <p class="text-sm text-secondary mb-0"><strong>❌ SL HIT {{ position.stopLoss }}</strong></p>
+                        {% else %}
+                            <p class="text-sm text-secondary mb-0"><strong>PENDING</strong></p>
+                        {% endif %}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -18,7 +18,7 @@ class PositionController extends AbstractController
     #[Route('/', name: 'position_index', methods: ['GET'])]
     public function index(PositionRepository $positionRepository): Response
     {
-        $positions = $positionRepository->findBy([], ['createdAt' => 'desc']);
+        $positions = $positionRepository->findBy([], ['publishedAt' => 'desc']);
         
         return $this->render('admin/position/index.html.twig', [
             'positions' => $positions
