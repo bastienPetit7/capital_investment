@@ -15,7 +15,6 @@
                     <div class="card-body">
                         {{ form_start(form) }}
 
-                        {{ form_row(form.name) }}
 
                         <div class="row">
                             <div class="col-md-6">{{ form_row(form.activeLeft)}}</div>
@@ -42,6 +41,9 @@
                                 {{ form_row(form.publishedAt,{'attr': { 'class' : "datepicker",'onfocus': 'focused(this)','onfocusout' : 'defocused(this)' } }) }}
                             </div>
                             <div class="col-md-6">{{ form_row(form.positionState)}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">{{ form_row(form.pips)}}</div>
                         </div>
 
                         <button type="submit" class="btn btn-info">Save</button>

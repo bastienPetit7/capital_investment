@@ -8,11 +8,22 @@
             <div class="col-12 mb-4">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5>Position</h5>
+                        <h5>Positions</h5>
                         <a class="btn btn-dark" href="{{ path('position_new') }}"><i class="fas fa-plus"></i> Add</a>
                     </div>
                     <div class="card-body">
                         {% include "admin/position/_table.html.twig" %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <div class="card bg-gradient-info">
+                    <div class="card-header border border-bottom bg-gradient-info">
+                        <h5 class="text-white">Informations</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-white">Nombre de positions : {{ nombreDePositions }}</p>
+                        <p class="text-white">Nombre de Pips : {{ totalPips }}</p>
                     </div>
                 </div>
             </div>

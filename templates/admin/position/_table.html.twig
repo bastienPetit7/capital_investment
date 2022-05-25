@@ -3,7 +3,6 @@
         <thead>
         <tr>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
-            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
             <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Left</th>
             <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Right</th>
@@ -11,6 +10,7 @@
             <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
             <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">TP</th>
             <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">RESULT</th>
+            <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pips</th>
         </tr>
         </thead>
         <tbody>
@@ -19,11 +19,6 @@
                 <td>
                     <a  href="{{ path('position_edit',{'id':position.id}) }}" >
                         <p class="text-sm text-secondary mb-0">{{ position.publishedAt | date('Y-m-d') }}</p>
-                    </a>
-                </td>
-                <td>
-                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
-                        <p class="text-sm text-secondary mb-0">{{ position.name }}</p>
                     </a>
                 </td>
                 <td>
@@ -75,6 +70,11 @@
                         {% else %}
                             <p class="text-sm text-secondary mb-0"><strong>PENDING</strong></p>
                         {% endif %}
+                    </a>
+                </td>
+                <td>
+                    <a  href="{{ path('position_edit',{'id':position.id}) }}">
+                        <p class="text-sm text-secondary mb-0">{{ position.pips }}</p>
                     </a>
                 </td>
             </tr>

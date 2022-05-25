@@ -6,6 +6,7 @@ use App\Entity\Position;
 use App\Entity\PositionType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\PositionType as EntityPositionType;
@@ -29,6 +30,12 @@ class PositionsType extends AbstractType
                     '📈 BUY' => '📈 BUY',
                 ]
             ])
+
+            ->add('pips', IntegerType::class, [
+                'label' => "Pips",
+                'required' => false,
+            ])
+
             ->add('activeLeft', ChoiceType::class, [
                 'label' => "Active Left",
                 'placeholder' => '-- Choose active left --',
@@ -79,10 +86,6 @@ class PositionsType extends AbstractType
                     'LIMIT' => 'LIMIT',
                     'STOP' => 'STOP',
                 ]
-
-            ])
-            ->add('name', TextType::class, [
-                'label' => "Position's name", 
 
             ])
             ->add('tp1', NumberType::class, [

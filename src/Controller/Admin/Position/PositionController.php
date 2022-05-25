@@ -19,9 +19,28 @@ class PositionController extends AbstractController
     public function index(PositionRepository $positionRepository): Response
     {
         $positions = $positionRepository->findBy([], ['publishedAt' => 'desc']);
+
+        $totalPips = 0;
+        $nombreDePositions = 0;
+
+        foreach ($positions as $position)
+        {
+            if($position->getPips())
+            {
+                $totalPips += $position->getPips();
+            }
+
+            if($position->getPositionState())
+            {
+                $nombreDePositions += 1;
+            }
+        }
+
         
         return $this->render('admin/position/index.html.twig', [
-            'positions' => $positions
+            'positions' => $positions,
+            'totalPips' => $totalPips,
+            'nombreDePositions' => $nombreDePositions
         ]);
     }
 
@@ -52,14 +71,6 @@ class PositionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'position_show', methods: ['GET'])]
-    public function show(Position $position): Response
-    {
-        return $this->render('admin/position/show.html.twig', [
-            'position' => $position,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'position_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request, 
@@ -79,9 +90,9 @@ class PositionController extends AbstractController
             return $this->redirectToRoute('position_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/position/edit.html.twig', [
+        return $this->render('admin/position/edit.html.twig', [
             'position' => $position,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 

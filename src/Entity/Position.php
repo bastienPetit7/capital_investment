@@ -22,11 +22,6 @@ class Position
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $activeLeft;
 
     /**
@@ -94,22 +89,16 @@ class Position
      */
     private $positionState = null;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $pips;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getTp1(): ?float
     {
@@ -282,6 +271,18 @@ class Position
     public function setPositionState($positionState)
     {
         $this->positionState = $positionState;
+        return $this;
+    }
+
+    public function getPips(): ?int
+    {
+        return $this->pips;
+    }
+
+    public function setPips(?int $pips): self
+    {
+        $this->pips = $pips;
+
         return $this;
     }
 
