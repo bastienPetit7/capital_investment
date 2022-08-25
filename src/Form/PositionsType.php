@@ -88,24 +88,24 @@ class PositionsType extends AbstractType
                 ]
 
             ])
-            ->add('tp1', NumberType::class, [
+            ->add('tp1', TextType::class, [
                 'label' => "tp1",
-                'required' => false
+                'required' => false,
             ])
-            ->add('tp2', NumberType::class, [
+            ->add('tp2', TextType::class, [
                 'label' => "tp2",
                 'required' => false
             ])
-            ->add('tp3',  NumberType::class, [
+            ->add('tp3',  TextType::class, [
                 'label' => "tp3",
                 'required' => false
             ])
-            ->add('tp4',  NumberType::class, [
+            ->add('tp4',  TextType::class, [
                 'label' => "tp4",
                 'required' => false
             ])
 
-            ->add('stopLoss',  NumberType::class, [
+            ->add('stopLoss',  TextType::class, [
                 'label' => 'stopLoss',
             ])
             // ->add('createdAt', DateType::class, [
@@ -126,7 +126,7 @@ class PositionsType extends AbstractType
                     ])
                 ],
             ])
-            ->add('price', NumberType::class, [
+            ->add('price', TextType::class, [
                 'label' => "Price",
                 'required'=> false
             ] )
@@ -140,6 +140,7 @@ class PositionsType extends AbstractType
                     'tp3' => 'tp3',
                     'tp4' => 'tp4',
                     'stopLoss' => 'stopLoss',
+                    'entryPoint' => 'entryPoint'
                 ]
 
             ])

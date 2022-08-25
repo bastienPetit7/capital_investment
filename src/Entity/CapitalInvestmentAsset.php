@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CapitalInvestmentAssetRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CapitalInvestmentAssetRepository::class)
@@ -19,11 +20,13 @@ class CapitalInvestmentAsset
 
     /**
      * @ORM\Column(type="bigint", nullable=true)
+     * @Groups("user:read")
      */
     private $totalAsset;
 
     /**
      * @ORM\Column(type="bigint", nullable=true)
+     * @Groups("user:read")
      */
     private $recoveryFoundTotal;
 

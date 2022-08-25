@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\InvestorProfile;
 
+use App\Repository\ReportingMovementRepository;
 use App\Repository\WalletRepository;
 use App\Services\ReportingService\BonusMovementPersister;
 use App\Services\ReportingService\DepositMovementPersister;
@@ -216,7 +217,8 @@ class HandleActionEditWalletController extends AbstractController
      * @Route("/admin/investorprofile/handlewallet/editsimulateearning/{id}", name="admin_investor_profile_handle_wallet_edit_simulate_earning")
      */
     public function editSimulateEarning($id,Request $request,WalletRepository $walletRepository,
-                                   EntityManagerInterface $em,EarningMovementPersister $earningMovementPersister)
+                                   EntityManagerInterface $em,EarningMovementPersister $earningMovementPersister,
+                                        ReportingMovementRepository $reportingMovementRepository)
     {
         $wallet = $walletRepository->find($id);
 
@@ -231,6 +233,22 @@ class HandleActionEditWalletController extends AbstractController
         $month = $data['month'];
 
         $year = $data['year'];
+
+        $reporting = $wallet->getReporting();
+
+        if(!$reporting)
+        {
+            $this->addFlash("danger","Error : reporting entity is missing.");
+            return $this->redirectToRoute("admin_investor_profile_handle_wallet",['id'=>$wallet->getInvestor()->getId(),'idWallet' => $id]);
+        }
+
+        $isMovementAlreadyExistForThisMonth = $reportingMovementRepository->findMovementPerMonthAndYearAndReporting($reporting,$month,$year);
+
+        if($isMovementAlreadyExistForThisMonth)
+        {
+            $this->addFlash("danger","Error : the earning interest has been already created for this month and year.");
+            return $this->redirectToRoute("admin_investor_profile_handle_wallet",['id'=>$wallet->getInvestor()->getId(),'idWallet' => $id]);
+        }
 
         if($month)
         {

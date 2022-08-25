@@ -25,7 +25,6 @@
                                 <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Left</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Right</th>
@@ -33,6 +32,7 @@
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">TP</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">RESULT</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pips</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -40,9 +40,6 @@
                                     <tr>
                                         <td>
                                             <p class="text-sm text-secondary mb-0">{{ position.publishedAt | date('Y-m-d') }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-sm text-secondary mb-0">{{ position.name }}</p>
                                         </td>
                                         <td>
                                             <p class="text-sm text-secondary mb-0">{{ position.action }}</p>
@@ -82,6 +79,9 @@
                                                     <p class="text-sm text-secondary mb-0"><strong>PENDING</strong></p>
                                                 {% endif %}
 
+                                        </td>
+                                        <td>
+                                            <p class="text-sm text-secondary mb-0">{{ position.pips }}</p>
                                         </td>
                                     </tr>
                                 {% endfor %}

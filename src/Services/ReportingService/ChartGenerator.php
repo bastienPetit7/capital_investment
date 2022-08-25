@@ -127,14 +127,11 @@ class ChartGenerator
                     $valueInEuro = $resultMonthly->getWalletAmountBeforeMovement() / 100;
                     $data[] = $valueInEuro;
                 }
-
             }
             else
             {
                 $data[] = 0;
             }
-
-
         }
 
         return $data;

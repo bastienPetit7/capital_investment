@@ -6,7 +6,6 @@ use App\Entity\WidgetCode;
 use App\Form\WidgetCodeType;
 use App\Repository\WidgetCodeRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,17 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class WidgetCodeController extends AbstractController
 {
     #[Route('/admin/widget/code/list', name: 'admin_widget_code_list', methods: ['GET'])]
-    public function listCode(WidgetCodeRepository $widgetCodeRepository,PaginatorInterface $paginator, Request $request)
+    public function listCode(WidgetCodeRepository $widgetCodeRepository)
     {
-
-        $widgetCodes = $paginator->paginate(
-            $widgetCodeRepository->findAll(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
-        );
-
         return $this->render("admin/wallet_widget/widget_code/list.html.twig",[
-            "widgetCodes" => $widgetCodes
+            "widgetCodes" =>  $widgetCodeRepository->findAll()
         ]);
     }
 

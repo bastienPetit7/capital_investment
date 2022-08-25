@@ -73,7 +73,6 @@ class MultipleChartGenerator
 
             }
         }
-
         return $data;
     }
 
@@ -81,7 +80,6 @@ class MultipleChartGenerator
     {
         $depositInitial = $wallet->getOriginInitialAmount();
         $dateDepositInitial = $wallet->getInvestor()->getCreatedAt();
-
 
         $labels = $this->getDateForChartLineEvolutionCapital($movements,$dateDepositInitial);
         $data = $this->getValueForChartLineEvolutionCapital($movements,$depositInitial);

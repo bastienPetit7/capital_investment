@@ -53,13 +53,6 @@ class InvestorHomeController extends AbstractController
             }
         }
 
-        $returnRate = 0;
-
-        if($wallet->getInitialAmount() > 0)
-        {
-            $returnRate = ceil(($wallet->getTotalInterest() * 100) / $wallet->getInitialAmount());
-        }
-
         $reporting = $wallet->getReporting();
 
         //HANDLE MOVEMENTS
@@ -99,7 +92,7 @@ class InvestorHomeController extends AbstractController
             'wallet' => $wallet,
             'wallets' => $wallets,
             'investor' => $investor,
-            'returnRate' => $returnRate,
+            'returnRate' => $wallet->getReturnRate(),
             'chartLineEvolutionCapital' => $chartLineEvolutionCapital,
             'chartLineEvolutionEarningInterest' => $chartLineEvolutionEarningInterest,
             'chartLineEvolutionRateInterest' => $chartLineEvolutionRateInterest,

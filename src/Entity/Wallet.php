@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Dictionary\Movement;
 use App\Repository\WalletRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=WalletRepository::class)
@@ -15,61 +16,73 @@ class Wallet
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("user:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer",nullable="true")
+     * @Groups("user:read")
      */
     private $originInitialAmount;
 
     /**
      * @ORM\Column(type="integer",nullable="true")
+     * @Groups("user:read")
      */
     private $initialAmount;
 
     /**
      * @ORM\Column(type="integer",nullable="true")
+     * @Groups("user:read")
      */
     private $actualAmount;
 
     /**
      * @ORM\OneToOne(targetEntity=Reporting::class, mappedBy="wallet", cascade={"persist", "remove"})
+     * @Groups("user:read")
      */
     private $reporting;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user:read")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("user:read")
      */
     private $status;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups("user:read")
      */
     private $interestRates;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("user:read")
      */
     private $interestType;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("user:read")
      */
     private $currency;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("user:read")
      */
     private $interestRecoveryFound;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups("user:read")
      */
     private $totalActif;
 
@@ -78,6 +91,26 @@ class Wallet
      * @ORM\JoinColumn(nullable=false)
      */
     private $investor;
+
+    /**
+     * @Groups("user:read")
+     */
+    private $locale;
+
+    /**
+     * @Groups("user:read")
+     */
+    private $currencyCode;
+
+    /**
+     * @Groups("user:read")
+     */
+    private $returnRate;
+
+    /**
+     * @Groups("user:read")
+     */
+    private $totalInterest;
 
     public function getId(): ?int
     {
@@ -253,6 +286,38 @@ class Wallet
         return $this;
     }
 
+    public function getLocale()
+    {
+        if($this->currency === '$')
+        {
+            return 'en-US';
+        }
+        elseif($this->currency === '€')
+        {
+            return 'fr-FR';
+        }
+    }
 
+    public function getCurrencyCode()
+    {
+        if($this->currency === '$')
+        {
+            return 'USD';
+        }
+        elseif($this->currency === '€')
+        {
+            return 'EUR';
+        }
+    }
+
+    public function getReturnRate()
+    {
+        if($this->getInitialAmount() > 0)
+        {
+            return ceil(($this->getTotalInterest() * 100) / $this->getInitialAmount());
+        }
+
+        return 0;
+    }
 
 }

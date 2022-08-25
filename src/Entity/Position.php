@@ -40,27 +40,27 @@ class Position
     private $type;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string",length=255, nullable=true)
      */
     private $tp1;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string",length=255, nullable=true)
      */
     private $tp2;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string",length=255, nullable=true)
      */
     private $tp3;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string",length=255, nullable=true)
      */
     private $tp4;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string",length=255, nullable=true)
      */
     private $stopLoss;
 
@@ -70,7 +70,7 @@ class Position
     private $publishedAt;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $price;
 
@@ -100,72 +100,72 @@ class Position
     }
 
 
-    public function getTp1(): ?float
+    public function getTp1()
     {
         return $this->tp1;
     }
 
-    public function setTp1(?float $tp1): self
+    public function setTp1($tp1): self
     {
         $this->tp1 = $tp1;
 
         return $this;
     }
 
-    public function getTp2(): ?float
+    public function getTp2()
     {
         return $this->tp2;
     }
 
-    public function setTp2(?float $tp2): self
+    public function setTp2($tp2): self
     {
         $this->tp2 = $tp2;
 
         return $this;
     }
 
-    public function getTp3(): ?float
+    public function getTp3()
     {
         return $this->tp3;
     }
 
-    public function setTp3(?float $tp3): self
+    public function setTp3($tp3): self
     {
         $this->tp3 = $tp3;
 
         return $this;
     }
 
-    public function getTp4(): ?float
+    public function getTp4()
     {
         return $this->tp4;
     }
 
-    public function setTp4(?float $tp4): self
+    public function setTp4($tp4): self
     {
         $this->tp4 = $tp4;
 
         return $this;
     }
 
-    public function getStopLoss(): ?float
+    public function getStopLoss()
     {
         return $this->stopLoss;
     }
 
-    public function setStopLoss(?float $stopLoss): self
+    public function setStopLoss($stopLoss)
     {
         $this->stopLoss = $stopLoss;
 
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice()
     {
         return $this->price;
     }
 
-    public function setPrice(?float $price): self
+    public function setPrice($price): self
     {
         $this->price = $price;
 

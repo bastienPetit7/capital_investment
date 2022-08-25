@@ -8,6 +8,7 @@ use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReportingRepository::class)
@@ -18,6 +19,7 @@ class Reporting
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("user:read")
      */
     private $id;
 
@@ -29,6 +31,7 @@ class Reporting
 
     /**
      * @ORM\OneToMany(targetEntity=ReportingMovement::class, mappedBy="reporting", orphanRemoval=true)
+     * @Groups("user:read")
      */
     private $reportingMovements;
 

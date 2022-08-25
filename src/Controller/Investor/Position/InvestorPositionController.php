@@ -26,44 +26,29 @@ class InvestorPositionController extends AbstractController
 
         if($export === 'csv')
         {
-            $separator = ',';
+            return $this->getCSV($positions);
+        }
 
-            $dataToSendCSV = "date,name,action,left,right,type,price,tp1,tp2,tp3,tp4,sl,result  \n";
+        $totalPips = 0;
+        $nombreDePositions = 0;
 
-            foreach ($positions as $item)
+        foreach ($positions as $position)
+        {
+            if($position->getPips())
             {
-                $dataToSendCSV .= $item->getPublishedAt()->format('Y-m-d') . $separator .
-                    $item->getName() . $separator .
-                    $item->getAction() . $separator .
-                    $item->getActiveLeft() . $separator .
-                    $item->getActiveRight() . $separator .
-                    $item->getType() . $separator .
-                    $item->getPrice() . $separator .
-                    $item->getTp1() . $separator .
-                    $item->getTp2() . $separator .
-                    $item->getTp3() . $separator .
-                    $item->getTp4() . $separator .
-                    $item->getStopLoss() . $separator .
-                    $item->getPositionState() . "\n";
+                $totalPips += $position->getPips();
             }
 
-            $fileSystem = new Filesystem();
-
-            $fileSystem->remove($this->getParameter('app_temp_directory'));
-
-            $tempFile = $fileSystem->tempnam($this->getParameter('app_temp_directory'), 'datedemand');
-
-            $fileSystem->dumpFile($tempFile, $dataToSendCSV);
-
-            $response =  new BinaryFileResponse($tempFile);
-
-            $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', 'data_all_position.csv'));
-
-            return $response;
+            if($position->getPositionState())
+            {
+                $nombreDePositions += 1;
+            }
         }
 
         return $this->render('dashboard/investor/position/live_trading.html.twig', [
             'positions' => $positions,
+            'totalPips' => $totalPips,
+            'nombreDePositions' => $nombreDePositions,
             'date' => 'All',
             'pathRoute' => 'investor_position'
         ]);
@@ -83,46 +68,31 @@ class InvestorPositionController extends AbstractController
 
         if($export === 'csv')
         {
-            $separator = ',';
+            return $this->getCSV($positions);
+        }
 
-            $dataToSendCSV = "date,name,action,left,right,type,price,tp1,tp2,tp3,tp4,sl,result  \n";
+        $totalPips = 0;
+        $nombreDePositions = 0;
 
-            foreach ($positions as $item)
+        foreach ($positions as $position)
+        {
+            if($position->getPips())
             {
-                $dataToSendCSV .= $item->getPublishedAt()->format('Y-m-d') . $separator .
-                    $item->getName() . $separator .
-                    $item->getAction() . $separator .
-                    $item->getActiveLeft() . $separator .
-                    $item->getActiveRight() . $separator .
-                    $item->getType() . $separator .
-                    $item->getPrice() . $separator .
-                    $item->getTp1() . $separator .
-                    $item->getTp2() . $separator .
-                    $item->getTp3() . $separator .
-                    $item->getTp4() . $separator .
-                    $item->getStopLoss() . $separator .
-                    $item->getPositionState() . "\n";
+                $totalPips += $position->getPips();
             }
 
-            $fileSystem = new Filesystem();
-
-            $fileSystem->remove($this->getParameter('app_temp_directory'));
-
-            $tempFile = $fileSystem->tempnam($this->getParameter('app_temp_directory'), 'datedemand');
-
-            $fileSystem->dumpFile($tempFile, $dataToSendCSV);
-
-            $response =  new BinaryFileResponse($tempFile);
-
-            $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', 'data_week_' . $date->format("W") . '.csv'));
-
-            return $response;
+            if($position->getPositionState())
+            {
+                $nombreDePositions += 1;
+            }
         }
 
         return $this->render('dashboard/investor/position/live_trading.html.twig', [
             'positions' => $positions,
             'date' => 'Week ' . $date->format("W"),
-            'pathRoute' => 'investor_position_week'
+            'pathRoute' => 'investor_position_week',
+            'totalPips' => $totalPips,
+            'nombreDePositions' => $nombreDePositions
         ]);
     }
 
@@ -140,46 +110,32 @@ class InvestorPositionController extends AbstractController
 
         if($export === 'csv')
         {
-            $separator = ',';
+            return $this->getCSV($positions);
+        }
 
-            $dataToSendCSV = "date,name,action,left,right,type,price,tp1,tp2,tp3,tp4,sl,result  \n";
 
-            foreach ($positions as $item)
+        $totalPips = 0;
+        $nombreDePositions = 0;
+
+        foreach ($positions as $position)
+        {
+            if($position->getPips())
             {
-                $dataToSendCSV .= $item->getPublishedAt()->format('Y-m-d') . $separator .
-                    $item->getName() . $separator .
-                    $item->getAction() . $separator .
-                    $item->getActiveLeft() . $separator .
-                    $item->getActiveRight() . $separator .
-                    $item->getType() . $separator .
-                    $item->getPrice() . $separator .
-                    $item->getTp1() . $separator .
-                    $item->getTp2() . $separator .
-                    $item->getTp3() . $separator .
-                    $item->getTp4() . $separator .
-                    $item->getStopLoss() . $separator .
-                    $item->getPositionState() . "\n";
+                $totalPips += $position->getPips();
             }
 
-            $fileSystem = new Filesystem();
-
-            $fileSystem->remove($this->getParameter('app_temp_directory'));
-
-            $tempFile = $fileSystem->tempnam($this->getParameter('app_temp_directory'), 'datedemand');
-
-            $fileSystem->dumpFile($tempFile, $dataToSendCSV);
-
-            $response =  new BinaryFileResponse($tempFile);
-
-            $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', 'data_week_' . $date->format("Y-m-d") . '.csv'));
-
-            return $response;
+            if($position->getPositionState())
+            {
+                $nombreDePositions += 1;
+            }
         }
 
         return $this->render('dashboard/investor/position/live_trading.html.twig', [
             'positions' => $positions,
             'date' => $date->format('d-M-Y'),
-            'pathRoute' => 'investor_position_day'
+            'pathRoute' => 'investor_position_day',
+            'totalPips' => $totalPips,
+            'nombreDePositions' => $nombreDePositions
         ]);
     }
 
@@ -210,6 +166,44 @@ class InvestorPositionController extends AbstractController
         $filename = "positions_all.pdf";
 
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $filename));
+
+        return $response;
+    }
+
+    private function getCSV($positions)
+    {
+        $separator = ',';
+
+        $dataToSendCSV = "date,action,left,right,type,price,tp1,tp2,tp3,tp4,sl,result,pips  \n";
+
+        foreach ($positions as $item)
+        {
+            $dataToSendCSV .= $item->getPublishedAt()->format('Y-m-d') . $separator .
+                $item->getAction() . $separator .
+                $item->getActiveLeft() . $separator .
+                $item->getActiveRight() . $separator .
+                $item->getType() . $separator .
+                $item->getPrice() . $separator .
+                $item->getTp1() . $separator .
+                $item->getTp2() . $separator .
+                $item->getTp3() . $separator .
+                $item->getTp4() . $separator .
+                $item->getStopLoss() . $separator .
+                $item->getPositionState() . $separator .
+                $item->getPips() . "\n";
+        }
+
+        $fileSystem = new Filesystem();
+
+        $fileSystem->remove($this->getParameter('app_temp_directory'));
+
+        $tempFile = $fileSystem->tempnam($this->getParameter('app_temp_directory'), 'datedemand');
+
+        $fileSystem->dumpFile($tempFile, $dataToSendCSV);
+
+        $response =  new BinaryFileResponse($tempFile);
+
+        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', 'data_all_position.csv'));
 
         return $response;
     }

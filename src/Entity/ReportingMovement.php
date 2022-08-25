@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReportingMovementRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReportingMovementRepository::class)
@@ -15,42 +16,50 @@ class ReportingMovement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("user:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("user:read")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user:read")
      */
     private $name;
 
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user:read")
      */
     private $month;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user:read")
      */
     private $year;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups("user:read")
      */
     private $interestRates;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("user:read")
      */
     private $walletAmountBeforeMovement;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("user:read")
      */
     private $walletAmountAfterMovement;
 
@@ -62,21 +71,25 @@ class ReportingMovement
 
     /**
      * @ORM\OneToOne(targetEntity=CashIn::class, mappedBy="reportingMovement", cascade={"persist", "remove"})
+     * @Groups("user:read")
      */
     private $cashIn;
 
     /**
      * @ORM\OneToOne(targetEntity=CashOut::class, mappedBy="reportingMovement", cascade={"persist", "remove"})
+     * @Groups("user:read")
      */
     private $cashOut;
 
     /**
      * @ORM\OneToOne(targetEntity=InterestEarn::class, mappedBy="reportingMovement", cascade={"persist", "remove"})
+     * @Groups("user:read")
      */
     private $interestEarn;
 
     /**
      * @ORM\OneToOne(targetEntity=Bonus::class, mappedBy="reportingMovement", cascade={"persist", "remove"})
+     * @Groups("user:read")
      */
     private $bonus;
 

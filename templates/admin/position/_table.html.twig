@@ -67,6 +67,8 @@
                             <p class="text-sm text-secondary mb-0"><strong>✅ TP4 HIT {{ position.tp4 }}</strong></p>
                         {% elseif position.positionState == 'stopLoss' %}
                             <p class="text-sm text-secondary mb-0"><strong>❌ SL HIT {{ position.stopLoss }}</strong></p>
+                        {% elseif position.positionState == 'entryPoint' %}
+                            <p class="text-sm text-secondary mb-0"><strong>🅿️ ENTRY POINT {{ position.price }}</strong></p>
                         {% else %}
                             <p class="text-sm text-secondary mb-0"><strong>PENDING</strong></p>
                         {% endif %}

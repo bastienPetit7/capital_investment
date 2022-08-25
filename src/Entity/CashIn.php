@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CashInRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CashInRepository::class)
@@ -14,11 +15,13 @@ class CashIn
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("user:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("user:read")
      */
     private $amount;
 

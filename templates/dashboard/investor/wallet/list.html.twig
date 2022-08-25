@@ -2,158 +2,63 @@
 {% extends "dashboard/investor/base_investor.html.twig" %}
 
 {% block body %}
-    <div class="container py-2">
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Informations générales</h3>
-                    </div>
-                    <div class="card-body">
-                        <!-- TradingView Widget BEGIN -->
-                        <div class="tradingview-widget-container-2">
-                            <div class="tradingview-widget-container__widget"></div>
-                            {# <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text">Marchés financiers</span></a> par TradingView</div> #}
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                                {
-                                    "width": "100%",
-                                    "height": "100%",
-                                    "symbolsGroups": [
-                                    {
-                                        "name": "Indices",
-                                        "originalName": "Indices",
-                                        "symbols": [
-                                            {
-                                                "name": "NASDAQ:CYBR",
-                                                "displayName": "CYBR ARC SOFTWARE"
-                                            },
-                                            {
-                                                "name": "FOREXCOM:SPXUSD",
-                                                "displayName": "S&P 500"
-                                            },
-                                            {
-                                                "name": "FOREXCOM:NSXUSD",
-                                                "displayName": "US 100"
-                                            },
-                                            {
-                                                "name": "FOREXCOM:DJI",
-                                                "displayName": "Dow 30"
-                                            },
-                                            {
-                                                "name": "INDEX:NKY",
-                                                "displayName": "Nikkei 225"
-                                            },
-                                            {
-                                                "name": "INDEX:DEU40",
-                                                "displayName": "DAX Index"
-                                            },
-                                            {
-                                                "name": "FOREXCOM:UKXGBP",
-                                                "displayName": "UK 100"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Contrats à terme",
-                                        "originalName": "Futures",
-                                        "symbols": [
-                                            {
-                                                "name": "CME_MINI:ES1!",
-                                                "displayName": "S&P 500"
-                                            },
-                                            {
-                                                "name": "CME:6E1!",
-                                                "displayName": "Euro"
-                                            },
-                                            {
-                                                "name": "COMEX:GC1!",
-                                                "displayName": "Gold"
-                                            },
-                                            {
-                                                "name": "NYMEX:CL1!",
-                                                "displayName": "Crude Oil"
-                                            },
-                                            {
-                                                "name": "NYMEX:NG1!",
-                                                "displayName": "Natural Gas"
-                                            },
-                                            {
-                                                "name": "CBOT:ZC1!",
-                                                "displayName": "Corn"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Obligations",
-                                        "originalName": "Bonds",
-                                        "symbols": [
-                                            {
-                                                "name": "CME:GE1!",
-                                                "displayName": "Eurodollar"
-                                            },
-                                            {
-                                                "name": "CBOT:ZB1!",
-                                                "displayName": "T-Bond"
-                                            },
-                                            {
-                                                "name": "CBOT:UB1!",
-                                                "displayName": "Ultra T-Bond"
-                                            },
-                                            {
-                                                "name": "EUREX:FGBL1!",
-                                                "displayName": "Euro Bund"
-                                            },
-                                            {
-                                                "name": "EUREX:FBTP1!",
-                                                "displayName": "Euro BTP"
-                                            },
-                                            {
-                                                "name": "EUREX:FGBM1!",
-                                                "displayName": "Euro BOBL"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "name": "Forex",
-                                        "originalName": "Forex",
-                                        "symbols": [
-                                            {
-                                                "name": "FX:EURUSD"
-                                            },
-                                            {
-                                                "name": "FX:GBPUSD"
-                                            },
-                                            {
-                                                "name": "FX:USDJPY"
-                                            },
-                                            {
-                                                "name": "FX:USDCHF"
-                                            },
-                                            {
-                                                "name": "FX:AUDUSD"
-                                            },
-                                            {
-                                                "name": "FX:USDCAD"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                    "showSymbolLogo": true,
-                                    "colorTheme": "dark",
-                                    "isTransparent": false,
-                                    "locale": "fr"
-                                }
-                            </script>
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12 position-relative z-index-2">
+                <div class="card card-plain mb-4">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="d-flex flex-column h-100">
+                                    <h2 class="font-weight-bolder mb-0">WALLETS</h2>
+                                </div>
+                            </div>
                         </div>
-                        <!-- TradingView Widget END -->
                     </div>
-
-
-
                 </div>
             </div>
-
         </div>
+
+        {% if widgetThemes | length > 0 %}
+            <div class="row">
+                {% for theme in widgetThemes %}
+                    <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
+
+                        <div class="card">
+                            <img class="card-img-top" src="{{ theme.imagePath }}" style="height: 400px!important;object-fit: cover !important;">
+                            <div class="position-relative" style="height: 50px;overflow: hidden;margin-top: -50px;z-index:2;position: relative;">
+                                <div class="position-absolute w-100 top-0" style="z-index: 1;">
+                                    <svg class="waves waves-sm" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+                                        <defs>
+                                            <path id="card-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+                                        </defs>
+                                        <g class="moving-waves">
+                                            <use xlink:href="#card-wave" x="48" y="-1" fill="rgba(255,255,255,0.30"></use>
+                                            <use xlink:href="#card-wave" x="48" y="3" fill="rgba(255,255,255,0.35)"></use>
+                                            <use xlink:href="#card-wave" x="48" y="5" fill="rgba(255,255,255,0.25)"></use>
+                                            <use xlink:href="#card-wave" x="48" y="8" fill="rgba(255,255,255,0.20)"></use>
+                                            <use xlink:href="#card-wave" x="48" y="13" fill="rgba(255,255,255,0.15)"></use>
+                                            <use xlink:href="#card-wave" x="48" y="16" fill="rgba(255,255,255,0.99)"></use>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h4>
+                                    {{ theme.name }}
+                                </h4>
+
+                                <a href="{{ path('investor_widget_list_per_wallet',{'id': theme.id }) }}" class="btn btn-dark"><i class="fas fa-eye"></i> DISCOVER</a>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-white" style="color: white !important;">No Widget Wallet</p>
+        {% endif %}
+
     </div>
 
 
