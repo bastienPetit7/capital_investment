@@ -1,0 +1,77 @@
+{% extends 'base_vitrine.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+
+    <div class="container position-sticky z-index-sticky top-0">
+        <div class="row">
+            {% include "shared/_messages_flash.html.twig" %}
+            <div class="col-12">
+                <!-- Navbar -->
+
+                <!-- End Navbar -->
+            </div>
+        </div>
+    </div>
+    <main class="main-content  mt-0">
+        <section>
+            <div class="page-header min-vh-100">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+
+                            <div class="card card-plain">
+                                <div class="card-header pb-0 text-start">
+                                    <h4 class="font-weight-bolder">Utilisation des applications mobiles </h4>
+                                    <p class="mb-0">Utilisation des applications mobiles : L'ensemble des contenus, édités sur l’application mobile est la propriété exclusive de CLEO CAPITAL INVESTMENT. Le terme « contenus » est entendu de la manière suivante : tout type d'information, d'œuvre, de texte, de vidéo, de son, musique, d'animation, de photographie ou d'image contenus dans l’application et, en général, de toutes contributions faisant l'objet d'une protection par les dispositions du Code de la propriété intellectuelle.
+
+                                        En application du code de la propriété intellectuelle (CPI), toute reproduction ou représentation partielle ou totale de l’application est strictement interdite sans autorisation écrite et préalable du CMN, sauf exceptions légales.r
+                                    </p>
+                                </div>
+                                <div class="card-header pb-0 text-start">
+                                    <h4 class="font-weight-bolder">Données personnelles</h4>
+                                    <p class="mb-0">
+                                        Les données personnelles transmises depuis l'application mobile sont susceptibles d'être conservées.
+                                        Les informations recueillies font l'objet d'un traitement informatique destiné à mieux connaître les utilisateurs.
+                                    </p>
+                                    <p class="mb-0">
+                                        Conformément à la loi no 78.17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés, les utilisateurs de l’application disposent d'un droit d'opposition (art. 26) d'accès (art. 34 à 38), de rectification (art. 36) et de suppression des données qui les concernent.
+                                        Ces droits peuvent être exercés par envoie d'email à : edouard.kyriazis@cleo-capital.com
+                                    </p>
+                                </div>
+                                <div class="card-header pb-0 text-start">
+                                    <h4 class="font-weight-bolder">Responsabilité</h4>
+                                    <p class="mb-0">
+                                        Tous les efforts sont mis en œuvre dans l'élaboration des contenus, toutefois CLEO CAPITAL ne peut être considéré comme responsable, garant, explicitement ou tacitement, de l'exactitude des contenus qui peuvent être créés ainsi que de l'utilisation qui en sera faite par les utilisateurs de ses applications mobiles.</p>
+                                    <p class="mb-0">
+                                        Par ailleurs, CLEO CAPITAL n'est pas responsable de l'utilisation qui pourra être faite par les utilisateurs des informations qu'il pourra trouver sur les applications. CLEO CAPITAL s'engage à mettre en œuvre tous les moyens nécessaires afin d'assurer au mieux la fourniture des services qu'il propose au travers de l’application.
+                                        Sa responsabilité ne saurait être engagée en cas de force majeure ou de fait indépendant de sa volonté, notamment en cas d'interruption du service résultant d'une défaillance du réseau téléphonique ou du fournisseur d'accès à internet de l’utilisateur.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+
+                            <div class="position-relative bg-gradient-light h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+                                <img src="../../theme/assets/img/shapes/pattern-lines.svg" alt="pattern-lines" class="position-absolute opacity-4 start-0">
+                                <div class="position-relative">
+                                    <img class="max-width-500 w-100 position-relative z-index-2" src="{{ asset('theme/assets/mes_images/CAPITAL_INVESTMENT_HIGH.png') }}" alt="chat-img">
+                                </div>
+                                <h4 class="mt-5 text-black font-weight-bolder">On ne vous vend pas du rêve, mais on vous évite les cauchemars.</h4>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+{% endblock %}

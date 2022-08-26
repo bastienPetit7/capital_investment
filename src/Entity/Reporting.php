@@ -39,8 +39,6 @@ class Reporting
     {
         $this->reportingMovements = new ArrayCollection();
     }
-    
-
 
     public function getId(): ?int
     {

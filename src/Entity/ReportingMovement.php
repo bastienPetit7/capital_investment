@@ -27,6 +27,11 @@ class ReportingMovement
     private $createdAt;
 
     /**
+     * @Groups("user:read")
+     */
+    private $createdAtAPIFormat;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Groups("user:read")
      */
@@ -279,6 +284,11 @@ class ReportingMovement
         $this->bonus = $bonus;
 
         return $this;
+    }
+
+    public function getCreatedAtAPIFormat()
+    {
+        return $this->createdAt->format('Y-m-d');
     }
 
 

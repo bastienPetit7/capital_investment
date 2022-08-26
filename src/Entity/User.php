@@ -122,6 +122,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $investorProfileCreatedAt;
 
+    /**
+     * @Groups("user:read")
+     */
+    private $investorProfileCreatedAtAPIFormat;
+
     public function __construct()
     {
         $this->videos = new ArrayCollection();
@@ -440,6 +445,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if($this->getInvestor())
         {
             return $this->getInvestor()->getCreatedAt();
+        }
+        return $this->createdAt;
+    }
+
+    public function investorProfileCreatedAtAPIFormat()
+    {
+        if($this->getInvestor())
+        {
+            return $this->getInvestor()->getCreatedAt()->format('Y-m-d');
         }
         return $this->createdAt;
     }
