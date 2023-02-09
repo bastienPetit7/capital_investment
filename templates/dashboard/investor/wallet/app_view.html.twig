@@ -1,0 +1,30 @@
+{% extends "dashboard/investor/base_app_mobile.html.twig" %}
+
+{% block body %}
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+
+        {% if widgetsAvailable | length > 0 %}
+            <div class="row">
+                {% for widget in widgetsAvailable %}
+                    <div class="col-12 mt-4">
+
+                        <div class="card bg-gradient-info">
+                            <div class="card-header border border-bottom bg-gradient-info">
+                                <h5 class="text-white">{{ widget.name }}</h5>
+                            </div>
+                            <div class="card-body bg-gradient-info">
+                                {% include "admin/wallet_widget/widget/_base_widget_trading_view.html.twig" %}
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-white" style="color: white !important;">No Widget for this theme</p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
