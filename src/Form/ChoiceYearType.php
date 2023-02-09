@@ -17,17 +17,23 @@ class ChoiceYearType extends AbstractType
             ->add('year', ChoiceType::class, [
                 'label' => false,
                 'placeholder' => '--Filter by year--',
-                'choices' => [
-                    '2018' => '2018',
-                    '2019' => '2019',
-                    '2020' => '2020',
-                    '2021' => '2021',
-                    '2022' => '2022'
-                ],
+                'choices' => $this->getYearChoices(),
                 'data' => $options['data']['year'],
                 'required' => false,
             ])
         ;
+    }
+
+    public function getYearChoices(): array
+    {
+        $currentYear = (int) date('Y');
+        $yearChoices = [];
+
+        for($i = 2018; $i <= $currentYear; $i++) {
+            $yearChoices[$i] = $i;
+        }
+
+        return $yearChoices;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -14,49 +14,12 @@ class SimulateEarningType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('month', ChoiceType::class, [
-                'label' => "Month",
-                'placeholder' => 'Month',
-                'choices' => [
-                    'January' => 'January',
-                    'February' => 'February',
-                    'March' => 'March',
-                    'April' => 'April',
-                    'May' => 'May',
-                    'June' => 'June',
-                    'July' => 'July',
-                    'August' => 'August',
-                    'September' => 'September',
-                    'October' => 'October',
-                    'November' => 'November',
-                    'December' => 'December',
-                ],
-                'required' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Month is required.',
-                    ])
-                ]
-            ])
-            ->add('year', ChoiceType::class, [
-                'label' => "Year",
-                'placeholder' => 'Year',
-                'choices' => [
-                    '2018' => '2018',
-                    '2019' => '2019',
-                    '2020' => '2020',
-                    '2021' => '2021',
-                    '2022' => '2022'
-                ],
-                'required' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Year is required.',
-                    ])
-                ]
-            ])
-        ;
+
+    }
+
+    public function getParent()
+    {
+        return SharedDateFormType::class;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
